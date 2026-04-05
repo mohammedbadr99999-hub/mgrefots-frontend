@@ -11,6 +11,7 @@ import ProgressChart from './components/ProgressChart';
 const GEMINI_API_KEY = "AIzaSyAPE5NdqeChD4YV07fF-S6vq1rk80qfZY0";
 const BACKEND_URL = "https://mgrefots-backend-production.up.railway.app";
 const API_KEY = GEMINI_API_KEY;
+
 export default function App() {
   // ── State ──
   const [currentUser, setCurrentUser] = useState(() => {
@@ -85,22 +86,6 @@ export default function App() {
     return () => { unsub(); if (unsubSnap) unsubSnap(); };
   }, []);
 
-  // ── Gemini Helper ──
-  const fetchGemini = async (prompt, systemInstruction, inlineData = null) => {
-    const payload = {
-      contents: [{ parts: [{ text: `Instructions: ${systemInstruction}\n\nUser Question: ${prompt}` }, ...(inlineData ? [{ inlineData }] : [])] }],
-      generationConfig: { maxOutputTokens: 8192, temperature: 0.7 }
-    };
-    try {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload),
-      });
-      const result = await r.json();
-      if (r.ok && result?.candidates?.[0]?.content?.parts?.[0]?.text) return result.candidates[0].content.parts[0].text;
-      return isRtl ? "عذراً، حدث خطأ." : "Sorry, an error occurred.";
-    } catch { return isRtl ? "الخادم مشغول." : "Server busy."; }
-  };
-
   // ── Auth ──
   const handleGuestEntry = () => setCurrentUser({ id: "guest", phone: "Guest", isGuest: true });
   const handleLogout = async () => { await auth.signOut(); localStorage.removeItem("current_user"); setCurrentUser(null); navigateTo("home"); };
@@ -143,7 +128,7 @@ export default function App() {
 // المحاولة الأولى بموديل Flash السريع
   const callGeminiDirect = async (prompt, sysPrompt) => {
     // استخدمنا الرابط المباشر لموديل 1.5-flash الأحدث
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
     
     try {
       const res = await fetch(url, {
