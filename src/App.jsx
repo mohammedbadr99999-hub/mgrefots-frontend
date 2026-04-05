@@ -140,32 +140,43 @@ export default function App() {
     } finally { setPipelineRunning(false); }
   };
 
+// المحاولة الأولى بموديل Flash السريع
   const callGeminiDirect = async (prompt, sysPrompt) => {
+    const MODEL_NAME = "gemini-1.5-flash"; 
     try {
-      // تم تحديث اسم الموديل هنا إلى gemini-1.5-flash-latest
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [{
-            parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }]
-          }]
+          contents: [{ parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }] }]
         })
       });
       
-      if (!res.ok) {
-        const errorDetails = await res.text();
-        return `⚠️ عذراً، سيرفر جوجل رفض الطلب. تفاصيل الخطأ: ${errorDetails}`;
-      }
-      
+      if (!res.ok) return await callGeminiBackup(prompt, sysPrompt); // لو فشل يحول لـ Pro
+
       const data = await res.json();
       return data.candidates[0].content.parts[0].text;
     } catch (e) {
-      console.error(e);
-      return `⚠️ عذراً، حدثت مشكلة في الاتصال: ${e.message}`;
+      return await callGeminiBackup(prompt, sysPrompt); // لو حصل أي خطأ يحول لـ Pro
     }
   };
 
+  // الخطة البديلة (الموديل البرو المستقر)
+  const callGeminiBackup = async (prompt, sysPrompt) => {
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }] }]
+        })
+      });
+      const data = await res.json();
+      return data.candidates[0].content.parts[0].text;
+    } catch (e) {
+      return lang === "ar" ? "عذراً، الخبير غير متاح حالياً." : "Expert currently unavailable.";
+    }
+  };
   const handleSendMessage = async () => {
     if (!chatInput.trim()) return;
     const q = chatInput;
