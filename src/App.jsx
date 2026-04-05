@@ -179,11 +179,11 @@ export default function App() {
 
     try {
       const sysPrompt = "You are a professional fitness & nutrition expert at MGREFOTS. Answer concisely.";
-      // التغيير هنا: خليناها callGeminiDirect بدل fetchGemini
+      // التغيير هنا: ربطنا الزرار بالدالة callGeminiDirect اللي عملناها
       const aiResponse = await callGeminiDirect(msg, sysPrompt); 
       setChatMessages(prev => [...prev, { role: "model", text: aiResponse }]);
     } catch (e) {
-      setChatMessages(prev => [...prev, { role: "model", text: "Error connecting to expert." }]);
+      setChatMessages(prev => [...prev, { role: "model", text: "Error: Could not connect to expert." }]);
     } finally {
       setChatLoading(false);
     }
