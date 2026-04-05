@@ -147,21 +147,22 @@ export default function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [{
-            role: "user",
             parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }]
           }]
         })
       });
       
       if (!res.ok) {
-        throw new Error("Google API rejected the request");
+        // السطرين دول هيجبروا جوجل تنطق بالخطأ الحقيقي على الشاشة
+        const errorDetails = await res.text();
+        return `⚠️ عذراً، سيرفر جوجل رفض الطلب. تفاصيل الخطأ: ${errorDetails}`;
       }
       
       const data = await res.json();
       return data.candidates[0].content.parts[0].text;
     } catch (e) {
       console.error(e);
-      return lang === "ar" ? "عذراً، الخبير غير متاح الآن." : "Sorry, expert unavailable.";
+      return `⚠️ عذراً، حدثت مشكلة في الاتصال: ${e.message}`;
     }
   };
 
