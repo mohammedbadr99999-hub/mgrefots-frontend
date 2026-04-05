@@ -5,7 +5,13 @@ import {
   AlertCircle, Mail, ChevronDown
 } from 'lucide-react';
 import { auth, db, firebase } from './firebase';
-import { translations } from './translations';
+const analyzeSupplement = (name) => {
+  setSelectedSupp(name);
+  // سحب النص الكامل حرفياً من المخزن بناءً على اللغة المختارة
+  const info = supplementsData[name]?.[lang] || supplementsData[name]?.["en"];
+  setSuppInfo(info);
+  setIsSuppLoading(false);
+};
 import ProgressChart from './components/ProgressChart';
 
 const GEMINI_API_KEY = "AIzaSyCrP_AEjK7pIOUtbKdaqXCOMZSl1lqYxf4";
