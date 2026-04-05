@@ -6,7 +6,21 @@ export const translations = {
     hero_btn_analysis: "Start Smart Analysis",
     login_guest_btn: "Enter as Guest (Free)",
     story_title: "A Journey of 13 Years: From Frailty to Global Expertise",
-    story_content: "My name is Mohamed Saad Zeina, Egyptian, a graduate of the prestigious Faculty of Commerce at Mansoura University in Egypt...",
+      story_content: `My name is Mohamed Saad Zeina, Egyptian, a graduate of the prestigious Faculty of Commerce at Mansoura University in Egypt. However, I was very skinny in 2013. I wanted to have a beautiful, symmetrical body, not a frail one. I entered the gym for the first time with my closest childhood friends and loved the idea. I didn't know at the time how to build a strong body until I stumbled upon this place inside the university by chance.
+
+From that very first time, I made the decision to continue in this place, like a child who found his lost mother. I decided to be disciplined and consistent. I was surprised that my friends who took me to this wonderful place gave up on it, and I was shocked by their lack of discipline in their diets, even though they wanted to build a strong body. They would say to me, 'Let's not go today,' and I would reply, 'No, I will go. I have packed my gear, eaten my pre-workout meal, and prepared myself; I won't waste it.'
+
+Since then, I made a decision to be my own companion unless I found someone whose motivation matches my internal drive—either higher because they have resources I don't, or lower, in which case they might try to bring me down and make me lazy. So, from 2013 until now (2026), I train alone and maintain my discipline. From day one, I decided that the gym and sports would be a permanent way of life, just like eating, drinking, sleeping, working, and studying. In fact, it later became the strong driving force for all of them.
+
+My day became a routine of training, eating a structured diet, working, praying, and spending time with my wife, children, father, mother, and siblings, along with sleeping and studying—all with the same level of importance. I used to search for exercises and proper techniques when the internet was still new in our beloved Egypt. I remember well having a keypad phone with the letters rubbed off. I would work from 9 AM to 11 PM and then go to the gym. I researched nutrition, its methods, and components until today I have enough knowledge and experience. I decided to crown all these years with a scientific certification from the world's leading organization in training and nutrition: NASM.
+
+What kept me consistent was the sport, and what made me strong in it was a diet relying entirely on natural foods and safe supplements, staying far away from hormones and the like. I decided I wouldn't do this for bodybuilding competitions, but for myself—for my mental and physical strength, to be a genuinely strong man, not one built on hormones. I dislike the idea of turning a sport whose core goal is health into 'inflating' bodies that look strong but are sluggish. We train, eat, and sleep well to work and live well, not just for aesthetics. The goal of sports is to live better, not just to look bigger.
+
+After 13 years, I wanted to solidify my experience with systematic study and become a strong part of a community striving to make its youth, elders, and children strong. I would rather die standing than die in a sickbed in pain, needing someone to care for me. It is all destiny; we do our best, and God chooses what is best for us. I can never forget God's grace in blessing me with a wife who loves me, who was patient with me through difficult days, and who has been my true blessing and greatest supporter.
+
+... The story is much longer and filled with struggles that make the above seem like nothing, but we are saving it for the right time—soon in a book. I love you all.
+
+Best regards, Mohamed Zeina.`,
     analysis_title: "AI Body Analysis",
     analysis_subtitle: "Upload your InBody result and describe your goal. Our NASM-trained AI will design a perfect plan.",
     upload_placeholder: "Select InBody (PDF/JPG)",
@@ -40,8 +54,22 @@ export const translations = {
     hero_desc: "محمد زينة: المدير العام لشركة MGREFOTS LTD. رياضي محترف وخبير تغذية رياضية معتمد.",
     hero_btn_analysis: "ابدأ التحليل الذكي",
     login_guest_btn: "دخول وبدء الاستخدام (مجاناً)",
-    story_title: "رحلة الـ ١٣ عاماً: من النحافة إلى الخبرة العالمية",
-    story_content: "اسم محمد سعد زينة، مصري، خريج كلية التجارة جامعة المنصورة...",
+    story_title: "رحلة 13 عاماً: من النحافة إلى الخبرة العالمية",
+      story_content: `اسمي محمد سعد زينة، مصري، خريج كلية التجارة العريقة بجامعة المنصورة في مصر. في عام 2013، كنت أعاني من نحافة شديدة. كنت أرغب في الحصول على جسم جميل ومتناسق، وليس جسماً ضعيفاً. دخلت الجيم لأول مرة مع أقرب أصدقاء طفولتي وأحببت الفكرة. لم أكن أعرف وقتها كيف أبني جسماً قوياً حتى اكتشفت هذا المكان داخل الجامعة بالصدفة.
+
+منذ تلك اللحظة الأولى، اتخذت قراراً بالاستمرار في هذا المكان، كطفل وجد أمه المفقودة. قررت أن أكون منضبطاً وملتزماً. تفاجأت بأن أصدقائي الذين أخذوني إلى هذا المكان الرائع تخلوا عنه، وصُدمت من عدم انضباطهم في نظامهم الغذائي، رغم رغبتهم في بناء جسم قوي. كانوا يقولون لي: "دعنا لا نذهب اليوم"، وكنت أرد: "لا، سأذهب. لقد جهزت حقيبتي، وأكلت وجبة قبل التمرين، واستعددت؛ لن أضيع ذلك".
+
+منذ ذلك الحين، اتخذت قراراً بأن أكون رفيق نفسي إلا إذا وجدت شخصاً يتطابق دافعه مع دافعي الداخلي - إما أعلى لأنه يمتلك موارد لا أمتلكها، أو أقل، وفي هذه الحالة قد يحاول إحباطي وجعلي كسولاً. لذلك، من عام 2013 حتى الآن (2026)، أتدرب بمفردي وأحافظ على انضباطي. من اليوم الأول، قررت أن الجيم والرياضة سيكونان أسلوب حياة دائم، تماماً مثل الأكل والشرب والنوم والعمل والدراسة. في الواقع، أصبحت الرياضة لاحقاً هي القوة الدافعة القوية لكل هؤلاء.
+
+أصبح يومي عبارة عن روتين من التدريب، وتناول نظام غذائي منظم، والعمل، والصلاة، وقضاء الوقت مع زوجتي وأطفالي ووالدي ووالدتي وإخوتي، إلى جانب النوم والدراسة - كل ذلك بنفس المستوى من الأهمية. كنت أبحث عن التمارين والأساليب الصحيحة عندما كان الإنترنت لا يزال حديثاً في مصر الحبيبة. أتذكر جيداً أنني كنت أمتلك هاتفاً بلوحة مفاتيح مُسحت حروفها. كنت أعمل من 9 صباحاً حتى 11 مساءً ثم أذهب إلى الجيم. بحثت في التغذية وأساليبها ومكوناتها حتى أصبح لدي اليوم ما يكفي من المعرفة والخبرة. قررت أن أتوج كل هذه السنوات بشهادة علمية من المنظمة الرائدة عالمياً في التدريب والتغذية: NASM.
+
+ما جعلني أستمر هو الرياضة، وما جعلني قوياً فيها هو نظام غذائي يعتمد كلياً على الأطعمة الطبيعية والمكملات الآمنة، والابتعاد تماماً عن الهرمونات وما شابهها. قررت أنني لن أفعل ذلك من أجل مسابقات كمال الأجسام، بل من أجل نفسي - من أجل قوتي العقلية والجسدية، لأكون رجلاً قوياً بحق، وليس رجلاً مبنياً على الهرمونات. لا أحب فكرة تحويل رياضة هدفها الأساسي هو الصحة إلى "نفخ" أجساد تبدو قوية ولكنها بطيئة. نحن نتدرب، ونأكل، وننام جيداً لنعمل ونعيش جيداً، وليس فقط من أجل المظهر. الهدف من الرياضة هو أن نعيش بشكل أفضل، وليس فقط أن نبدو أكبر.
+
+بعد 13 عاماً، أردت ترسيخ خبرتي بدراسة منهجية وأن أصبح جزءاً قوياً من مجتمع يسعى لجعل شبابه وكباره وأطفاله أقوياء. أفضل أن أموت واقفاً على أن أموت في سرير المرض أتألم وأحتاج لمن يرعاني. كل شيء بقدر؛ نحن نبذل قصارى جهدنا، والله يختار لنا ما هو أفضل. لا يمكنني أبداً أن أنسى فضل الله في أن رزقني بزوجة تحبني، صبرت معي في الأيام الصعبة، وكانت نعمتي الحقيقية وأكبر داعم لي.
+
+... القصة أطول بكثير ومليئة بالكفاح الذي يجعل ما سبق يبدو لا شيء، لكننا نحتفظ بها للوقت المناسب - قريباً في كتاب. أحبكم جميعاً.
+
+مع خالص تحياتي، محمد زينة.`,
     analysis_title: "تحليل الجسم بالذكاء الاصطناعي",
     analysis_subtitle: "ارفع نتيجة الـ InBody واكتب هدفك. نظامنا سيعطيك أدق النتائج.",
     upload_placeholder: "اختر ملف InBody (PDF/JPG)",
@@ -75,8 +103,22 @@ export const translations = {
     hero_desc: "Mohamed Zeina: Umuyobozi wa MGREFOTS LTD. Inzobere mu mirire n'imikino.",
     hero_btn_analysis: "Tangira Isuzuma",
     login_guest_btn: "Injira nk'Umushyitsi (Ubuntu)",
-    story_title: "Inkuru y'Imyaka 13",
-    story_content: "Nitwa Mohamed Saad Zeina, Umunyamisiri, warangije muri Kaminuza ya Mansoura...",
+story_title: "Urugendo rw'imyaka 13: Kuva mu ntege nke kugera ku bunararibonye",
+      story_content: `Nitwa Mohamed Saad Zeina, Umunyamisiri, narangije mu ishami rya Commerce muri Kaminuza ya Mansoura mu Misiri. Ariko, mu 2013 nari nkananutse cyane. Nashakaga kugira umubiri mwiza, uteye neza, utari unanutse. Ninjiye muri gym bwa mbere n'incuti zanjye z'abana nkunda igitekerezo. Sinari nzi icyo gihe uko bubaka umubiri ukomeye kugeza nkoze kuri iyi nzu muri kaminuza kubw'amahirwe.
+
+Kuva icyo gihe bwa mbere, nafashe icyemezo cyo gukomeza muri uyu mwanya, nk'umwana wabonye nyina wari warabuze. Nafashe icyemezo cyo kugira ikinyabupfura n'umurongo. Natangajwe n'uko incuti zanjye zanjyanye muri uyu mwanya mwiza zawuretse, kandi natangajwe n'uko batagira ikinyabupfura mu mirire yabo, nubwo bashakaga kubaka umubiri ukomeye. Bambwiraga bati 'Tureke kujyayo uyu munsi,' nkabashubiza nti, 'Oya, ndagenda. Natunganyije ibikoresho byanjye, nariye ibiryo byanjye mbere yo kwitoza, kandi niteguye; sinzabipfusha ubusa.'
+
+Kuva icyo gihe, nafashe icyemezo cyo kuba inshuti yanjye bwite keretse mbonye umuntu ufite ishyaka rihuye n'iryanjye - yaba ari hejuru kuko bafite ibikoresho ntagira, cyangwa hasi, muri icyo gihe bashobora kugerageza kunca intege no kunteza ubunebwe. Rero, kuva 2013 kugeza ubu (2026), nitoza njyenyine kandi nkomeza ikinyabupfura cyanjye. Kuva ku munsi wa mbere, nafashe icyemezo cy'uko gym na siporo bizaba ubuzima bwa buri munsi, kimwe no kurya, kunywa, kuryama, gukora, no kwiga. Kandi byaje kuba imbaraga zikomeye zibigenga byose.
+
+Umunsi wanjye wabaye gahunda yo kwitoza, kurya indyo yuzuye, gukora, gusenga, no kumarana igihe n'umugore wanjye, abana, data, mama, n'abavandimwe, hamwe no kuryama no kwiga - byose ku rugero rumwe rw'agaciro. Nashakishaga imyitozo n'uburyo bukwiye igihe internet yari ikiri nshya mu Misiri yacu dukunda. Ndibuka neza ko nari mfite telefone ya keypad inyuguti zasibanganye. Nakoraga kuva saa tatu za mugitondo kugeza saa tanu z'ijoro hanyuma nkajya muri gym. Nakoze ubushakashatsi ku mirire, uburyo bwayo, n'ibiyigize kugeza ubu mfite ubumenyi n'ubunararibonye buhagije. Nafashe icyemezo cyo guha ikamba iyi myaka yose n'icyemezo cy'ubumenyi gitangwa n'ikigo cya mbere ku isi mu kwitoza n'imirire: NASM.
+
+Icyatumye nkomera ni siporo, kandi icyatumye mba umunyambaraga muri yo ni indyo ishingiye gusa ku biribwa by'umwimerere n'inyongeramirire zizewe, kure ya hormones n'ibindi nk'ibyo. Nafashe icyemezo cy'uko ntabikora ku bw'amarushanwa yo kubaka umubiri, ahubwo kubwanjye - ku bw'imbaraga zanjye zo mu mutwe n'umubiri, kuba umugabo ukomeye by'ukuri, utari uwubatswe kuri hormones. Sinshyigikiye igitekerezo cyo guhindura siporo igamije ubuzima bwiza mu kubyimbisha imibiri isa n'ikomeye ariko inaniwe. Twitoza, turya, kandi turyama neza kugira ngo dukore kandi tubeho neza, atari ukugaragara neza gusa. Intego ya siporo ni ukubaho neza, atari ukugaragara nk'abanini gusa.
+
+Nyuma y'imyaka 13, nashakaga gushimangira ubunararibonye bwanjye n'inyigo yimbitse no kuba urugingo rukomeye rw'umuryango uharanira gukomeza urubyiruko rwawo, abasaza, n'abana. Nahitamo gupfa mpagaze aho gupfa ndyamye mu buriri bw'indwara mbabara, nkeneye umuntu unyitaho. Byose ni igeno; dukora ibyo dushoboye, Imana ikaduhitiramo ibyiza. Sinzigera nibagirwa ubuntu bw'Imana bwo kumpa umugore unkunda, wanyihanganiye mu bihe bikomeye, kandi wambereye umugisha nyakuri n'umuterinkunga wanjye ukomeye.
+
+... Inkuru ni ndende cyane kandi yuzuyemo imihate ituma ibivuzwe haruguru bisa n'aho nta cyo bivuze, ariko turayibikiye igihe gikwiye - vuba mu gitabo. Ndabakunda mwese.
+
+Murakoze cyane, Mohamed Zeina.`,
     analysis_title: "Isuzuma ry'Umubiri na AI",
     analysis_subtitle: "Shyiraho InBody yawe wandike n'intego yawe.",
     upload_placeholder: "Hitamo InBody (PDF/JPG)",
