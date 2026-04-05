@@ -8,7 +8,7 @@ import { auth, db, firebase } from './firebase';
 import { translations, supplementsData } from './translations';
 import ProgressChart from './components/ProgressChart';
 
-const GEMINI_API_KEY = "AIzaSyCrP_AEjK7pIOUtbKdaqXCOMZSl1lqYxf4";
+const GEMINI_API_KEY = "AIzaSyAPE5NdqeChD4YV07fF-S6vq1rk80qfZY0";
 const BACKEND_URL = "https://mgrefots-backend-production.up.railway.app";
 
 export default function App() {
