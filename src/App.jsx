@@ -171,22 +171,15 @@ export default function App() {
     }
   };
   const handleSendMessage = async () => {
-    if (!userInput.trim()) return;
-    const msg = userInput;
-    setUserInput("");
-    setChatMessages(prev => [...prev, { role: "user", text: msg }]);
-    setChatLoading(true);
-
-    try {
-      const sysPrompt = "You are a professional fitness & nutrition expert at MGREFOTS. Answer concisely.";
-      // التغيير هنا: ربطنا الزرار بالدالة callGeminiDirect اللي عملناها
-      const aiResponse = await callGeminiDirect(msg, sysPrompt); 
-      setChatMessages(prev => [...prev, { role: "model", text: aiResponse }]);
-    } catch (e) {
-      setChatMessages(prev => [...prev, { role: "model", text: "Error: Could not connect to expert." }]);
-    } finally {
-      setChatLoading(false);
-    }
+    if (!chatInput.trim()) return;
+    const q = chatInput;
+    setChatInput(""); 
+    setIsChatting(true); 
+    setChatResponse("");
+    const ll = lang === "ar" ? "Answer ONLY in Arabic." : lang === "rw" ? "Answer ONLY in Kinyarwanda." : "Answer ONLY in English.";
+    const res = await callGeminiDirect(q, `You are an elite fitness coach. ${ll} Be specific and actionable.`);
+    setChatResponse(res); 
+    setIsChatting(false);
   };
 
   const analyzeSupplement = (name) => {
