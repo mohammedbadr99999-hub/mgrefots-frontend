@@ -10,8 +10,7 @@ import ProgressChart from './components/ProgressChart';
 
 const GEMINI_API_KEY = "AIzaSyAPE5NdqeChD4YV07fF-S6vq1rk80qfZY0";
 const BACKEND_URL = "https://mgrefots-backend-production.up.railway.app";
-const API_KEY = GEMINI_API_KEY; // السطر ده هو اللي هيخلي الكود يقرأ المفتاح صح مهما كان اسمه تحت
-
+const API_KEY = GEMINI_API_KEY;
 export default function App() {
   // ── State ──
   const [currentUser, setCurrentUser] = useState(() => {
