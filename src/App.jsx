@@ -5,6 +5,7 @@ import {
   AlertCircle, Mail, ChevronDown
 } from 'lucide-react';
 import { auth, db, firebase } from './firebase';
+import { translations, supplementsData } from './translations';
 import ProgressChart from './components/ProgressChart';
 
 const GEMINI_API_KEY = "AIzaSyCrP_AEjK7pIOUtbKdaqXCOMZSl1lqYxf4";
