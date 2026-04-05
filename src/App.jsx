@@ -140,12 +140,34 @@ export default function App() {
     } finally { setPipelineRunning(false); }
   };
 
+  const callGeminiDirect = async (prompt, sysPrompt) => {
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: prompt }] }],
+          systemInstruction: { role: "system", parts: [{ text: sysPrompt }] }
+        })
+      });
+      const data = await res.json();
+      return data.candidates[0].content.parts[0].text;
+    } catch (e) {
+      console.error(e);
+      return lang === "ar" ? "عذراً، الخبير غير متاح الآن." : "Sorry, expert unavailable.";
+    }
+  };
+
   const handleSendMessage = async () => {
     if (!chatInput.trim()) return;
-    const q = chatInput; setChatInput(""); setIsChatting(true); setChatResponse("");
+    const q = chatInput;
+    setChatInput(""); 
+    setIsChatting(true); 
+    setChatResponse("");
     const ll = lang === "ar" ? "Answer ONLY in Arabic." : lang === "rw" ? "Answer ONLY in Kinyarwanda." : "Answer ONLY in English.";
-    const res = await fetchGemini(q, `You are an elite fitness coach. ${ll} Be specific and actionable.`);
-    setChatResponse(res); setIsChatting(false);
+    const res = await callGeminiDirect(q, `You are an elite fitness coach. ${ll} Be specific and actionable.`);
+    setChatResponse(res); 
+    setIsChatting(false);
   };
 
   const analyzeSupplement = (name) => {
