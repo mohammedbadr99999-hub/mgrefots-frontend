@@ -5,13 +5,6 @@ import {
   AlertCircle, Mail, ChevronDown
 } from 'lucide-react';
 import { auth, db, firebase } from './firebase';
-const analyzeSupplement = (name) => {
-  setSelectedSupp(name);
-  // سحب النص الكامل حرفياً من المخزن بناءً على اللغة المختارة
-  const info = supplementsData[name]?.[lang] || supplementsData[name]?.["en"];
-  setSuppInfo(info);
-  setIsSuppLoading(false);
-};
 import ProgressChart from './components/ProgressChart';
 
 const GEMINI_API_KEY = "AIzaSyCrP_AEjK7pIOUtbKdaqXCOMZSl1lqYxf4";
@@ -154,11 +147,12 @@ export default function App() {
     setChatResponse(res); setIsChatting(false);
   };
 
-  const analyzeSupplement = async (name) => {
-    setSelectedSupp(name); setIsSuppLoading(true);
-    const ll = lang === "ar" ? "Answer ONLY in Arabic." : lang === "rw" ? "Answer ONLY in Kinyarwanda." : "Answer ONLY in English.";
-    const res = await fetchGemini(`Tell me about ${name}`, `Expert nutritionist. ${ll} Explain benefits, dosage, timing.`);
-    setSuppInfo(res); setIsSuppLoading(false);
+  const analyzeSupplement = (name) => {
+    setSelectedSupp(name);
+    // السطر ده هو اللي بيروح يجيب الكلام من الـ PDF اللي في translations.js
+    const info = supplementsData[name]?.[lang] || supplementsData[name]?.["en"];
+    setSuppInfo(info);
+    setIsSuppLoading(false);
   };
 
   const formatText = (text) => {
