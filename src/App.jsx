@@ -142,29 +142,37 @@ export default function App() {
 
 // المحاولة الأولى بموديل Flash السريع
   const callGeminiDirect = async (prompt, sysPrompt) => {
-    const MODEL_NAME = "gemini-1.5-flash"; 
+    // استخدمنا الرابط المباشر لموديل 1.5-flash الأحدث
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`, {
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }] }]
+          contents: [{
+            parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }]
+          }]
         })
       });
-      
-      if (!res.ok) return await callGeminiBackup(prompt, sysPrompt); // لو فشل يحول لـ Pro
 
       const data = await res.json();
-      return data.candidates[0].content.parts[0].text;
+      
+      if (data.candidates && data.candidates[0].content) {
+        return data.candidates[0].content.parts[0].text;
+      } else {
+        // لو الموديل الأول فشل، جرب البرو كاحتياطي أخير فوراً
+        return await callGeminiBackup(prompt, sysPrompt);
+      }
     } catch (e) {
-      return await callGeminiBackup(prompt, sysPrompt); // لو حصل أي خطأ يحول لـ Pro
+      return await callGeminiBackup(prompt, sysPrompt);
     }
   };
 
-  // الخطة البديلة (الموديل البرو المستقر)
   const callGeminiBackup = async (prompt, sysPrompt) => {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -174,7 +182,7 @@ export default function App() {
       const data = await res.json();
       return data.candidates[0].content.parts[0].text;
     } catch (e) {
-      return lang === "ar" ? "عذراً، الخبير غير متاح حالياً." : "Expert currently unavailable.";
+      return lang === "ar" ? "عذراً، الخبير غير متاح حالياً." : "Expert unavailable.";
     }
   };
   const handleSendMessage = async () => {
