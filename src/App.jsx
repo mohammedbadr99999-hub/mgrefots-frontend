@@ -146,10 +146,17 @@ export default function App() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: prompt }] }],
-          systemInstruction: { role: "system", parts: [{ text: sysPrompt }] }
+          contents: [{
+            role: "user",
+            parts: [{ text: sysPrompt + "\n\nUser Question: " + prompt }]
+          }]
         })
       });
+      
+      if (!res.ok) {
+        throw new Error("Google API rejected the request");
+      }
+      
       const data = await res.json();
       return data.candidates[0].content.parts[0].text;
     } catch (e) {
