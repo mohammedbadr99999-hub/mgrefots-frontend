@@ -1,0 +1,6 @@
+{
+  "name": "MGREFOTS Sports Nutrition",
+  "description": "MGREFOTS Sports Nutrition & Supplements platform featuring high-performance products, AI body analysis, and expert consultation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
