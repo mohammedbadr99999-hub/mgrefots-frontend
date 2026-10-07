@@ -42,14 +42,14 @@ const products = [
     name: "C-Zinc",
     subtitle: "Vitamin C + Zinc · 30 capsules",
     description: "Daily immune and antioxidant support.",
-    image: `${LEGACY_IMAGE_BASE}/c-zinc.png`,
+    image: "/products/czinc.webp",
     message: "Hello MGREFOTS, I would like to order C-Zinc 30 capsules."
   },
   {
     name: "L-Carnitine",
     subtitle: "350 mg · 30 capsules",
     description: "Supports fat metabolism, energy and exercise performance.",
-    image: `${LEGACY_IMAGE_BASE}/l-carnitine.png`,
+    image: "/products/carnitine.webp",
     message: "Hello MGREFOTS, I would like to order L-Carnitine 30 capsules."
   },
   {
@@ -187,7 +187,7 @@ function App() {
                 />
                 <img
                   className="hero-product hero-zinc"
-                  src={`${LEGACY_IMAGE_BASE}/c-zinc.png`}
+                  src="/products/czinc.webp"
                   alt="MGREFOTS C-Zinc"
                 />
               </div>
