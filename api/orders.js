@@ -2,7 +2,7 @@ const PRODUCTS = {
   creatine: { name: 'Creatine Monohydrate', price: 50000 },
   citrulline: { name: 'L-Citrulline', price: 40000 },
   czinc: { name: 'C-Zinc', price: 27000 },
-  carnitine: { name: 'L-Carnitine', price: 22000 },
+  carnitine: { name: 'L-Carnitine', price: 20000 },
   milga: { name: 'Milga Advance', price: 50000 },
 };
 
@@ -18,7 +18,6 @@ export default async function handler(req, res) {
   }
 
   const body = req.body && typeof req.body === 'object' ? req.body : {};
-  // Quietly accept bot submissions without sending email.
   if (clean(body.website, 200)) return res.status(200).json({ ok: true });
 
   const name = clean(body.name, 100);
@@ -26,34 +25,42 @@ export default async function handler(req, res) {
   const city = clean(body.city, 80);
   const area = clean(body.area, 100);
   const street = clean(body.street, 160);
-  const product = PRODUCTS[clean(body.product, 30)];
-  const quantity = Number(body.quantity);
+  const items = body.items;
+  if (!name || !phone || !city || !area || !street || !Array.isArray(items) ||
+      items.length < 1 || items.length > Object.keys(PRODUCTS).length ||
+      !/^\+?[0-9\s().-]{7,24}$/.test(phone) ||
+      new Set(items.map((item) => clean(item?.product, 30))).size !== items.length) {
+    return res.status(400).json({ message: 'Check your contact, delivery and product details, then try again.' });
+  }
 
-  if (!name || !phone || !city || !area || !street || !product ||
-      !/^\+?[0-9\s().-]{7,24}$/.test(phone) || !Number.isInteger(quantity) ||
-      quantity < 1 || quantity > 99) {
+  const normalizedItems = items.map((item) => ({
+    product: PRODUCTS[clean(item?.product, 30)],
+    quantity: Number(item?.quantity),
+  }));
+  if (normalizedItems.some((item) => !item.product || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 99)) {
     return res.status(400).json({ message: 'Check your contact, delivery and product details, then try again.' });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const sender = process.env.RESEND_FROM_EMAIL;
+  const sender = process.env.RESEND_FROM_EMAIL || 'MGREFOTS Orders <orders@notifications.mgrefots.com>';
   const recipient = process.env.ORDER_NOTIFICATION_EMAIL || 'info@mgrefots.com';
-  if (!apiKey || !sender) {
-    return res.status(503).json({ code: 'ORDER_EMAIL_NOT_CONFIGURED' });
-  }
+  if (!apiKey) return res.status(503).json({ code: 'ORDER_EMAIL_NOT_CONFIGURED' });
 
-  const total = product.price * quantity;
+  const total = normalizedItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const orderId = `MG-${Date.now().toString(36).toUpperCase()}`;
+  const productLines = normalizedItems.map((item) =>
+    `${item.product.name} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} RWF = ${(item.quantity * item.product.price).toLocaleString('en-US')} RWF`
+  );
   const fields = [
-    ['Order ID', orderId], ['Product', product.name], ['Quantity', `${quantity} bottle(s)`],
-    ['Unit price', `${product.price.toLocaleString('en-US')} RWF`],
-    ['Order total', `${total.toLocaleString('en-US')} RWF`], ['Customer name', name],
+    ['Order ID', orderId], ['Order total', `${total.toLocaleString('en-US')} RWF`], ['Customer name', name],
     ['Phone', phone], ['City', city], ['Area / district', area], ['Street / building', street],
   ];
-  const text = fields.map(([label, value]) => `${label}: ${value}`).join('\n');
+  const text = [...fields.map(([label, value]) => `${label}: ${value}`), '', 'Products:', ...productLines].join('\n');
   const html = `<h2>New MGREFOTS order request</h2><table>${fields.map(([label, value]) =>
     `<tr><th align="left" style="padding:6px 12px 6px 0">${escapeHtml(label)}</th><td style="padding:6px">${escapeHtml(value)}</td></tr>`
-  ).join('')}</table><p>Contact the customer to confirm availability, delivery and payment.</p>`;
+  ).join('')}</table><h3>Products</h3><ul>${normalizedItems.map((item) =>
+    `<li>${escapeHtml(item.product.name)} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} RWF = ${(item.quantity * item.product.price).toLocaleString('en-US')} RWF</li>`
+  ).join('')}</ul><p>Contact the customer to confirm availability, delivery and payment.</p>`;
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
