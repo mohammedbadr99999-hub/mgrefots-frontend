@@ -2,7 +2,7 @@ const PRODUCTS = {
   creatine: { name: 'Creatine Monohydrate', price: 50000 },
   citrulline: { name: 'L-Citrulline', price: 40000 },
   czinc: { name: 'C-Zinc', price: 27000 },
-  carnitine: { name: 'L-Carnitine', price: 20000 },
+  carnitine: { name: 'L-Carnitine', price: 22000 },
   milga: { name: 'Milga Advance', price: 50000 },
 };
 
