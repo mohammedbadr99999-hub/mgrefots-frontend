@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Bike, Dumbbell, Facebook, Globe2, Instagram, Leaf, Mail, MapPin, Menu, PackageCheck, Phone, ShieldCheck, Truck, X, CheckCircle2 } from 'lucide-react';
 import { copy } from './storefront-copy';
+import { ecommerce, trackEvent, trackOrderResult, installClickTracking } from './analytics.js';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/noto-sans-arabic';
 import '@fontsource/libre-baskerville/700.css';
@@ -18,8 +19,13 @@ export default function App(){
  const icons=[Leaf,Truck,ShieldCheck,Dumbbell];
  const isOrderPage=window.location.pathname.replace(/\/$/,'')==='/order';
  const selectedItems=images.filter(id=>cart[id]?.selected).map(id=>({product:id,quantity:Number(cart[id].quantity)||1})); const orderTotal=selectedItems.reduce((sum,item)=>sum+t.prices[images.indexOf(item.product)]*item.quantity,0);
+ useEffect(() => {
+   const cleanup = installClickTracking();
+   if (isOrderPage) trackEvent('begin_checkout', ecommerce(selectedItems));
+   return cleanup;
+ }, []);
  const updateCart=(id,updates)=>setCart(current=>({...current,[id]:{...current[id],...updates}}));
- const submitOrder=async event=>{event.preventDefault();if(!selectedItems.length){setNotice(t.selectAtLeastOne);return}setNotice('');setSubmitting(true);try{const response=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...form,items:selectedItems,website:''})});const data=await response.json();if(!response.ok)throw new Error(data.code==='ORDER_EMAIL_NOT_CONFIGURED'?t.emailNotReady:t.orderError);setSent(true);setNotice(t.orderSuccess)}catch(error){setNotice(error.message||t.orderError)}finally{setSubmitting(false)}};
+ const submitOrder=async event=>{event.preventDefault();if(!selectedItems.length){setNotice(t.selectAtLeastOne);return}setNotice('');setSubmitting(true);try{const response=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...form,items:selectedItems,website:''})});const data=await response.json();if(!response.ok)throw new Error(data.code==='ORDER_EMAIL_NOT_CONFIGURED'?t.emailNotReady:t.orderError);trackOrderResult(data,selectedItems);setSent(true);setNotice(t.orderSuccess)}catch(error){setNotice(error.message||t.orderError)}finally{setSubmitting(false)}};
  if(isOrderPage)return <div className="site-shell order-page"><header className="site-header"><div className="container header-inner"><Brand/><div className="header-controls"><LanguagePicker lang={lang} setLang={setLang} t={t}/><a className="order-back" href="/#shop">{t.backHome}</a></div></div></header><main className="order-main"><div className="order-card"><a href="/#home" className="order-brand"><Brand/></a><p className="section-kicker">MGREFOTS · KIGALI</p><h1>{t.orderTitle}</h1><p className="order-intro">{t.orderIntro}</p>{sent?<div className="order-success" role="status"><CheckCircle2 size={34}/><p>{notice}</p><a className="btn btn-gold" href="/#shop">{t.backHome}</a></div>:<form className="order-form" onSubmit={submitOrder}>
  <label>{t.fieldName}<input autoComplete="name" name="name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required maxLength="100"/></label>
  <label>{t.fieldPhone}<input type="tel" autoComplete="tel" name="phone" inputMode="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required maxLength="24" placeholder="+250 7xx xxx xxx" dir="ltr"/></label>
