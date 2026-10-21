@@ -28,3 +28,9 @@ The `/order` page validates the five supported products and their prices in `api
 - `ORDER_NOTIFICATION_EMAIL` — optional; defaults to `info@mgrefots.com`.
 
 After adding the variables, redeploy the Vercel project. Until then the form displays a message directing customers to WhatsApp. This form records an order request; it does not charge the customer. The team confirms payment and delivery with the customer.
+
+## Additional pages restored from the earlier Sports Nutrition project
+
+The current storefront and `/order` checkout remain the source of truth for the five current products, prices, photos, and displayed ratings. `/explore` links to a product catalogue, product details, knowledge center, FAQ, supplement encyclopedia, InBody upload, AI chat, expanded about and contact pages. Older protein and B-Complex listings are enquiry-only and cannot be added to checkout. Older content is in `src/legacy/data`; review its health claims and references before publishing.
+
+To activate AI chat and InBody analysis, set `GEMINI_API_KEY` in Vercel Production and redeploy. Without it, the endpoints return 503 and the page directs visitors to WhatsApp. The API never returns a fabricated analysis. The uploaded report is sent to the Gemini API for analysis; no scan is stored by this project. Maximum upload size is 2.5 MB.
