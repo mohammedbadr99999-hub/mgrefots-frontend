@@ -17,7 +17,9 @@ pregnancy, disordered eating).
 The person's goal matters more than labels such as ectomorph, endomorph, or
 “female exercise”. Sex alone does not prescribe a training program. Aesthetic
 goals such as glute growth are valid; do not promise a specific body shape,
-targeted fat removal, or an exact timeline.
+reliable targeted fat removal, or an exact timeline. Research on localized
+fat loss has mixed findings; muscle growth and fat distribution are separate
+outcomes.
 
 | Example | First principle | Missing detail worth asking |
 | --- | --- | --- |
@@ -63,6 +65,7 @@ state the uncertainty. The initial registry includes:
 - [ISSN protein and exercise position stand](https://pmc.ncbi.nlm.nih.gov/articles/PMC5477153/)
 - [AIS nutrition](https://www.ausport.gov.au/ais/nutrition)
 - [NIH ODS exercise supplements](https://ods.od.nih.gov/factsheets/ExerciseAndAthleticPerformance-HealthProfessional/)
+- Localized fat-loss studies with differing results: [2013 leg-training trial](https://pubmed.ncbi.nlm.nih.gov/23222084/) and [2023 abdominal-endurance trial](https://pubmed.ncbi.nlm.nih.gov/38010201/)
 
 For MGREFOTS product identity, ingredients, servings and directions, the
 **current approved label and product records** take priority. The legacy
