@@ -1,22 +1,5 @@
-.hero-coach{max-width:515px;margin-top:22px;padding:15px 17px 13px;background:#fffdfa;border:1px solid #d9c189;border-inline-start:4px solid #dba01c;border-radius:13px;box-shadow:0 12px 30px #08255018;text-align:start}
-.coach-heading h2{font-size:19px;line-height:1.3;color:#082550;margin:2px 0 0}
-.coach-eyebrow{font-size:10px;font-weight:750;letter-spacing:.2px;color:#9a6a06;margin:0}
-.coach-heading>p{font-size:11px;color:#51617a;margin:3px 0 10px;line-height:1.45}
-.coach-form{display:flex;gap:8px;align-items:stretch;padding:5px;background:#f6f8fc;border:1px solid #cbd6e4;border-radius:9px}
-.coach-form:focus-within{border-color:#c58a10;box-shadow:0 0 0 2px #dba01c22}
-.coach-form textarea{flex:1;min-width:0;min-height:43px;max-height:120px;resize:vertical;border:0;outline:0;background:transparent;padding:7px;color:#0b2349;font:inherit;font-size:12px;line-height:1.45}
-.coach-form textarea::placeholder{color:#697991}
-.coach-form .btn{align-self:center;min-width:83px;min-height:38px;padding-inline:12px;font-size:12px;cursor:pointer}
-.coach-form .btn:disabled{opacity:.65;cursor:wait}
-.coach-examples{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
-.coach-examples button{padding:5px 8px;border:1px solid #d6dfeb;border-radius:18px;background:#fff;color:#284666;font:inherit;font-size:10px;cursor:pointer;text-align:start}
-.coach-examples button:hover{border-color:#dba01c}
-.coach-conversation{max-height:170px;overflow:auto;display:grid;gap:8px;margin-bottom:9px;padding:10px;background:#f6f8fc;border-radius:9px}
-.coach-conversation p{margin:0;white-space:pre-line;font-size:12px;line-height:1.6}
-.coach-message-question{justify-self:end;max-width:92%;padding:7px 9px;background:#e8eef7;border-radius:8px}
-.coach-message-answer{justify-self:start;max-width:96%;padding:7px 9px;background:#fff1d0;border-radius:8px}
-.coach-note{font-size:9px;color:#617088;margin:9px 0 0;line-height:1.5}
-.coach-note a{display:inline-flex;gap:3px;align-items:center;color:#8d600e;font-weight:700;white-space:nowrap}
-@media(max-width:900px){.hero-coach{padding:12px;margin-top:17px}.coach-heading h2{font-size:17px}.coach-heading>p{font-size:10px}.coach-examples button{font-size:9px}}
-@media(max-width:680px){.hero-coach{margin:19px auto 0;max-width:480px;padding:15px;text-align:start}.coach-heading h2{font-size:19px}.coach-heading>p{font-size:11px}.coach-examples{justify-content:flex-start}.coach-form textarea{font-size:12px}}
-[dir=rtl] .hero-coach h2,[dir=rtl] .hero-coach p,[dir=rtl] .hero-coach button,[dir=rtl] .hero-coach textarea{font-family:'Cairo',sans-serif}
+.coach-strip{display:block;width:100%;background:#fffdfa;border-block:1px solid #d9c189;color:#082550;font-size:13px;font-weight:700;line-height:1.35;transition:background-color .2s}
+.coach-strip:hover{background:#fff3d7}
+.coach-strip-inner{width:min(1180px,calc(100% - 40px));min-height:48px;margin:auto;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 0;text-align:center}
+.coach-strip svg{color:#ae780b}
+@media(max-width:680px){.coach-strip{font-size:11px}.coach-strip-inner{width:calc(100% - 28px);min-height:48px;gap:7px;padding:8px 4px}.coach-strip svg{width:16px;height:16px}}
