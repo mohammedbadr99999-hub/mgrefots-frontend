@@ -62,7 +62,6 @@ export function WelcomePage({ lang, t }) {
   ];
   return frame(<><Heading title={w.discover} subtitle={t.intro} />
     <div className="legacy-feature-grid">{sections.map(([href,title,en,ar])=><a className="legacy-feature" href={href} key={href}><BookOpen size={24}/><h2>{title}</h2><p>{lang==='ar'?ar:en}</p><span>{w.read}<ArrowRight size={15}/></span></a>)}</div>
-    <div className="legacy-egypt"><span>🇪🇬</span><div><h2>{lang==='ar'?'أسعار خاصة للمصريين':'Special prices for Egyptians'}</h2><p>{lang==='ar'?'تواصل معنا عبر واتساب لمعرفة العرض المتاح.':'Contact us on WhatsApp to ask about available offers.'}</p></div><Action href={whatsapp('مرحباً MGREFOTS، أنا مصري وأرغب في معرفة الأسعار والعروض الخاصة للمصريين 🇪🇬')}>{w.contact}</Action></div>
     <div className="legacy-link-row"><Action href="/about" outline>{t.about}</Action><Action href="/contact" outline>{t.contact}</Action><Action href="/order">{t.orderNav}</Action></div>
   </>);
 }
