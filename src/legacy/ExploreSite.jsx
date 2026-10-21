@@ -7,9 +7,9 @@ import {
 import './explore.css';
 
 const labels = {
-  en: { explore: 'Explore', products: 'Products', knowledge: 'Knowledge', analysis: 'InBody', supplements: 'Supplements', chat: 'Ask an Expert', faq: 'FAQ', home: 'Home', order: 'Order' },
-  ar: { explore: 'اكتشف', products: 'المنتجات', knowledge: 'مركز المعرفة', analysis: 'تحليل InBody', supplements: 'موسوعة المكملات', chat: 'اسأل الخبير', faq: 'الأسئلة الشائعة', home: 'الرئيسية', order: 'اطلب الآن' },
-  rw: { explore: 'Menya byinshi', products: 'Ibicuruzwa', knowledge: 'Ubumenyi', analysis: 'Isuzuma rya InBody', supplements: 'Inyongeramirire', chat: 'Baza impuguke', faq: 'Ibibazo', home: 'Ahabanza', order: 'Tumiza' },
+  en: { explore: 'Explore', products: 'Products', knowledge: 'Knowledge', analysis: 'InBody', supplements: 'Supplements', chat: 'Ask MGREFOTS', faq: 'FAQ', home: 'Home', order: 'Order' },
+  ar: { explore: 'اكتشف', products: 'المنتجات', knowledge: 'مركز المعرفة', analysis: 'تحليل InBody', supplements: 'موسوعة المكملات', chat: 'اسأل MGREFOTS', faq: 'الأسئلة الشائعة', home: 'الرئيسية', order: 'اطلب الآن' },
+  rw: { explore: 'Menya byinshi', products: 'Ibicuruzwa', knowledge: 'Ubumenyi', analysis: 'Isuzuma rya InBody', supplements: 'Inyongeramirire', chat: 'Baza MGREFOTS', faq: 'Ibibazo', home: 'Ahabanza', order: 'Tumiza' },
 };
 
 function Brand() {
