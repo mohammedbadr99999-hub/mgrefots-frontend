@@ -1,6 +1,6 @@
 # MGREFOTS — training and nutrition answer method (draft)
 
-This is an editorial and implementation guide for the `/#coach` link and `/chat`.
+This is an editorial and implementation guide for the `/#coach` question form and `/chat`.
 It applies to general education for adults, not medical diagnosis or individual treatment.
 The current answer engine uses these rules and the source notes in `api/ai/fitness-method.js`;
 it does **not** yet search an exhaustive library of sport-specific studies.
