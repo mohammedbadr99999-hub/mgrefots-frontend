@@ -91,7 +91,7 @@ export function ProductDetailPage({ lang,t,slug }) {
         {product.sales&&<p className="legacy-sales">{product.sales} {w.sold}</p>}
         <p>{education?.summary||product.description}</p>
       </div></div>
-    {education&&<section className="product-education"><h2>{w.goalTitle}</h2><p className="product-education-summary">{education.summary}</p>
+    {education&&<section className="product-education"><h2>{w.goalTitle}</h2>
       <div className="product-point-grid">{education.points.map(([label,description],i)=><section className={`legacy-panel product-point ${i>2&&!expanded?'product-point-hidden':''}`} key={label}><h3>{label}</h3><p>{description}</p></section>)}</div>
       <button className="product-more" type="button" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>{expanded?w.less:w.more}</button>
       {expanded&&<><section className="legacy-info-grid"><div className="legacy-panel"><h3>{w.usage}</h3><p>{education.use}</p></div><div className="legacy-panel"><h3>{w.benefits}</h3><p>{education.note}</p></div></section>
