@@ -103,7 +103,7 @@ export function ProductDetailPage({ lang,t,slug }) {
     {product.id==='creatine'&&<section className="legacy-panel coa-card"><h2>{w.coa}</h2><p><a href={`/products/creatine/certificate?lang=${lang}`}>{w.coaPage} <ArrowRight size={15}/></a></p></section>}
     <details className="legacy-panel standards-details"><summary>{w.standards}</summary><p>{standard.intro}</p><ul>{standard.items.map(([title,description])=><li key={title}><strong>{title}:</strong> {description}</li>)}</ul>
       <div className="product-references">{standard.sources.map(([title,url])=><a key={url} href={url} target="_blank" rel="noreferrer">{title}</a>)}</div></details>
-    {lang!=='ar'&&<p className="legacy-note">{w.learning} Check the current product label before use.</p>}
+    
   </>);
 }
 
