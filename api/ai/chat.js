@@ -26,7 +26,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
   const prompt = typeof req.body?.prompt === 'string' ? req.body.prompt.trim() : '';
-  const lang = ['en', 'ar', 'rw'].includes(req.body?.lang) ? req.body.lang : 'en';
+  const selectedLang = ['en', 'ar', 'rw'].includes(req.body?.lang) ? req.body.lang : 'en';
+  // Visitors may ask in Arabic while the storefront language is still English.
+  const lang = /[\u0600-\u06ff]/u.test(prompt) ? 'ar' : selectedLang;
   if (!prompt || prompt.length > 2000) return res.status(400).json({ error: 'Enter a question of up to 2000 characters.' });
   const history = req.body?.history ?? [];
   if (!Array.isArray(history) || history.length > 8 ||
