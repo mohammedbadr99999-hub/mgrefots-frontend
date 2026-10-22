@@ -62,3 +62,68 @@ export const customerProvidedEducation = {
     ],
   },
 };
+
+// Faithful English translation of the owner-provided Arabic copy above.
+export const customerProvidedEducationEnglish = {
+  creatine: {
+    summary: 'Creatine is, in brief, the body’s “quick fuel reserve.” Its main role is to regenerate energy molecules (ATP) within seconds.',
+    points: [
+      ['Bodybuilding', 'It draws water into the muscle cell (not under the skin), giving the muscle more volume (Pump) and providing an ideal environment for building protein. It also gives you the strength to lift heavier weights and perform more repetitions.'],
+      ['Football', 'It provides explosive energy for repeated sprints. It reduces fatigue in the second half and speeds muscle recovery between attacks.'],
+      ['Basketball', 'It increases the power and speed of the jump (Vertical Jump) by supplying fast energy to fast-twitch muscle fibers, and helps with changing direction quickly.'],
+      ['High fitness', 'It delays the feeling of fatigue, allowing you to exercise for longer and at a higher intensity, whether in CrossFit, swimming, or interval running.'],
+      ['Everyday use', 'It improves brain function and memory and reduces daily mental and physical fatigue, because the brain uses a great deal of energy (ATP), just like the muscles.'],
+      ['Men', 'Indirectly, by increasing physical strength and improving athletic performance, it raises testosterone and a man’s self-confidence. The extra energy also supports general physical effort.'],
+      ['Women and pregnancy', 'It fights depression and mood swings and supports bone health. In sexual activity, it reduces physical fatigue. During pregnancy: some recent studies have shown its importance in supporting fetal brain growth and protecting it from oxygen deprivation, but a doctor must be consulted to determine the dose and safety.'],
+      ['Older adults', 'It is the first weapon against age-related muscle loss (Sarcopenia). It improves body balance, reduces the risk of falls, and protects against age-related neurological diseases such as Alzheimer’s.'],
+    ],
+  },
+  czinc: {
+    summary: 'Vitamin C and zinc work together as a “powerful protective shield.” Vitamin C is an antioxidant that moves through the body’s fluids to eliminate free radicals, while zinc works inside cells to support DNA. Their combination reduces inflammation caused by intense exercise, speeds tissue healing, and boosts immunity twofold.',
+    points: [
+      ['Bodybuilding', 'Zinc is essential for producing the male hormone (testosterone), and vitamin C is necessary for producing “collagen,” which protects ligaments and joints from heavy weights.'],
+      ['Football and basketball', 'Strenuous sports cause a temporary drop in immunity after matches. C-Zinc protects players from colds and infections during busy seasons.'],
+      ['High fitness', 'It reduces muscle breakdown (Catabolism) and delayed muscle soreness after strenuous workouts.'],
+      ['Everyday use', 'It supports fresh-looking skin and strong hair, protects against seasonal illnesses, and reduces oxidative stress caused by pollution and psychological pressure.'],
+      ['Men', 'Zinc is the “manhood mineral.” Zinc deficiency immediately causes erectile weakness and lowers sperm quality and count. Vitamin C improves circulation, strongly supporting erectile health.'],
+      ['Women and pregnancy', 'It supports fertility and helps preserve youthful skin. During pregnancy: zinc is very important for fetal cell development, and vitamin C helps pregnant women absorb iron to prevent anemia.'],
+      ['Older adults', 'It protects against age-related vision loss (macular degeneration), speeds wound healing, and strengthens immunity, which naturally weakens with age.'],
+    ],
+  },
+  carnitine: {
+    summary: 'It works like a “transport vehicle” that takes stored fat in the body into the cells’ energy factories (the mitochondria) to burn it and turn it into real energy.',
+    points: [
+      ['Bodybuilding', 'It is excellent during “cutting” phases to lose fat while preserving muscle mass, and increases the density of androgen receptors in the muscles (allowing the muscle to benefit more from testosterone).'],
+      ['Football and basketball', 'It provides sustained energy (Endurance). Instead of quickly using muscle glycogen, it makes the body rely on fat as fuel, delaying the onset of “muscle cramps” and lactic-acid buildup.'],
+      ['High fitness', 'It increases cardio-respiratory endurance and helps you reach your ideal weight without using stimulants that raise your heart rate.'],
+      ['Everyday use', 'It supports heart-muscle health, reduces liver fat, and provides energy and vitality throughout the day.'],
+      ['Men', 'It has a major, scientifically proven role in increasing sperm “motility” (Motility) and treating infertility. It also improves blood circulation to the reproductive organs.'],
+      ['Women and pregnancy', 'It is excellent for supporting polycystic ovary syndrome (PCOS) and helping with weight loss. During pregnancy: carnitine levels may naturally fall, but using it as a supplement must be decided by an obstetrician-gynecologist.'],
+      ['Older adults', 'It strongly supports heart health (because the heart relies heavily on fat as fuel) and reduces physical and mental fatigue, especially in other forms such as acetyl-L-carnitine for memory support.'],
+    ],
+  },
+  milga: {
+    summary: 'It is “nerve nourishment” and an “engine for metabolism.” Milga contains (benfotiamine — fast-absorbing vitamin B1, B6, and B12). Their role is to turn the food we eat into usable energy and maintain the body’s nerve pathways.',
+    points: [
+      ['Bodybuilding', 'It improves “muscle–nerve coordination” (Mind-Muscle Connection) and helps the central nervous system recover from the heavy strain of lifting heavy weights. Vitamin B6 is essential for digesting and making use of protein.'],
+      ['Football and basketball', 'Reaction speed depends on healthy nerves. Milga ensures signals travel from the brain to the muscles in fractions of a second (such as when shooting or jumping).'],
+      ['High fitness', 'It prevents sudden nervous fatigue during intense workouts and maintains stable energy levels.'],
+      ['Everyday use', 'It treats numbness, tingling, limb tremors, and lower-back pain caused by nerve inflammation, and reduces nervous tension.'],
+      ['Men', 'Sensation and erection depend mainly on strong, healthy nerves. Any nerve damage or weakness directly affects sexual performance; this is where Milga stands out as a strong preventive treatment.'],
+      ['Women and pregnancy', 'Vitamin B6 greatly reduces premenstrual symptoms (PMS) and mood swings. During pregnancy: B vitamins (especially B12 together with folic acid) are the cornerstone of forming the fetal spinal cord and nervous system.'],
+      ['Older adults', 'It protects against neuropathy (especially for people with diabetes) and helps preserve memory from decline due to B12 deficiency, whose absorption decreases greatly with age.'],
+    ],
+  },
+  citrulline: {
+    summary: 'It is a “pipe widener.” Once in the body, it converts to arginine and then to “nitric oxide” (Nitric Oxide). This gas relaxes and widens blood-vessel walls, allowing huge amounts of oxygen- and nutrient-rich blood to flow through.',
+    points: [
+      ['Bodybuilding', 'It gives the muscle a strong, full appearance (the Pump) during and after exercise, and flushes ammonia from the muscle (which causes fatigue), reducing muscle soreness in the days after training.'],
+      ['Football and basketball', 'It boosts oxygen delivery to muscles during continuous running, increasing a player’s ability to keep running and jumping without their muscles burning from fatigue.'],
+      ['High fitness', 'It delays reaching the “lactate threshold” (the moment when you feel the muscle burning and cannot complete another repetition), resulting in exceptional performance.'],
+      ['Everyday use', 'It supports heart health, improves peripheral circulation (cold hands and feet), and contributes naturally to lowering high blood pressure.'],
+      ['Men', 'It is scientifically called “natural Viagra.” The way citrulline works (widening blood vessels through nitric oxide) is the same basic mechanism as erectile-dysfunction medicines, ensuring a stronger erection and better performance in a completely healthy way.'],
+      ['Women and pregnancy', 'Increased blood flow to the female reproductive organs improves arousal and physical response. During pregnancy: it is used medically in some cases to help control systolic blood pressure and improve blood flow to the placenta, but it must not be taken except under strict medical prescription.'],
+      ['Older adults', 'It fights age-related hardening of the arteries and maintains blood-vessel flexibility, supporting heart and limb health.'],
+    ],
+  },
+};
