@@ -66,7 +66,7 @@
 [dir=rtl] .legacy-site h1,[dir=rtl] .legacy-site h2,[dir=rtl] .legacy-site h3,[dir=rtl] .legacy-site p,[dir=rtl] .legacy-site button,[dir=rtl] .legacy-site input,[dir=rtl] .legacy-site textarea{font-family:'Cairo',sans-serif}
 
 /* Product education and evidence panels */
-.product-detail-layout{grid-template-columns:minmax(0,1.45fr) minmax(290px,.8fr);align-items:start;direction:rtl}
+.product-detail-layout{grid-template-columns:minmax(0,1.45fr) minmax(290px,.8fr);align-items:start;direction:ltr}
 .product-detail-layout>*{direction:ltr}
 .product-detail-layout .legacy-detail-photo{grid-column:2;grid-row:1;height:390px}
 .product-detail-layout .legacy-detail-copy{grid-column:1;grid-row:1;direction:inherit}
