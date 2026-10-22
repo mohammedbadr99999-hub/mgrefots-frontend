@@ -13,6 +13,9 @@ function classifyGeminiError(error) {
   if (status === 429) return 'GEMINI_LIMIT';
   if (status === 404) return 'GEMINI_MODEL';
   if (status === 400) return 'GEMINI_REQUEST';
+  if (status >= 500 && status <= 599) return `GEMINI_HTTP_${status}`;
+  if (!status && /fetch failed|network|timeout|ETIMEDOUT|ECONNRESET|ENOTFOUND/i.test(message)) return 'GEMINI_NETWORK';
+  if (!status) return 'GEMINI_RUNTIME';
   return 'GEMINI_UPSTREAM';
 }
 
@@ -48,7 +51,7 @@ export default async function handler(req, res) {
   } catch (error) {
     const providerStatus = Number(error?.status) || 0;
     const code = classifyGeminiError(error);
-    console.error('Gemini chat request failed', { code, providerStatus });
+    console.error('Gemini chat request failed', { code, providerStatus, errorName: error?.name || 'unknown' });
     return res.status(502).json({ error: 'AI service is temporarily unavailable.', code });
   }
 }
