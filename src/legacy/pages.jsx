@@ -5,7 +5,7 @@ import { SUPPLEMENT_ENCYCLOPEDIA } from './data/supplementEncyclopediaData';
 import { FEATURED_GUIDES, KNOWLEDGE_ARTICLES, KNOWLEDGE_CATEGORIES, KNOWLEDGE_FAQS } from './data/knowledgeCenterData';
 import { faqData } from './data/faqData';
 import { manufacturingStandards, productEducation } from './productEducation';
-import { customerProvidedEducation } from './customerProvidedEducation';
+import { customerProvidedEducation, customerProvidedEducationEnglish } from './customerProvidedEducation';
 
 const words = {
   en: { discover:'Explore more from MGREFOTS', browse:'Browse products', read:'Read the guide', details:'Product details', ask:'Ask about availability', related:'Related product', usage:'Directions', ingredients:'Ingredients', facts:'Supplement facts', benefits:'Highlights', science:'More information', references:'References', question:'Questions and answers', articles:'Articles', guides:'Guides', search:'Search', all:'All', contact:'Contact us', send:'Send on WhatsApp', noResults:'No matching results', choose:'Choose a category', analysis:'InBody analysis', chat:'Ask MGREFOTS', submit:'Analyze scan', sending:'Working…', unavailable:'Answers are not available right now. Please contact us on WhatsApp.', file:'Upload an InBody image or PDF', goal:'Tell us your goal', learning:'Educational content; confirm personal health decisions with a qualified professional.', home:'Back to shop', rating:'Customer rating', more:'Show more information', less:'Show less', goalTitle:'Who is this information for?', training:'Muscle gain', fatLoss:'Fat loss', fitness:'Fitness and sport', women:'Women', older:'Older adults', orderProduct:'Order this product', standards:'Manufacturing standards', coa:'Certificate of Analysis (COA)', coaFull:'Certificate of Analysis', coaPage:'View certificate and test results', coaNote:'', coaContents:'What the certificate reports', batch:'Batch', assay:'Creatine assay', particle:'Particle size', metals:'Heavy metals', micro:'Microbiology', conclusion:'Conclusion', zoom:'Open full-size image', sold:'sold' },
@@ -81,7 +81,7 @@ export function ProductDetailPage({ lang,t,slug }) {
   const w=words[lang], [expanded,setExpanded]=useState(false);
   const product=[...currentProducts(t),...extraProducts(lang)].find(p=>p.id===slug||p.old?.id===slug);
   if(!product)return frame(<><Heading title={lang==='ar'?'المنتج غير موجود':'Product not found'} /><Action href="/products">{w.browse}</Action></>);
-  const education=lang==='ar'?(customerProvidedEducation[product.id]||productEducation[product.id]?.ar):productEducation[product.id]?.[lang]||productEducation[product.id]?.en;
+  const education=lang==='ar'?customerProvidedEducation[product.id]:lang==='en'?customerProvidedEducationEnglish[product.id]:productEducation[product.id]?.[lang]||productEducation[product.id]?.en;
   const rating=['5.0/5','4.8/5','4.7/5','4.8/5','4.7/5'][ids.indexOf(product.id)];
   const standard=manufacturingStandards[lang]||manufacturingStandards.en;
   const old=product.id==='creatine'?product.old:null;
