@@ -28,3 +28,17 @@ The `/order` page validates the five supported products and their prices in `api
 - `ORDER_NOTIFICATION_EMAIL` — optional; defaults to `info@mgrefots.com`.
 
 After adding the variables, redeploy the Vercel project. Until then the form displays a message directing customers to WhatsApp. This form records an order request; it does not charge the customer. The team confirms payment and delivery with the customer.
+
+## Additional pages restored from the earlier Sports Nutrition project
+
+The current storefront and `/order` checkout remain the source of truth for the five current products, prices, and photos. Product ratings and stars are not displayed or shipped in the storefront bundle. `/explore` links to a product catalogue, product details, knowledge center, FAQ, supplement encyclopedia, InBody upload, AI chat, expanded about and contact pages. Older protein and B-Complex listings are enquiry-only and cannot be added to checkout. Older content is in `src/legacy/data`; review its health claims and references before publishing.
+
+To activate AI chat and InBody analysis, set `GEMINI_API_KEY` in Vercel Production and redeploy. Without it, the endpoints return 503 and the page directs visitors to WhatsApp. The API never returns a fabricated analysis. The uploaded report is sent to the Gemini API for analysis; no scan is stored by this project. Maximum upload size is 2.5 MB.
+
+The home page has a narrow full-width question form above the original hero content. It submits directly to `/api/ai/chat` and shows the reply in place; `/chat` uses the same answer method. The method and initial reviewed source registry are in [`docs/fitness-assistant-methodology.md`](docs/fitness-assistant-methodology.md) and `api/ai/fitness-method.js`. This is a starting evidence framework, not a complete sport-specific knowledge library; expand and review the source corpus and add abuse controls before public activation.
+
+## API key protection
+
+Keep `GEMINI_API_KEY` and `RESEND_API_KEY` only in server environment variables. Never prefix these keys with `VITE_` or add them to frontend configuration. The browser calls same-origin `/api/ai/*` endpoints; only the server contacts Gemini. Local `.env.*` files are ignored by Git.
+
+Google HTTP 402 is a billing/prepay issue for the key’s project. A redeploy cannot resolve billing. Resolve the project’s billing in Google AI Studio, then retry. The API returns a sanitized `GEMINI_BILLING` code; provider error messages and credentials are never returned to visitors.
