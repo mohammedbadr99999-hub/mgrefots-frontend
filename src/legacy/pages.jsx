@@ -4,11 +4,12 @@ import { PRODUCTS as OLD_PRODUCTS } from './data/products';
 import { SUPPLEMENT_ENCYCLOPEDIA } from './data/supplementEncyclopediaData';
 import { FEATURED_GUIDES, KNOWLEDGE_ARTICLES, KNOWLEDGE_CATEGORIES, KNOWLEDGE_FAQS } from './data/knowledgeCenterData';
 import { faqData } from './data/faqData';
+import { manufacturingStandards, productEducation } from './productEducation';
 
 const words = {
-  en: { discover:'Explore more from MGREFOTS', browse:'Browse products', read:'Read the guide', details:'Product details', ask:'Ask about availability', sold:'Currently unavailable', related:'Related product', usage:'Directions', ingredients:'Ingredients', facts:'Supplement facts', benefits:'Highlights', science:'More information', references:'References', question:'Questions and answers', articles:'Articles', guides:'Guides', search:'Search', all:'All', contact:'Contact us', send:'Send on WhatsApp', noResults:'No matching results', choose:'Choose a category', analysis:'InBody analysis', chat:'Ask MGREFOTS', submit:'Analyze scan', sending:'Working…', unavailable:'Answers are not available right now. Please contact us on WhatsApp.', file:'Upload an InBody image or PDF', goal:'Tell us your goal', learning:'Educational content; confirm personal health decisions with a qualified professional.', home:'Back to shop' },
-  ar: { discover:'اكتشف المزيد من MGREFOTS', browse:'تصفح المنتجات', read:'اقرأ الدليل', details:'تفاصيل المنتج', ask:'استفسر عن التوفر', sold:'غير متوفر حاليًا', related:'منتج مرتبط', usage:'طريقة الاستخدام', ingredients:'المكونات', facts:'حقائق المكمل', benefits:'أبرز المميزات', science:'معلومات إضافية', references:'المراجع', question:'أسئلة وإجابات', articles:'مقالات', guides:'أدلة', search:'بحث', all:'الكل', contact:'تواصل معنا', send:'أرسل عبر واتساب', noResults:'لا توجد نتائج مطابقة', choose:'اختر تصنيفًا', analysis:'تحليل InBody', chat:'اسأل MGREFOTS', submit:'حلّل التقرير', sending:'جارٍ العمل…', unavailable:'الإجابات غير متاحة الآن. تواصل معنا عبر واتساب.', file:'ارفع صورة أو PDF لتقرير InBody', goal:'اكتب هدفك', learning:'محتوى تثقيفي؛ راجع مختصًا في القرارات الصحية الشخصية.', home:'العودة للمتجر' },
-  rw: { discover:'Menya byinshi kuri MGREFOTS', browse:'Reba ibicuruzwa', read:'Soma inyoborabumenyi', details:'Amakuru y’igicuruzwa', ask:'Baza niba gihari', sold:'Ntikiboneka ubu', related:'Igicuruzwa kijyanye', usage:'Uko gikoreshwa', ingredients:'Ibigize', facts:'Amakuru y’inyongeramirire', benefits:'Ibyiza', science:'Andi makuru', references:'Inkomoko', question:'Ibibazo n’ibisubizo', articles:'Inyandiko', guides:'Inyoborabumenyi', search:'Shakisha', all:'Byose', contact:'Twandikire', send:'Ohereza kuri WhatsApp', noResults:'Nta bisubizo', choose:'Hitamo icyiciro', analysis:'Isuzuma rya InBody', chat:'Baza MGREFOTS', submit:'Suzuma raporo', sending:'Birakorwa…', unavailable:'Ubu ntidushobora gusubiza. Twandikire kuri WhatsApp.', file:'Shyiraho ifoto cyangwa PDF ya InBody', goal:'Andika intego yawe', learning:'Amakuru yo kwiga; baza inzobere ku byerekeye ubuzima bwawe.', home:'Subira ku iduka' },
+  en: { discover:'Explore more from MGREFOTS', browse:'Browse products', read:'Read the guide', details:'Product details', ask:'Ask about availability', related:'Related product', usage:'Directions', ingredients:'Ingredients', facts:'Supplement facts', benefits:'Highlights', science:'More information', references:'References', question:'Questions and answers', articles:'Articles', guides:'Guides', search:'Search', all:'All', contact:'Contact us', send:'Send on WhatsApp', noResults:'No matching results', choose:'Choose a category', analysis:'InBody analysis', chat:'Ask MGREFOTS', submit:'Analyze scan', sending:'Working…', unavailable:'Answers are not available right now. Please contact us on WhatsApp.', file:'Upload an InBody image or PDF', goal:'Tell us your goal', learning:'Educational content; confirm personal health decisions with a qualified professional.', home:'Back to shop', rating:'Customer rating', more:'Show more information', less:'Show less', goalTitle:'Who is this information for?', training:'Muscle gain', fatLoss:'Fat loss', fitness:'Fitness and sport', women:'Women', older:'Older adults', orderProduct:'Order this product', standards:'Manufacturing standards', coa:'Certificate of Analysis (COA)', coaFull:'Certificate of Analysis', coaPage:'View certificate and test results', coaNote:'This supplier document describes the tested raw-material batch. It is not independent verification of every retail pack or a medical approval.', coaContents:'What the certificate reports', batch:'Batch', assay:'Creatine assay', particle:'Particle size', metals:'Heavy metals', micro:'Microbiology', conclusion:'Conclusion', zoom:'Open full-size image', sold:'sold' },
+  ar: { discover:'اكتشف المزيد من MGREFOTS', browse:'تصفح المنتجات', read:'اقرأ الدليل', details:'تفاصيل المنتج', ask:'استفسر عن التوفر', related:'منتج مرتبط', usage:'طريقة الاستخدام', ingredients:'المكونات', facts:'حقائق المكمل', benefits:'أبرز المميزات', science:'معلومات إضافية', references:'المراجع', question:'أسئلة وإجابات', articles:'مقالات', guides:'أدلة', search:'بحث', all:'الكل', contact:'تواصل معنا', send:'أرسل عبر واتساب', noResults:'لا توجد نتائج مطابقة', choose:'اختر تصنيفًا', analysis:'تحليل InBody', chat:'اسأل MGREFOTS', submit:'حلّل التقرير', sending:'جارٍ العمل…', unavailable:'الإجابات غير متاحة الآن. تواصل معنا عبر واتساب.', file:'ارفع صورة أو PDF لتقرير InBody', goal:'اكتب هدفك', learning:'محتوى تثقيفي؛ راجع مختصًا في القرارات الصحية الشخصية.', home:'العودة للمتجر', rating:'تقييم العملاء', more:'عرض مزيد من المعلومات', less:'عرض معلومات أقل', goalTitle:'لمن هذه المعلومات؟', training:'زيادة العضلات', fatLoss:'خفض الدهون', fitness:'اللياقة والرياضة', women:'السيدات', older:'كبار السن', orderProduct:'اطلب هذا المنتج', standards:'معايير التصنيع', coa:'شهادة تحليل (COA)', coaFull:'Certificate of Analysis', coaPage:'عرض الشهادة ونتائج الاختبار', coaNote:'تعرض وثيقة المورد نتائج تحليل دفعة من المادة الخام. وهي ليست تحققًا مستقلًا من كل عبوة للبيع بالتجزئة ولا اعتمادًا طبيًا.', coaContents:'ماذا توضح الشهادة؟', batch:'رقم الدفعة', assay:'نسبة الكرياتين', particle:'حجم الجزيئات', metals:'المعادن الثقيلة', micro:'الفحوص الميكروبية', conclusion:'النتيجة', zoom:'افتح الصورة بالحجم الكامل', sold:'مبيعات' },
+  rw: { discover:'Menya byinshi kuri MGREFOTS', browse:'Reba ibicuruzwa', read:'Soma inyoborabumenyi', details:'Amakuru y’igicuruzwa', ask:'Baza niba gihari', related:'Igicuruzwa kijyanye', usage:'Uko gikoreshwa', ingredients:'Ibigize', facts:'Amakuru y’inyongeramirire', benefits:'Ibyiza', science:'Andi makuru', references:'Inkomoko', question:'Ibibazo n’ibisubizo', articles:'Inyandiko', guides:'Inyoborabumenyi', search:'Shakisha', all:'Byose', contact:'Twandikire', send:'Ohereza kuri WhatsApp', noResults:'Nta bisubizo', choose:'Hitamo icyiciro', analysis:'Isuzuma rya InBody', chat:'Baza MGREFOTS', submit:'Suzuma raporo', sending:'Birakorwa…', unavailable:'Ubu ntidushobora gusubiza. Twandikire kuri WhatsApp.', file:'Shyiraho ifoto cyangwa PDF ya InBody', goal:'Andika intego yawe', learning:'Amakuru yo kwiga; baza inzobere ku byerekeye ubuzima bwawe.', home:'Subira ku iduka', rating:'Amanota y’abakiriya', more:'Reba andi makuru', less:'Hisha andi makuru', goalTitle:'Aya makuru agenewe ba nde?', training:'Kongera imikaya', fatLoss:'Kugabanya ibinure', fitness:'Siporo n’ubuzima bwiza', women:'Abagore', older:'Abakuze', orderProduct:'Tumiza iki gicuruzwa', standards:'Ibipimo by’inganda', coa:'Icyemezo cy’isesengura (COA)', coaFull:'Certificate of Analysis', coaPage:'Reba icyemezo n’ibyapimwe', coaNote:'Iyi nyandiko y’uwatanze ibikoresho igaragaza ibisubizo by’isesengura rya batch imwe y’ibikoresho fatizo. Ntabwo igenzura buri paki igurishwa cyangwa ngo ibe icyemezo cy’ubuvuzi.', coaContents:'Ibyo icyemezo kivuga', batch:'Batch', assay:'Creatine yapimwe', particle:'Ingano y’uduce', metals:'Ibyuma biremereye', micro:'Ibizamini bya mikorobe', conclusion:'Umwanzuro', zoom:'Fungura ifoto yuzuye', sold:'byaguzwe' },
 };
 const local = (v, lang) => v?.[lang] || v?.en || '';
 const whatsapp = msg => `https://wa.me/250792294432?text=${encodeURIComponent(msg)}`;
@@ -43,7 +44,7 @@ function ProductTile({ product, lang }) {
   const w=words[lang];
   return <article className="legacy-product-card">
     <a href={`/products/${product.id}`}><img src={product.image} alt={product.name} loading="lazy" /></a>
-    <div><h3>{product.name}</h3><small>{product.spec}</small><p>{product.description}</p>
+    <div><h3><a href={`/products/${product.id}`}>{product.name}</a></h3><small>{product.spec}</small><p>{product.description}</p>
       {product.sales && <p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':lang==='rw'?'byaguzwe':'sold'}</p>}
       {product.orderable ? <strong>{product.price.toLocaleString('en-US')} RWF</strong> : <span className="legacy-muted">{w.ask}</span>}
     </div>
@@ -76,24 +77,49 @@ export function ProductsPage({ lang,t }) {
   </>);
 }
 export function ProductDetailPage({ lang,t,slug }) {
-  const w=words[lang];
+  const w=words[lang], [expanded,setExpanded]=useState(false);
   const product=[...currentProducts(t),...extraProducts(lang)].find(p=>p.id===slug||p.old?.id===slug);
   if(!product)return frame(<><Heading title={lang==='ar'?'المنتج غير موجود':'Product not found'} /><Action href="/products">{w.browse}</Action></>);
-  const old=product.id==='creatine'?product.old:null, details=[
-    [w.usage,local(old?.usage,lang)],[w.ingredients,local(old?.ingredients,lang)],
-    [w.science,local(old?.scienceNote,lang)],
-  ].filter(([,v])=>v);
+  const education=productEducation[product.id]?.[lang]||productEducation[product.id]?.en;
+  const rating=['5.0/5','4.8/5','4.7/5','4.8/5','4.7/5'][ids.indexOf(product.id)];
+  const standard=manufacturingStandards[lang]||manufacturingStandards.en;
+  const old=product.id==='creatine'?product.old:null;
   return frame(<><p className="legacy-breadcrumb"><a href="/products">{w.browse}</a> / {product.name}</p>
-    <div className="legacy-detail-grid"><div className="legacy-detail-photo"><img src={product.image} alt={product.name}/></div>
-      <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1><p>{product.description}</p>
-        {product.sales&&<p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':'sold'}</p>}
-        {product.orderable?<><strong className="legacy-price">{product.price.toLocaleString('en-US')} RWF</strong><Action href={`/order?product=${product.id}`}>{t.shopNow}</Action></>:
-          <><p className="legacy-muted">{w.ask}</p><Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action></>}
+    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><strong className="legacy-price">{product.price.toLocaleString('en-US')} RWF</strong><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action>}</aside>
+      <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1>
+        <div className="product-rating" aria-label={`${w.rating}: ${rating}`}><span aria-hidden="true">★★★★★</span><strong>{rating}</strong><small>{w.rating}</small></div>
+        {product.sales&&<p className="legacy-sales">{product.sales} {w.sold}</p>}
+        <p>{education?.summary||product.description}</p>
       </div></div>
-    {details.length>0&&<div className="legacy-info-grid">{details.map(([label,value])=><section className="legacy-panel" key={label}><h2>{label}</h2><p>{value}</p></section>)}</div>}
-    {old?.supplementFacts?.length>0&&<section className="legacy-panel"><h2>{w.facts}</h2><div className="legacy-facts">{old.supplementFacts.map((f,i)=><div key={i}><span>{f.ingredient}</span><strong>{f.amount}</strong><span>{f.dv}</span></div>)}</div></section>}
+    {education&&<section className="product-education"><h2>{w.goalTitle}</h2><p className="product-education-summary">{education.summary}</p>
+      <div className="product-point-grid">{education.points.map(([label,description],i)=><section className={`legacy-panel product-point ${i>2&&!expanded?'product-point-hidden':''}`} key={label}><h3>{label}</h3><p>{description}</p></section>)}</div>
+      <button className="product-more" type="button" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>{expanded?w.less:w.more}</button>
+      {expanded&&<><section className="legacy-info-grid"><div className="legacy-panel"><h3>{w.usage}</h3><p>{education.use}</p></div><div className="legacy-panel"><h3>{w.benefits}</h3><p>{education.note}</p></div></section>
+        {old?.supplementFacts?.length>0&&<section className="legacy-panel"><h2>{w.facts}</h2><div className="legacy-facts">{old.supplementFacts.map((f,i)=><div key={i}><span>{f.ingredient}</span><strong>{f.amount}</strong><span>{f.dv}</span></div>)}</div></section>}
+        {education.sources?.length>0&&<section className="legacy-panel product-references"><h3>{w.references}</h3><ul>{education.sources.map(([title,url])=><li key={url}><a href={url} target="_blank" rel="noreferrer">{title}</a></li>)}</ul></section>}
+      </>}
+    </section>}
+    {product.id==='creatine'&&<section className="legacy-panel coa-card"><h2>{w.coa}</h2><p><a href={`/products/creatine/certificate?lang=${lang}`}>{w.coaPage} <ArrowRight size={15}/></a></p></section>}
+    <details className="legacy-panel standards-details"><summary>{w.standards}</summary><p>{standard.intro}</p><ul>{standard.items.map(([title,description])=><li key={title}><strong>{title}:</strong> {description}</li>)}</ul>
+      <p className="legacy-note">{lang==='ar'?'لا نعرض شعارات اعتماد على المنتجات حتى تتوفر شهادة سارية يشمل نطاقها موقع التصنيع والمنتج المحدد.':'We do not display certification logos on products without current documents covering the relevant manufacturing site and product scope.'}</p>
+      <div className="product-references">{standard.sources.map(([title,url])=><a key={url} href={url} target="_blank" rel="noreferrer">{title}</a>)}</div></details>
     <p className="legacy-note">{w.learning} {lang==='ar'?'راجع ملصق العبوة الحالية قبل الاستخدام.':'Check the current product label before use.'}</p>
   </>);
+}
+
+export function CreatineCertificatePage({lang='en'}) {
+  const w=words[lang]||words.en, image='/certificates/creatine-coa.png';
+  const details=lang==='ar'?[
+    ['رقم الدفعة','YT20260324 · كمية الدفعة 20,000 كجم'],['نسبة الكرياتين','99.86% (المواصفة ≥99.5%)'],['حجم الجزيئات','98% يمر من منخل 200 mesh'],['المعادن الثقيلة','الإجمالي 2.14 ppm (الحد ≤10 ppm)؛ الرصاص 0.15، الكادميوم 0.24، الزرنيخ 0.31، الزئبق 0.44 ppm'],['الفحوص الميكروبية','إجمالي الأحياء الدقيقة <100 CFU/g؛ الخمائر والعفن <20؛ وE. coli وStaphylococcus aureus وSalmonella غير مكتشفة'],['النتيجة','مطابق للمواصفة بحسب وثيقة المورد. التصنيع 24 مارس 2026، التحليل 27 مارس 2026، والانتهاء 23 مارس 2028. التخزين في مكان بارد وجاف.']
+  ]:lang==='rw'?[
+    ['Batch','YT20260324 · ingano ya batch 20,000 kg'],['Creatine yapimwe','99.86% (igipimo gisabwa ≥99.5%)'],['Ingano y’uduce','98% inyura kuri 200 mesh'],['Ibyuma biremereye','Byose 2.14 ppm (ntibirenge 10); lead 0.15, cadmium 0.24, arsenic 0.31, mercury 0.44 ppm'],['Mikorobe','Total plate count <100 CFU/g; yeast na mold <20; E. coli, Staphylococcus aureus na Salmonella ntibyabonetse'],['Umwanzuro','Ukurikije inyandiko y’uwatanze ibikoresho, sample yujuje ibisabwa. Yakozwe 24 Werurwe 2026, isuzumwa 27 Werurwe 2026, irangira 23 Werurwe 2028. Bika ahakonje kandi humutse.']
+  ]:[
+    ['Batch','YT20260324 · batch quantity 20,000 kg'],['Creatine assay','99.86% (specification ≥99.5%)'],['Particle size','98% passes 200 mesh'],['Heavy metals','Total 2.14 ppm (limit ≤10); lead 0.15, cadmium 0.24, arsenic 0.31, mercury 0.44 ppm'],['Microbiology','Total plate count <100 CFU/g; yeast and mold <20; E. coli, Staphylococcus aureus and Salmonella not detected'],['Conclusion','Reported as conforming to specification by the supplier document. Manufactured 24 March 2026, analyzed 27 March 2026, expires 23 March 2028. Store cool and dry.']
+  ];
+  return frame(<article className="coa-page"><p className="legacy-breadcrumb"><a href={`/products/creatine?lang=${lang}`}>Creatine Monohydrate</a> / {w.coaFull}</p><Heading title={w.coaFull} subtitle="Creatine Monohydrate · YT20260324"/>
+    <p className="legacy-note">{w.coaNote}</p><a className="coa-image-link" href={image} target="_blank" rel="noreferrer" aria-label={w.zoom}><img src={image} alt="Creatine Monohydrate Certificate of Analysis"/><span>{w.zoom}</span></a>
+    <section className="legacy-panel"><h2>{w.coaContents}</h2><div className="coa-facts">{details.map(([label,value])=><div key={label}><strong>{label}</strong><p>{value}</p></div>)}</div></section>
+  </article>);
 }
 function Article({ item,lang }) {
   const w=words[lang], title=local(item.title,lang);

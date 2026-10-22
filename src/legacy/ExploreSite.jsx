@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Globe2, Menu, X } from 'lucide-react';
 import {
   AboutPage, AnalysisPage, ChatPage, ContactPage, FaqPage, KnowledgePage,
-  ProductDetailPage, ProductsPage, SupplementsPage, WelcomePage,
+  CreatineCertificatePage, ProductDetailPage, ProductsPage, SupplementsPage, WelcomePage,
 } from './pages.jsx';
 import './explore.css';
 
@@ -20,10 +20,12 @@ export default function ExploreSite({ lang, setLang, t }) {
   const [menu, setMenu] = useState(false);
   const l = labels[lang];
   const path = decodeURIComponent(window.location.pathname).replace(/\/+$/, '') || '/';
+  const certificate = path === '/products/creatine/certificate';
   const productSlug = path.match(/^\/products\/([^/]+)$/)?.[1];
   const guideSlug = path.match(/^\/knowledge\/(?:guides|articles)\/([^/]+)$/)?.[1];
   let page;
-  if (productSlug) page = <ProductDetailPage lang={lang} t={t} slug={productSlug} />;
+  if (certificate) page = <CreatineCertificatePage lang={new URLSearchParams(window.location.search).get('lang')||lang} />;
+  else if (productSlug) page = <ProductDetailPage lang={lang} t={t} slug={productSlug} />;
   else if (guideSlug) page = <KnowledgePage lang={lang} detailId={guideSlug} />;
   else switch (path) {
     case '/products': page = <ProductsPage lang={lang} t={t} />; break;
