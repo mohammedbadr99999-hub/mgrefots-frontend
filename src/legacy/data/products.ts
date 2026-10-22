@@ -27,8 +27,6 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/creatine-monohydrate.png',
     servings: '60 Servings',
     size: '300g Powder',
-    rating: 5.0,
-    reviewsCount: 412,
     buyersCount: 2840,
     description: {
       en: 'MGREFOTS Creatine Monohydrate delivers ultra-pure, micronized creatine to rapidly replenish cellular ATP energy during high-intensity training. Accelerates muscle cell hydration, strength gains, and muscular endurance.',
@@ -102,8 +100,6 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/citrulline.webp',
     servings: '30 Servings',
     size: '90g Powder',
-    rating: 5.0,
-    reviewsCount: 315,
     buyersCount: 1850,
     description: {
       en: 'MGREFOTS Pure Citrulline delivers 3000mg of 100% pure unflavored L-Citrulline per serving without malate. Designed to optimize vascular dilation, maximize Nitric Oxide pump, reduce lactic acid buildup, and accelerate recovery.',
@@ -177,8 +173,6 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/l-carnitine.png',
     servings: '30 Servings',
     size: '60 Capsules',
-    rating: 4.8,
-    reviewsCount: 240,
     buyersCount: 1420,
     description: {
       en: 'MGREFOTS L-Carnitine provides 750mg per serving in convenient capsules (60 capsules per bottle, 30 servings). Shuttles stored fatty acids directly into mitochondria to burn for cellular ATP energy, aiding fat loss and stamina.',
@@ -253,8 +247,6 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/protein-pea-rice.png',
     servings: '30 Servings',
     size: '1kg (1000g) Tub',
-    rating: 4.9,
-    reviewsCount: 380,
     buyersCount: 2150,
     description: {
       en: 'MGREFOTS Protein features an 81.3% lab-tested protein concentration combining 70% Pea Protein Isolate & 30% Organic Rice Protein. We are the FIRST company to apply this blend in practice to produce a 100% complete amino acid profile matching whey protein at an ideal price. Delivers 26.8g pure protein per scoop.',
@@ -328,8 +320,6 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/c-zinc.png',
     servings: '30 Servings',
     size: '30 Vegan Capsules',
-    rating: 4.7,
-    reviewsCount: 195,
     buyersCount: 980,
     description: {
       en: 'MGREFOTS C-Zinc combines 1000mg Vitamin C with 20mg highly bioavailable Zinc Bisglycinate Chelate. Fortifies white blood cell immune defenses, accelerates tissue & collagen repair, and counters oxidative stress.',
@@ -403,8 +393,6 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/b-complex.png',
     servings: '60 Servings',
     size: '60 Capsules',
-    rating: 4.9,
-    reviewsCount: 260,
     buyersCount: 1260,
     description: {
       en: 'MGREFOTS B-Complex (Iron Strength) offers a complete, ultra-potent blend of 8 essential B-Vitamins plus Vitamin C. Optimized for cellular energy conversion, nervous system support, red blood cell formation, and heavy athletic resilience.',

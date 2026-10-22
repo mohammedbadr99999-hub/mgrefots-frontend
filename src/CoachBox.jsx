@@ -32,9 +32,8 @@ export default function CoachBox({ lang = 'en' }) {
       if (!data?.text) throw new Error('EMPTY_RESPONSE');
       setMessages(previous => [...previous, { role: 'user', text: prompt }, { role: 'model', text: data.text }]);
       setInput('');
-    } catch (cause) {
-      const code = /^[A-Z][A-Z0-9_]{1,40}$/.test(cause?.message || '') ? cause.message : 'NETWORK';
-      setError(`${t.error} (${code})`);
+    } catch {
+      setError(t.error);
     } finally {
       setBusy(false);
     }

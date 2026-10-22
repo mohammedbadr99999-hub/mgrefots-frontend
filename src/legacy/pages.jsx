@@ -28,7 +28,7 @@ function frame(children) { return <div className="container legacy-content">{chi
 function currentProducts(t) {
   return ids.map((id, i) => ({
     id, name:t.names[i], description:t.descriptions[i], spec:t.specs[i], price:t.prices[i], category:currentCategories[i],
-    image:`/products/${id}.webp`, rating:t.ratings?.[i], sales:t.sales?.[i],
+    image:`/products/${id}.webp`, sales:t.sales?.[i],
     old: OLD_PRODUCTS.find(p => p.id === oldIds[i]), orderable:true,
   }));
 }
@@ -44,7 +44,7 @@ function ProductTile({ product, lang }) {
   return <article className="legacy-product-card">
     <a href={`/products/${product.id}`}><img src={product.image} alt={product.name} loading="lazy" /></a>
     <div><h3>{product.name}</h3><small>{product.spec}</small><p>{product.description}</p>
-      {product.rating && <p className="legacy-rating">★ {product.rating} · {product.sales} {lang==='ar'?'مبيعات':lang==='rw'?'byaguzwe':'sold'}</p>}
+      {product.sales && <p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':lang==='rw'?'byaguzwe':'sold'}</p>}
       {product.orderable ? <strong>{product.price.toLocaleString('en-US')} RWF</strong> : <span className="legacy-muted">{w.ask}</span>}
     </div>
     <Action href={`/products/${product.id}`}>{w.details}</Action>
@@ -86,7 +86,7 @@ export function ProductDetailPage({ lang,t,slug }) {
   return frame(<><p className="legacy-breadcrumb"><a href="/products">{w.browse}</a> / {product.name}</p>
     <div className="legacy-detail-grid"><div className="legacy-detail-photo"><img src={product.image} alt={product.name}/></div>
       <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1><p>{product.description}</p>
-        {product.rating&&<p className="legacy-rating">★ {product.rating} · {product.sales} {lang==='ar'?'مبيعات':'sold'}</p>}
+        {product.sales&&<p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':'sold'}</p>}
         {product.orderable?<><strong className="legacy-price">{product.price.toLocaleString('en-US')} RWF</strong><Action href={`/order?product=${product.id}`}>{t.shopNow}</Action></>:
           <><p className="legacy-muted">{w.ask}</p><Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action></>}
       </div></div>

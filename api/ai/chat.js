@@ -8,7 +8,7 @@ function classifyGeminiError(error) {
   const message = String(error?.message || '');
   if (/API_KEY_INVALID|API key not valid|invalid API key/i.test(message)) return 'GEMINI_KEY_INVALID';
   if (/API_KEY_HTTP_REFERRER_BLOCKED|API_KEY_SERVICE_BLOCKED|API_KEY_IP_ADDRESS_BLOCKED/i.test(message)) return 'GEMINI_KEY_RESTRICTED';
-  if (/BILLING_DISABLED|billing account/i.test(message)) return 'GEMINI_BILLING';
+  if (status === 402 || /BILLING_DISABLED|billing account/i.test(message)) return 'GEMINI_BILLING';
   if (status === 401 || status === 403) return 'GEMINI_AUTH';
   if (status === 429) return 'GEMINI_LIMIT';
   if (status === 404) return 'GEMINI_MODEL';

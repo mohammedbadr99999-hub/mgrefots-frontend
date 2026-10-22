@@ -111,8 +111,6 @@ export interface Product {
   image?: string;
   servings: string;
   size: string;
-  rating: number; // e.g. 5.0, 4.8
-  reviewsCount: number; // e.g. 340
   buyersCount: number; // e.g. 2840
   description: Record<Language, string>;
   highlights: Record<Language, string[]>;
