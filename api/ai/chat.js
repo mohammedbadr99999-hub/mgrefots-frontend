@@ -1,6 +1,21 @@
 import { GoogleGenAI } from '@google/genai';
 import { fitnessInstruction } from './fitness-method.js';
 
+function classifyGeminiError(error) {
+  const status = Number(error?.status) || 0;
+  // The SDK puts Google's JSON error body in `message`. Read only known
+  // reason codes so the response and logs never contain credentials or prompts.
+  const message = String(error?.message || '');
+  if (/API_KEY_INVALID|API key not valid|invalid API key/i.test(message)) return 'GEMINI_KEY_INVALID';
+  if (/API_KEY_HTTP_REFERRER_BLOCKED|API_KEY_SERVICE_BLOCKED|API_KEY_IP_ADDRESS_BLOCKED/i.test(message)) return 'GEMINI_KEY_RESTRICTED';
+  if (/BILLING_DISABLED|billing account/i.test(message)) return 'GEMINI_BILLING';
+  if (status === 401 || status === 403) return 'GEMINI_AUTH';
+  if (status === 429) return 'GEMINI_LIMIT';
+  if (status === 404) return 'GEMINI_MODEL';
+  if (status === 400) return 'GEMINI_REQUEST';
+  return 'GEMINI_UPSTREAM';
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') {
@@ -32,10 +47,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ text: response.text || '' });
   } catch (error) {
     const providerStatus = Number(error?.status) || 0;
-    const code = providerStatus === 401 || providerStatus === 403 ? 'GEMINI_AUTH'
-      : providerStatus === 429 ? 'GEMINI_LIMIT'
-      : providerStatus === 404 ? 'GEMINI_MODEL'
-      : providerStatus === 400 ? 'GEMINI_REQUEST' : 'GEMINI_UPSTREAM';
+    const code = classifyGeminiError(error);
     console.error('Gemini chat request failed', { code, providerStatus });
     return res.status(502).json({ error: 'AI service is temporarily unavailable.', code });
   }
