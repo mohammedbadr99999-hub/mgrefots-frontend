@@ -4,6 +4,7 @@
     { "source": "/order/", "destination": "/index.html" },
     { "source": "/explore", "destination": "/index.html" },
     { "source": "/products", "destination": "/index.html" },
+    { "source": "/products/creatine/certificate", "destination": "/index.html" },
     { "source": "/products/:slug", "destination": "/index.html" },
     { "source": "/knowledge", "destination": "/index.html" },
     { "source": "/knowledge/guides/:guideId", "destination": "/index.html" },
