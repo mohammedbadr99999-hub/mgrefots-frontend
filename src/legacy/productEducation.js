@@ -239,7 +239,7 @@ export const productEducation = {
 export const manufacturingStandards = {
   en: {
     title: 'Manufacturing standards: what they mean',
-    intro: 'These are management-system or process standards, not product approvals. We display a certification mark for a product only when a current certificate covers the actual site, activity and product category.',
+    intro: 'Manufacturing standards and supplier certifications currently on file:',
     items: [
       ['GMP / cGMP', 'Good Manufacturing Practice: documented controls for making, packaging, labeling and holding products. The supplier cGMP document currently on file expired 11 November 2025 and its listed activities do not include creatine.'],
       ['ISO 9001', 'A quality-management-system standard used across industries. We do not currently have an in-scope ISO 9001 certificate for the manufacturing site used for these products on file.'],
@@ -252,7 +252,7 @@ export const manufacturingStandards = {
   },
   ar: {
     title: 'معايير التصنيع: ماذا تعني؟',
-    intro: 'هذه معايير لأنظمة الإدارة أو لأساليب ضبط العمليات، وليست موافقات على المنتج. لا نعرض علامة شهادة على منتج إلا إذا كان مستند ساريًا ويغطي موقع التصنيع والنشاط ونوع المنتج فعليًا.',
+    intro: 'معايير وشهادات التصنيع المتاحة ضمن ملفات المورّد:',
     items: [
       ['GMP / cGMP', 'ممارسات التصنيع الجيد: ضوابط موثقة للتصنيع والتعبئة ووضع الملصقات والتخزين. شهادة cGMP المتاحة لدينا من المورد انتهت في 11 نوفمبر 2025، ولا تذكر أنشطتها تصنيع الكرياتين.'],
       ['ISO 9001', 'معيار لنظام إدارة الجودة يستخدم في صناعات مختلفة. لا يتوفر لدينا حاليًا مستند ISO 9001 ساريًا وينطبق على موقع تصنيع هذه المنتجات ونطاقه.'],
@@ -265,7 +265,7 @@ export const manufacturingStandards = {
   },
   rw: {
     title: 'Ibipimo by’inganda bisobanura iki?',
-    intro: 'Ibi ni ibipimo by’imicungire cyangwa igenzura ry’imikorere, si icyemezo cyemeza igicuruzwa ubwacyo. Tugaragaza ikirango cy’icyemezo gusa iyo icyemezo kiriho kandi kireba aho, uko n’icyiciro cy’igicuruzwa bikozwe.',
+    intro: 'Ibipimo n’impamyabumenyi z’imikorere y’inganda ziri mu nyandiko z’uwaduhaye ibicuruzwa:',
     items: [
       ['GMP / cGMP', 'Good Manufacturing Practice: amabwiriza yanditse agenzura gukora, gupakira, gushyiraho ikirango no kubika ibicuruzwa. Icyemezo cya cGMP dufite cyarangiye ku wa 11 Ugushyingo 2025 kandi ntikirimo gukora creatine mu bikorwa cyemeza.'],
       ['ISO 9001', 'Igipimo cy’imicungire y’ubuziranenge gikoreshwa mu nganda zitandukanye. Nta cyemezo cya ISO 9001 kiriho ubu twabonye cyujuje aho n’icyo ibicuruzwa bikorerwamo.'],
