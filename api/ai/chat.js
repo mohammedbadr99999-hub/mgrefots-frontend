@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         typeof item.text !== 'string' || item.text.length > 1200 || !item.text.trim())) {
     return res.status(400).json({ error: 'Invalid conversation history.' });
   }
-  if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'AI service is not configured.' });
+  if (!process.env.GEMINI_API_KEY) return res.status(503).json({ error: 'AI service is not configured.', code: 'CONFIG_MISSING' });
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     const response = await ai.models.generateContent({
@@ -30,7 +30,13 @@ export default async function handler(req, res) {
       },
     });
     return res.status(200).json({ text: response.text || '' });
-  } catch {
-    return res.status(502).json({ error: 'AI service is temporarily unavailable.' });
+  } catch (error) {
+    const providerStatus = Number(error?.status) || 0;
+    const code = providerStatus === 401 || providerStatus === 403 ? 'GEMINI_AUTH'
+      : providerStatus === 429 ? 'GEMINI_LIMIT'
+      : providerStatus === 404 ? 'GEMINI_MODEL'
+      : providerStatus === 400 ? 'GEMINI_REQUEST' : 'GEMINI_UPSTREAM';
+    console.error('Gemini chat request failed', { code, providerStatus });
+    return res.status(502).json({ error: 'AI service is temporarily unavailable.', code });
   }
 }

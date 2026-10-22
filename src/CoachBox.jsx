@@ -27,12 +27,14 @@ export default function CoachBox({ lang = 'en' }) {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, lang, history }),
       });
-      const data = await response.json();
-      if (!response.ok || !data.text) throw new Error(t.error);
+      const data = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(data?.code || `HTTP_${response.status}`);
+      if (!data?.text) throw new Error('EMPTY_RESPONSE');
       setMessages(previous => [...previous, { role: 'user', text: prompt }, { role: 'model', text: data.text }]);
       setInput('');
-    } catch {
-      setError(t.error);
+    } catch (cause) {
+      const code = /^[A-Z][A-Z0-9_]{1,40}$/.test(cause?.message || '') ? cause.message : 'NETWORK';
+      setError(`${t.error} (${code})`);
     } finally {
       setBusy(false);
     }
