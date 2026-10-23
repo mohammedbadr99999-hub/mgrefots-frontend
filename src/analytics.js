@@ -18,9 +18,9 @@ export function trackEvent(name, parameters = {}) {
   } catch { /* Analytics must never interrupt ordering. */ }
 }
 
-export function trackOrderResult(result, items) {
+export function trackOrderResult(result, items, referralCode = '') {
   if (result?.ok !== true || !result.orderId) return;
-  trackEvent('generate_lead', { ...ecommerce(items), order_id: result.orderId, lead_source: 'website_order' });
+  trackEvent('generate_lead', { ...ecommerce(items), order_id: result.orderId, lead_source: 'website_order', ...(referralCode === 'COACH01' ? { referral_partner: 'COACH01', referral_channel: 'instagram' } : {}) });
 }
 
 export function installClickTracking() {

@@ -8,6 +8,25 @@ import '@fontsource-variable/noto-sans-arabic';
 import '@fontsource/libre-baskerville/700.css';
 const ExploreSite = React.lazy(() => import('./legacy/ExploreSite.jsx'));
 const images=['creatine','citrulline','czinc','carnitine','milga'];
+const REFERRAL_STORAGE_KEY = 'mgrefots-referral-code';
+const ACTIVE_REFERRAL_CODE = 'COACH01';
+// Keep a valid referral for navigation from the coach's product link to checkout in the same tab.
+function readPartnerReferral() {
+  const params = new URLSearchParams(window.location.search);
+  const incoming = params.get('ref');
+  if (incoming !== null) {
+    const code = incoming.trim().toUpperCase();
+    try {
+      if (code === ACTIVE_REFERRAL_CODE) window.sessionStorage.setItem(REFERRAL_STORAGE_KEY, code);
+      else window.sessionStorage.removeItem(REFERRAL_STORAGE_KEY);
+    } catch { /* Storage may be disabled. */ }
+    return code === ACTIVE_REFERRAL_CODE ? code : '';
+  }
+  try {
+    return window.sessionStorage.getItem(REFERRAL_STORAGE_KEY) === ACTIVE_REFERRAL_CODE ? ACTIVE_REFERRAL_CODE : '';
+  } catch { return ''; }
+}
+
 const wa=message=>`https://wa.me/250792294432?text=${encodeURIComponent(message)}`;
 function WhatsAppIcon(){return <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.8 7.4L3 20.5l1.4-4.6A8.5 8.5 0 1 1 20.5 11.7Z"/><path d="M8.5 7.5c-.8.1-1.1 1-.8 2 .8 2.7 2.8 4.7 5.6 5.5 1 .3 2-.1 2.2-.9l.2-.8-2.5-1.2-.8.9c-1.5-.7-2.5-1.7-3.1-3.1l.8-.8-1-2.2Z"/></svg>}
 function Brand(){return <a className="brand" href="/#home" aria-label="MGREFOTS"><img className="brand-symbol" src="/brand/mark.png" width="240" height="194" alt=""/><span className="brand-wordmark"><strong>M.G.REFOTS<sup>®</sup></strong><small>DIETARY SUPPLEMENTS</small></span></a>}
@@ -15,6 +34,7 @@ function LanguagePicker({lang,setLang,t}){return <label className="language-pick
 function OrderButton({className='',t}){return <a className={`btn btn-gold ${className}`} href={wa(t.request)} target="_blank" rel="noreferrer"><WhatsAppIcon/><span>{t.order}</span><ArrowRight size={16}/></a>}
 export default function App(){
  const [lang,setLang]=useState(()=>{try{return ['en','rw','ar'].includes(localStorage.getItem('mgrefots-language'))?localStorage.getItem('mgrefots-language'):'en'}catch{return 'en'}});
+ const referralCode=readPartnerReferral();
  const [menu,setMenu]=useState(false); const initialProduct=new URLSearchParams(window.location.search).get('product'); const [cart,setCart]=useState(()=>Object.fromEntries(images.map(id=>[id,{selected:id===(images.includes(initialProduct)?initialProduct:'creatine'),quantity:id===(images.includes(initialProduct)?initialProduct:'creatine')?1:0}]))); const [submitting,setSubmitting]=useState(false); const [notice,setNotice]=useState(''); const [sent,setSent]=useState(false); const [form,setForm]=useState({name:'',phone:'',city:'',area:'',street:''}); const t=copy[lang];
  useEffect(()=>{document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';try{localStorage.setItem('mgrefots-language',lang)}catch{}},[lang]);
  useEffect(()=>{if(window.location.hash==='#order-products'){requestAnimationFrame(()=>document.getElementById('order-products')?.scrollIntoView({behavior:'smooth',block:'center'}));}},[]);
@@ -28,7 +48,7 @@ export default function App(){
    return cleanup;
  }, []);
  const updateCart=(id,updates)=>setCart(current=>({...current,[id]:{...current[id],...updates}}));
- const submitOrder=async event=>{event.preventDefault();if(!selectedItems.length){setNotice(t.selectAtLeastOne);return}setNotice('');setSubmitting(true);try{const response=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...form,items:selectedItems,website:''})});const data=await response.json();if(!response.ok)throw new Error(data.code==='ORDER_EMAIL_NOT_CONFIGURED'?t.emailNotReady:t.orderError);trackOrderResult(data,selectedItems);setSent(true);setNotice(t.orderSuccess)}catch(error){setNotice(error.message||t.orderError)}finally{setSubmitting(false)}};
+ const submitOrder=async event=>{event.preventDefault();if(!selectedItems.length){setNotice(t.selectAtLeastOne);return}setNotice('');setSubmitting(true);try{const response=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...form,items:selectedItems,referralCode,website:''})});const data=await response.json();if(!response.ok)throw new Error(data.code==='ORDER_EMAIL_NOT_CONFIGURED'?t.emailNotReady:t.orderError);trackOrderResult(data,selectedItems,referralCode);setSent(true);setNotice(t.orderSuccess)}catch(error){setNotice(error.message||t.orderError)}finally{setSubmitting(false)}};
  if(!isOrderPage && /^\/(explore|products(?:\/[^/]+(?:\/certificate)?)?|knowledge(?:\/(?:guides|articles)\/[^/]+)?|analysis|supplements|chat|faq|about|contact)\/?$/.test(window.location.pathname))return <React.Suspense fallback={<div className="container" style={{padding:40}}>MGREFOTS…</div>}><ExploreSite lang={lang} setLang={setLang} t={t}/></React.Suspense>;
  if(isOrderPage)return <div className="site-shell order-page"><header className="site-header"><div className="container header-inner"><Brand/><div className="header-controls"><LanguagePicker lang={lang} setLang={setLang} t={t}/><a className="order-back" href="/#shop">{t.backHome}</a></div></div></header><main className="order-main"><div className="order-card"><a href="/#home" className="order-brand"><Brand/></a><p className="section-kicker">MGREFOTS · KIGALI</p><h1>{t.orderTitle}</h1><p className="order-intro">{t.orderIntro}</p>{sent?<div className="order-success" role="status"><CheckCircle2 size={34}/><p>{notice}</p><a className="btn btn-gold" href="/#shop">{t.backHome}</a></div>:<form className="order-form" onSubmit={submitOrder}>
  <label>{t.fieldName}<input autoComplete="name" name="name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required maxLength="100"/></label>

@@ -25,6 +25,8 @@ export default async function handler(req, res) {
   const city = clean(body.city, 80);
   const area = clean(body.area, 100);
   const street = clean(body.street, 160);
+  // Only recognize approved partner codes. Do not trust an arbitrary referral label from a visitor.
+  const referralCode = clean(body.referralCode, 40).toUpperCase() === 'COACH01' ? 'COACH01' : '';
   const items = body.items;
   if (!name || !phone || !city || !area || !street || !Array.isArray(items) ||
       items.length < 1 || items.length > Object.keys(PRODUCTS).length ||
@@ -54,6 +56,7 @@ export default async function handler(req, res) {
   const fields = [
     ['Order ID', orderId], ['Order total', `${total.toLocaleString('en-US')} RWF`], ['Customer name', name],
     ['Phone', phone], ['City', city], ['Area / district', area], ['Street / building', street],
+    ...(referralCode ? [['Referral partner code', referralCode], ['Marketing source (tagged link)', 'Instagram / gym coach']] : []),
   ];
   const text = [...fields.map(([label, value]) => `${label}: ${value}`), '', 'Products:', ...productLines].join('\n');
   const html = `<h2>New MGREFOTS order request</h2><table>${fields.map(([label, value]) =>
@@ -66,7 +69,7 @@ export default async function handler(req, res) {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: sender, to: [recipient], subject: `New MGREFOTS order — ${orderId}`, text, html }),
+      body: JSON.stringify({ from: sender, to: [recipient], subject: `New MGREFOTS order${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`, text, html }),
     });
     if (!response.ok) {
       console.error('Order email provider rejected request:', response.status, await response.text());
