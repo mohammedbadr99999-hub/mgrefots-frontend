@@ -69,7 +69,7 @@ export default async function handler(req, res) {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: sender, to: referralCode === 'COACH01' ? [recipient, 'mohammedbadr99999@gmail.com'] : [recipient], subject: `New MGREFOTS order${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`, text, html }),
+      body: JSON.stringify({ from: sender, to: referralCode === 'COACH01' ? [recipient, 'mufukuzij@gmail.com'] : [recipient], subject: `New MGREFOTS order${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`, text, html }),
     });
     if (!response.ok) {
       console.error('Order email provider rejected request:', response.status, await response.text());
