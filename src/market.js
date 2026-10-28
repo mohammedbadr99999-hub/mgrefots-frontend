@@ -6,6 +6,6 @@ export const productImage = (id, market) => `/products/${id}${market === 'EG' &&
 export const productSpec = (id, market, spec, lang) => {
   if (market !== 'EG') return spec;
   if (id === 'czinc' || id === 'carnitine') return lang === 'ar' ? '٦٠ كبسولة' : '60 capsules';
-  if (id === 'citrulline') return lang === 'ar' ? 'نقي · ١٥٠ جم · ٣٠ حصة · ٥ جم للحصة' : 'Pure L-Citrulline · 150 g · 30 servings · 5 g per serving';
+  if (id === 'citrulline') return lang === 'ar' ? 'نقي · ١٥٠ جم · ٣٠ حصة' : 'Pure L-Citrulline · 150 g · 30 servings';
   return spec;
 };

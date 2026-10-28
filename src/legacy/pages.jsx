@@ -38,8 +38,8 @@ function currentProducts(t, market, lang) {
 }
 function extraProducts(lang) {
   return legacyExtras.map(p => ({
-    id:p.id, name:local(p.name, lang), description:lang==='ar'?'من الكتالوج السابق؛ استفسر عن التوفر والمواصفات الحالية.':'From the previous catalogue; ask us to confirm current availability and specifications.',
-    spec:`${p.size} · ${p.servings}`, image:`/legacy-products/${p.id}.png`,
+    id:p.id, name:local(p.name, lang), description:lang==='ar'?'بروتين MGREFOTS النباتي: ٧٠٪ بازلاء + ٣٠٪ أرز. قريبًا في مصر.':lang==='rw'?'Poroteyine y’ibimera MGREFOTS: 70% amashaza + 30% umuceri. Izaboneka vuba muri Egiputa.':'MGREFOTS plant protein: 70% pea + 30% rice. Coming soon in Egypt.',
+    spec:`${p.size} · ${p.servings}`, image:p.id==='protein-pea-rice'?'/legacy-products/protein-pea-rice-new.webp':`/legacy-products/${p.id}.png`,
     old:p, category:p.category, orderable:false,
   }));
 }
@@ -47,9 +47,9 @@ function ProductTile({ product, lang, market }) {
   const w=words[lang];
   return <article className="legacy-product-card">
     <a href={`/products/${product.id}`}><img src={product.image} alt={product.name} loading="lazy" /></a>
-    <div><h3><a href={`/products/${product.id}`}>{product.name}</a></h3><small>{product.spec}</small>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'سيترولين نقي · ٥ جم للحصة':'Pure L-Citrulline · 5 g per serving'}</strong>}<p>{product.description}</p>
+    <div><h3><a href={`/products/${product.id}`}>{product.name}</a></h3><small>{product.spec}</small>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'٥ جم للحصة':'5 g per serving'}</strong>}<p>{product.description}</p>
       {product.sales && <p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':lang==='rw'?'byaguzwe':'sold'}</p>}
-      {product.orderable ? <strong><PriceDisplay id={product.id} price={product.price} market={market} lang={lang}/></strong> : <span className="legacy-muted">{w.ask}</span>}
+      {product.orderable ? <strong><PriceDisplay id={product.id} price={product.price} market={market} lang={lang}/></strong> : <span className="coming-soon-label">{lang==='ar'?'قريبًا في مصر':lang==='rw'?'Vuba muri Egiputa':'Coming soon in Egypt'}</span>}
     </div>
     <Action href={`/products/${product.id}`}>{w.details}</Action>
   </article>;
@@ -76,7 +76,7 @@ export function ProductsPage({ lang,t,market }) {
   const filtered=products.filter(p=>category==='all'||p.category===category);
   return frame(<><Heading title={w.browse} subtitle={t.intro} /><div className="legacy-chips" aria-label={w.choose}>{cats.map(([id,label])=><button className={category===id?'active':''} onClick={()=>setCategory(id)} key={id}>{label}</button>)}</div>
     <div className="legacy-product-grid">{filtered.map(p=><ProductTile key={p.id} product={p} lang={lang} market={market}/>)}</div>
-    <p className="legacy-note">{lang==='ar'?'منتج البروتين من الكتالوج القديم للعرض والاستفسار فقط؛ لا يدخل في طلب الموقع حتى تتأكد إتاحته وسعره.':'Protein is from the earlier catalogue and is for enquiries only; it is not part of online checkout.'}</p>
+
   </>);
 }
 export function ProductDetailPage({ lang,t,slug,market }) {
@@ -88,8 +88,8 @@ export function ProductDetailPage({ lang,t,slug,market }) {
   const standard=manufacturingStandards[lang]||manufacturingStandards.en;
   const old=product.id==='creatine'?product.old:null;
   return frame(<><p className="legacy-breadcrumb"><a href="/products">{w.browse}</a> / {product.name}</p>
-    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><div className="legacy-price"><PriceDisplay id={product.id} price={product.price} market={market} lang={lang}/></div><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}${new URLSearchParams(window.location.search).get('ref')?.toUpperCase() === 'COACH01' ? '&ref=COACH01' : ''}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action>}</aside>
-      <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'سيترولين نقي · ٥ جم للحصة':'Pure L-Citrulline · 5 g per serving'}</strong>}
+    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><div className="legacy-price"><PriceDisplay id={product.id} price={product.price} market={market} lang={lang}/></div><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}${new URLSearchParams(window.location.search).get('ref')?.toUpperCase() === 'COACH01' ? '&ref=COACH01' : ''}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<span className="coming-soon-label">{lang==='ar'?'قريبًا في مصر':lang==='rw'?'Vuba muri Egiputa':'Coming soon in Egypt'}</span>}</aside>
+      <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'٥ جم للحصة':'5 g per serving'}</strong>}
         <div className="product-rating" aria-label={`${w.rating}: ${rating}`}><span aria-hidden="true">★★★★★</span><strong>{rating}</strong><small>{w.rating}</small></div>
         {product.sales&&<p className="legacy-sales">{product.sales} {w.sold}</p>}
         <p>{education?.summary||product.description}</p>
