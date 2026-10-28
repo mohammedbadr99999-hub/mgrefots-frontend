@@ -1,3 +1,4 @@
+import { EGYPT_PRICES } from '../src/market.js';
 const PRODUCTS = {
   creatine: { name: 'Creatine Monohydrate', price: 50000 },
   citrulline: { name: 'L-Citrulline', price: 40000 },
@@ -28,6 +29,8 @@ export default async function handler(req, res) {
   // Only recognize approved partner codes. Do not trust an arbitrary referral label from a visitor.
   const referralCode = clean(body.referralCode, 40).toUpperCase() === 'COACH01' ? 'COACH01' : '';
   const items = body.items;
+  const market = String(req.headers['x-vercel-ip-country'] || '').toUpperCase() === 'EG' || body.lang === 'ar' ? 'EG' : 'RW';
+  const currency = market === 'EG' ? 'EGP' : 'RWF';
   if (!name || !phone || !city || !area || !street || !Array.isArray(items) ||
       items.length < 1 || items.length > Object.keys(PRODUCTS).length ||
       !/^\+?[0-9\s().-]{7,24}$/.test(phone) ||
@@ -35,10 +38,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Check your contact, delivery and product details, then try again.' });
   }
 
-  const normalizedItems = items.map((item) => ({
-    product: PRODUCTS[clean(item?.product, 30) === 'milga' ? 'b-complex' : clean(item?.product, 30)],
-    quantity: Number(item?.quantity),
-  }));
+  const productIds = Object.keys(PRODUCTS);
+  const normalizedItems = items.map((item) => {
+    const id = clean(item?.product, 30) === 'milga' ? 'b-complex' : clean(item?.product, 30);
+    const product = PRODUCTS[id];
+    return { product: product && { ...product, price: market === 'EG' ? EGYPT_PRICES[productIds.indexOf(id)] : product.price }, quantity: Number(item?.quantity) };
+  });
   if (normalizedItems.some((item) => !item.product || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 99)) {
     return res.status(400).json({ message: 'Check your contact, delivery and product details, then try again.' });
   }
@@ -51,10 +56,10 @@ export default async function handler(req, res) {
   const total = normalizedItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const orderId = `MG-${Date.now().toString(36).toUpperCase()}`;
   const productLines = normalizedItems.map((item) =>
-    `${item.product.name} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} RWF = ${(item.quantity * item.product.price).toLocaleString('en-US')} RWF`
+    `${item.product.name} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} ${currency} = ${(item.quantity * item.product.price).toLocaleString('en-US')} ${currency}`
   );
   const fields = [
-    ['Order ID', orderId], ['Order total', `${total.toLocaleString('en-US')} RWF`], ['Customer name', name],
+    ['Order ID', orderId], ['Order total', `${total.toLocaleString('en-US')} ${currency}`], ['Customer name', name],
     ['Phone', phone], ['City', city], ['Area / district', area], ['Street / building', street],
     ...(referralCode ? [['Referral partner code', referralCode], ['Marketing source (tagged link)', 'Instagram / gym coach']] : []),
   ];
@@ -62,7 +67,7 @@ export default async function handler(req, res) {
   const html = `<h2>New MGREFOTS order request</h2><table>${fields.map(([label, value]) =>
     `<tr><th align="left" style="padding:6px 12px 6px 0">${escapeHtml(label)}</th><td style="padding:6px">${escapeHtml(value)}</td></tr>`
   ).join('')}</table><h3>Products</h3><ul>${normalizedItems.map((item) =>
-    `<li>${escapeHtml(item.product.name)} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} RWF = ${(item.quantity * item.product.price).toLocaleString('en-US')} RWF</li>`
+    `<li>${escapeHtml(item.product.name)} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} ${currency} = ${(item.quantity * item.product.price).toLocaleString('en-US')} ${currency}</li>`
   ).join('')}</ul><p>Contact the customer to confirm availability, delivery and payment.</p>`;
 
   try {

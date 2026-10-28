@@ -12,3 +12,5 @@
 .order-form .order-product-choice input[type="checkbox"]{appearance:auto;-webkit-appearance:checkbox;width:19px!important;height:19px!important;min-width:19px;min-height:19px;padding:0!important;margin:0;flex:0 0 19px;accent-color:#b67b09;cursor:pointer}
 .product-card .product-price{margin:10px 0 2px;color:#082550;font-size:16px;font-weight:750;letter-spacing:.1px}
 @media(max-width:1050px){.site-shell:not(.legacy-site) .main-nav{display:none;position:absolute;top:68px;inset-inline:14px;padding:15px;background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 30px #08255022}.site-shell:not(.legacy-site) .main-nav.open{display:grid;gap:3px}.site-shell:not(.legacy-site) .main-nav>a:not(.btn){padding:12px}.site-shell:not(.legacy-site) .menu-toggle{display:block}}
+
+.serving-highlight{display:block;color:#a26b08;font-weight:800;margin:.35rem 0 .65rem}

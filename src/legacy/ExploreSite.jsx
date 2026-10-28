@@ -16,7 +16,7 @@ function Brand() {
   return <a className="brand" href="/#home" aria-label="MGREFOTS"><img className="brand-symbol" src="/brand/mark.png" width="240" height="194" alt="" /><span className="brand-wordmark"><strong>M.G.REFOTS<sup>®</sup></strong><small>DIETARY SUPPLEMENTS</small></span></a>;
 }
 
-export default function ExploreSite({ lang, setLang, t }) {
+export default function ExploreSite({ lang, setLang, t, market }) {
   const [menu, setMenu] = useState(false);
   const l = labels[lang];
   const path = decodeURIComponent(window.location.pathname).replace(/\/+$/, '') || '/';
@@ -25,10 +25,10 @@ export default function ExploreSite({ lang, setLang, t }) {
   const guideSlug = path.match(/^\/knowledge\/(?:guides|articles)\/([^/]+)$/)?.[1];
   let page;
   if (certificate) page = <CreatineCertificatePage lang={new URLSearchParams(window.location.search).get('lang')||lang} />;
-  else if (productSlug) page = <ProductDetailPage lang={lang} t={t} slug={productSlug} />;
+  else if (productSlug) page = <ProductDetailPage lang={lang} t={t} market={market} slug={productSlug} />;
   else if (guideSlug) page = <KnowledgePage lang={lang} detailId={guideSlug} />;
   else switch (path) {
-    case '/products': page = <ProductsPage lang={lang} t={t} />; break;
+    case '/products': page = <ProductsPage lang={lang} t={t} market={market} />; break;
     case '/knowledge': page = <KnowledgePage lang={lang} />; break;
     case '/analysis': page = <AnalysisPage lang={lang} />; break;
     case '/supplements': page = <SupplementsPage lang={lang} />; break;
@@ -50,7 +50,7 @@ export default function ExploreSite({ lang, setLang, t }) {
         <a className="order-nav-link" href="/order">{l.order}</a>
       </nav>
       <div className="header-controls">
-        <label className="language-picker"><Globe2 size={17} /><select aria-label={t.language} value={lang} onChange={e => setLang(e.target.value)}><option value="en">English</option><option value="rw">Kinyarwanda</option><option value="ar">العربية</option></select></label>
+        <label className="language-picker"><Globe2 size={17} /><select aria-label={t.language} value={lang} onChange={e => { sessionStorage.setItem('mgrefots-manual-language','1'); setLang(e.target.value); }}><option value="en">English</option><option value="rw">Kinyarwanda</option><option value="ar">العربية</option></select></label>
         <button className="menu-toggle" aria-expanded={menu} aria-label={menu ? t.close : t.open} onClick={() => setMenu(!menu)}>{menu ? <X /> : <Menu />}</button>
       </div>
     </div></header>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { pricesFor, currencyFor, productImage, productSpec } from '../market';
 import { ArrowRight, BookOpen, CheckCircle2, FlaskConical, MessageCircle, Search, ShieldCheck } from 'lucide-react';
 import { PRODUCTS as OLD_PRODUCTS } from './data/products';
 import { SUPPLEMENT_ENCYCLOPEDIA } from './data/supplementEncyclopediaData';
@@ -27,10 +28,10 @@ function Action({ href, children, outline=false }) {
 }
 function frame(children) { return <div className="container legacy-content">{children}</div>; }
 
-function currentProducts(t) {
+function currentProducts(t, market, lang) {
   return ids.map((id, i) => ({
-    id, name:t.names[i], description:t.descriptions[i], spec:t.specs[i], price:t.prices[i], category:currentCategories[i],
-    image:`/products/${id}.webp`, sales:t.sales?.[i],
+    id, name:t.names[i], description:t.descriptions[i], spec:productSpec(id,market,t.specs[i],lang), price:pricesFor(market,t)[i], category:currentCategories[i],
+    image:productImage(id,market), sales:t.sales?.[i],
     old: OLD_PRODUCTS.find(p => p.id === oldIds[i]), orderable:true,
   }));
 }
@@ -41,13 +42,13 @@ function extraProducts(lang) {
     old:p, category:p.category, orderable:false,
   }));
 }
-function ProductTile({ product, lang }) {
+function ProductTile({ product, lang, market }) {
   const w=words[lang];
   return <article className="legacy-product-card">
     <a href={`/products/${product.id}`}><img src={product.image} alt={product.name} loading="lazy" /></a>
-    <div><h3><a href={`/products/${product.id}`}>{product.name}</a></h3><small>{product.spec}</small><p>{product.description}</p>
+    <div><h3><a href={`/products/${product.id}`}>{product.name}</a></h3><small>{product.spec}</small>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'سيترولين نقي · ٥ جم للحصة':'Pure L-Citrulline · 5 g per serving'}</strong>}<p>{product.description}</p>
       {product.sales && <p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':lang==='rw'?'byaguzwe':'sold'}</p>}
-      {product.orderable ? <strong>{product.price.toLocaleString('en-US')} RWF</strong> : <span className="legacy-muted">{w.ask}</span>}
+      {product.orderable ? <strong>{product.price.toLocaleString('en-US')} {currencyFor(market)}</strong> : <span className="legacy-muted">{w.ask}</span>}
     </div>
     <Action href={`/products/${product.id}`}>{w.details}</Action>
   </article>;
@@ -67,27 +68,27 @@ export function WelcomePage({ lang, t }) {
     <div className="legacy-link-row"><Action href="/about" outline>{t.about}</Action><Action href="/contact" outline>{t.contact}</Action><Action href="/order">{t.orderNav}</Action></div>
   </>);
 }
-export function ProductsPage({ lang,t }) {
+export function ProductsPage({ lang,t,market }) {
   const w=words[lang], [category,setCategory]=useState('all');
-  const products=[...currentProducts(t),...extraProducts(lang)];
+  const products=[...currentProducts(t,market,lang),...extraProducts(lang)];
   const cats=[['all',w.all],['power',lang==='ar'?'القوة':'Power'],['pump',lang==='ar'?'الضخ':'Pump'],['energy',lang==='ar'?'الطاقة':'Energy'],['protein',lang==='ar'?'البروتين':'Protein'],['immunity',lang==='ar'?'المناعة':'Immunity']];
   const filtered=products.filter(p=>category==='all'||p.category===category);
   return frame(<><Heading title={w.browse} subtitle={t.intro} /><div className="legacy-chips" aria-label={w.choose}>{cats.map(([id,label])=><button className={category===id?'active':''} onClick={()=>setCategory(id)} key={id}>{label}</button>)}</div>
-    <div className="legacy-product-grid">{filtered.map(p=><ProductTile key={p.id} product={p} lang={lang}/>)}</div>
-    <p className="legacy-note">{lang==='ar'?'منتجا البروتين وB-Complex من الكتالوج القديم للعرض والاستفسار فقط؛ لا يدخلان في طلب الموقع حتى تتأكد إتاحتهما وسعرهما.':'Protein and B-Complex are from the earlier catalogue and are for enquiries only; they are not part of online checkout.'}</p>
+    <div className="legacy-product-grid">{filtered.map(p=><ProductTile key={p.id} product={p} lang={lang} market={market}/>)}</div>
+    <p className="legacy-note">{lang==='ar'?'منتجا البروتين وB-Complex من الكتالوج القديم للعرض والاستفسار فقط؛ لا يدخلان في طلب الموقع حتى تتأكد إتاحتهما وسعرهما.':'Protein is from the earlier catalogue and is for enquiries only; it is not part of online checkout.'}</p>
   </>);
 }
-export function ProductDetailPage({ lang,t,slug }) {
+export function ProductDetailPage({ lang,t,slug,market }) {
   const w=words[lang], [expanded,setExpanded]=useState(false);
-  const product=[...currentProducts(t),...extraProducts(lang)].find(p=>p.id===slug||p.old?.id===slug);
+  const product=[...currentProducts(t,market,lang),...extraProducts(lang)].find(p=>p.id===slug||p.old?.id===slug);
   if(!product)return frame(<><Heading title={lang==='ar'?'المنتج غير موجود':'Product not found'} /><Action href="/products">{w.browse}</Action></>);
   const education=lang==='ar'?customerProvidedEducation[product.id]:lang==='en'?customerProvidedEducationEnglish[product.id]:productEducation[product.id]?.[lang]||productEducation[product.id]?.en;
   const rating=['5.0/5','4.8/5','4.7/5','4.8/5','4.7/5'][ids.indexOf(product.id)];
   const standard=manufacturingStandards[lang]||manufacturingStandards.en;
   const old=product.id==='creatine'?product.old:null;
   return frame(<><p className="legacy-breadcrumb"><a href="/products">{w.browse}</a> / {product.name}</p>
-    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><strong className="legacy-price">{product.price.toLocaleString('en-US')} RWF</strong><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}${new URLSearchParams(window.location.search).get('ref')?.toUpperCase() === 'COACH01' ? '&ref=COACH01' : ''}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action>}</aside>
-      <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1>
+    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><strong className="legacy-price">{product.price.toLocaleString('en-US')} {currencyFor(market)}</strong><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}${new URLSearchParams(window.location.search).get('ref')?.toUpperCase() === 'COACH01' ? '&ref=COACH01' : ''}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action>}</aside>
+      <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'سيترولين نقي · ٥ جم للحصة':'Pure L-Citrulline · 5 g per serving'}</strong>}
         <div className="product-rating" aria-label={`${w.rating}: ${rating}`}><span aria-hidden="true">★★★★★</span><strong>{rating}</strong><small>{w.rating}</small></div>
         {product.sales&&<p className="legacy-sales">{product.sales} {w.sold}</p>}
         <p>{education?.summary||product.description}</p>

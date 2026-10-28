@@ -1,15 +1,16 @@
 import { copy } from './storefront-copy.js';
+import { EGYPT_PRICES, currencyFor } from './market.js';
 
 const productIds = ['creatine', 'citrulline', 'czinc', 'carnitine', 'b-complex'];
 
 // Send product data only; never include the customer's form or WhatsApp text.
-export function ecommerce(items) {
+export function ecommerce(items, market = 'RW') {
   const products = items.filter(item => productIds.includes(item.product)).map(item => {
     const index = productIds.indexOf(item.product);
     return { item_id: item.product, item_name: copy.en.names[index],
-      price: copy.en.prices[index], quantity: item.quantity };
+      price: market === 'EG' ? EGYPT_PRICES[index] : copy.en.prices[index], quantity: item.quantity };
   });
-  return { currency: 'RWF', value: products.reduce((sum, item) => sum + item.price * item.quantity, 0), items: products };
+  return { currency: currencyFor(market), value: products.reduce((sum, item) => sum + item.price * item.quantity, 0), items: products };
 }
 
 export function trackEvent(name, parameters = {}) {
@@ -18,9 +19,9 @@ export function trackEvent(name, parameters = {}) {
   } catch { /* Analytics must never interrupt ordering. */ }
 }
 
-export function trackOrderResult(result, items, referralCode = '') {
+export function trackOrderResult(result, items, referralCode = '', market = 'RW') {
   if (result?.ok !== true || !result.orderId) return;
-  trackEvent('generate_lead', { ...ecommerce(items), order_id: result.orderId, lead_source: 'website_order', ...(referralCode === 'COACH01' ? { referral_partner: 'COACH01', referral_channel: 'instagram' } : {}) });
+  trackEvent('generate_lead', { ...ecommerce(items, market), order_id: result.orderId, lead_source: 'website_order', ...(referralCode === 'COACH01' ? { referral_partner: 'COACH01', referral_channel: 'instagram' } : {}) });
 }
 
 export function installClickTracking() {
