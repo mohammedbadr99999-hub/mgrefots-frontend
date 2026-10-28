@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { pricesFor, currencyFor, productImage, productSpec } from '../market';
+import PriceDisplay from '../PriceDisplay.jsx';
 import { ArrowRight, BookOpen, CheckCircle2, FlaskConical, MessageCircle, Search, ShieldCheck } from 'lucide-react';
 import { PRODUCTS as OLD_PRODUCTS } from './data/products';
 import { SUPPLEMENT_ENCYCLOPEDIA } from './data/supplementEncyclopediaData';
@@ -48,7 +49,7 @@ function ProductTile({ product, lang, market }) {
     <a href={`/products/${product.id}`}><img src={product.image} alt={product.name} loading="lazy" /></a>
     <div><h3><a href={`/products/${product.id}`}>{product.name}</a></h3><small>{product.spec}</small>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'سيترولين نقي · ٥ جم للحصة':'Pure L-Citrulline · 5 g per serving'}</strong>}<p>{product.description}</p>
       {product.sales && <p className="legacy-sales">{product.sales} {lang==='ar'?'مبيعات':lang==='rw'?'byaguzwe':'sold'}</p>}
-      {product.orderable ? <strong>{product.price.toLocaleString('en-US')} {currencyFor(market)}</strong> : <span className="legacy-muted">{w.ask}</span>}
+      {product.orderable ? <strong><PriceDisplay id={product.id} price={product.price} market={market} lang={lang}/></strong> : <span className="legacy-muted">{w.ask}</span>}
     </div>
     <Action href={`/products/${product.id}`}>{w.details}</Action>
   </article>;
@@ -87,7 +88,7 @@ export function ProductDetailPage({ lang,t,slug,market }) {
   const standard=manufacturingStandards[lang]||manufacturingStandards.en;
   const old=product.id==='creatine'?product.old:null;
   return frame(<><p className="legacy-breadcrumb"><a href="/products">{w.browse}</a> / {product.name}</p>
-    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><strong className="legacy-price">{product.price.toLocaleString('en-US')} {currencyFor(market)}</strong><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}${new URLSearchParams(window.location.search).get('ref')?.toUpperCase() === 'COACH01' ? '&ref=COACH01' : ''}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action>}</aside>
+    <div className="legacy-detail-grid product-detail-layout"><aside className="legacy-detail-photo"><img src={product.image} alt={product.name}/>{product.orderable?<div className="product-buy-box"><div className="legacy-price"><PriceDisplay id={product.id} price={product.price} market={market} lang={lang}/></div><a className="btn btn-gold product-order-cta" href={`/order?product=${product.id}${new URLSearchParams(window.location.search).get('ref')?.toUpperCase() === 'COACH01' ? '&ref=COACH01' : ''}#order-products`}>{w.orderProduct}<ArrowRight size={16}/></a></div>:<Action href={whatsapp(`Hello MGREFOTS, is ${product.name} available?`)}>{w.ask}</Action>}</aside>
       <div className="legacy-detail-copy"><p className="section-kicker">MGREFOTS · {product.spec}</p><h1>{product.name}</h1>{product.id==='citrulline'&&market==='EG'&&<strong className="serving-highlight">{lang==='ar'?'سيترولين نقي · ٥ جم للحصة':'Pure L-Citrulline · 5 g per serving'}</strong>}
         <div className="product-rating" aria-label={`${w.rating}: ${rating}`}><span aria-hidden="true">★★★★★</span><strong>{rating}</strong><small>{w.rating}</small></div>
         {product.sales&&<p className="legacy-sales">{product.sales} {w.sold}</p>}

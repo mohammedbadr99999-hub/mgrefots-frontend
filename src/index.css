@@ -14,3 +14,13 @@
 @media(max-width:1050px){.site-shell:not(.legacy-site) .main-nav{display:none;position:absolute;top:68px;inset-inline:14px;padding:15px;background:white;border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 30px #08255022}.site-shell:not(.legacy-site) .main-nav.open{display:grid;gap:3px}.site-shell:not(.legacy-site) .main-nav>a:not(.btn){padding:12px}.site-shell:not(.legacy-site) .menu-toggle{display:block}}
 
 .serving-highlight{display:block;color:#a26b08;font-weight:800;margin:.35rem 0 .65rem}
+.offer-price{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin:10px 0 2px;line-height:1.45}
+.offer-old{color:#9d2c2c;text-decoration-color:#c43b3b;text-decoration-thickness:1px;font-size:.8em;font-weight:500}
+.offer-current{color:#082550;font-weight:800}
+.offer-price .offer-current{font-size:1.15em}
+.offer-badge{display:inline-block;flex-basis:100%;width:max-content;color:#835400;background:#fff4d7;border-radius:20px;padding:3px 9px;font-size:11px;font-weight:700}
+.offer-price-compact{margin:1px 0;gap:2px 8px;font-size:11px}
+.offer-price-compact .offer-current{font-size:12px}
+.offer-price-compact .offer-badge{font-size:10px;padding:1px 6px}
+.legacy-product-card .offer-price strong,.product-buy-box .offer-price strong{color:#082550;font-size:1.15em}
+.product-buy-box .offer-price{justify-content:center}
