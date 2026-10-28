@@ -3,7 +3,7 @@ const PRODUCTS = {
   citrulline: { name: 'L-Citrulline', price: 40000 },
   czinc: { name: 'C-Zinc', price: 27000 },
   carnitine: { name: 'L-Carnitine', price: 22000 },
-  milga: { name: 'Milga Advance', price: 50000 },
+  'b-complex': { name: 'B-Complex', price: 50000 },
 };
 
 const clean = (value, max) => String(value ?? '').trim().slice(0, max);
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
   }
 
   const normalizedItems = items.map((item) => ({
-    product: PRODUCTS[clean(item?.product, 30)],
+    product: PRODUCTS[clean(item?.product, 30) === 'milga' ? 'b-complex' : clean(item?.product, 30)],
     quantity: Number(item?.quantity),
   }));
   if (normalizedItems.some((item) => !item.product || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 99)) {

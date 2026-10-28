@@ -187,7 +187,7 @@ export const productEducation = {
       sources: [['NIH Office of Dietary Supplements: Carnitine', 'https://ods.od.nih.gov/factsheets/Carnitine-HealthProfessional/']],
     },
   },
-  milga: {
+  'b-complex': {
     en: {
       summary: 'The product listing names vitamins B1, B6 and B12. B vitamins help the body use nutrients in normal metabolism; B6 and B12 also support normal nerve function and blood-cell formation. They do not provide extra energy or treat nerve symptoms when a person’s intake and status are already adequate.',
       points: [

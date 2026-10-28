@@ -1,6 +1,6 @@
 import { copy } from './storefront-copy.js';
 
-const productIds = ['creatine', 'citrulline', 'czinc', 'carnitine', 'milga'];
+const productIds = ['creatine', 'citrulline', 'czinc', 'carnitine', 'b-complex'];
 
 // Send product data only; never include the customer's form or WhatsApp text.
 export function ecommerce(items) {

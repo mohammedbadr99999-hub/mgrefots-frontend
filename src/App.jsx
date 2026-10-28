@@ -7,7 +7,7 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/noto-sans-arabic';
 import '@fontsource/libre-baskerville/700.css';
 const ExploreSite = React.lazy(() => import('./legacy/ExploreSite.jsx'));
-const images=['creatine','citrulline','czinc','carnitine','milga'];
+const images=['creatine','citrulline','czinc','carnitine','b-complex'];
 const REFERRAL_STORAGE_KEY = 'mgrefots-referral-code';
 const ACTIVE_REFERRAL_CODE = 'COACH01';
 // Keep a valid referral for navigation from the coach's product link to checkout in the same tab.
@@ -35,7 +35,7 @@ function OrderButton({className='',t}){return <a className={`btn btn-gold ${clas
 export default function App(){
  const [lang,setLang]=useState(()=>{try{return ['en','rw','ar'].includes(localStorage.getItem('mgrefots-language'))?localStorage.getItem('mgrefots-language'):'en'}catch{return 'en'}});
  const referralCode=readPartnerReferral();
- const [menu,setMenu]=useState(false); const initialProduct=new URLSearchParams(window.location.search).get('product'); const [cart,setCart]=useState(()=>Object.fromEntries(images.map(id=>[id,{selected:id===(images.includes(initialProduct)?initialProduct:'creatine'),quantity:id===(images.includes(initialProduct)?initialProduct:'creatine')?1:0}]))); const [submitting,setSubmitting]=useState(false); const [notice,setNotice]=useState(''); const [sent,setSent]=useState(false); const [form,setForm]=useState({name:'',phone:'',city:'',area:'',street:''}); const t=copy[lang];
+ const [menu,setMenu]=useState(false); const requestedProduct=new URLSearchParams(window.location.search).get('product'); const initialProduct=requestedProduct==='milga'?'b-complex':requestedProduct; const [cart,setCart]=useState(()=>Object.fromEntries(images.map(id=>[id,{selected:id===(images.includes(initialProduct)?initialProduct:'creatine'),quantity:id===(images.includes(initialProduct)?initialProduct:'creatine')?1:0}]))); const [submitting,setSubmitting]=useState(false); const [notice,setNotice]=useState(''); const [sent,setSent]=useState(false); const [form,setForm]=useState({name:'',phone:'',city:'',area:'',street:''}); const t=copy[lang];
  useEffect(()=>{document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';try{localStorage.setItem('mgrefots-language',lang)}catch{}},[lang]);
  useEffect(()=>{if(window.location.hash==='#order-products'){requestAnimationFrame(()=>document.getElementById('order-products')?.scrollIntoView({behavior:'smooth',block:'center'}));}},[]);
  const order=(i)=>`${t.request} ${t.names[i]} (${t.specs[i]}).`;

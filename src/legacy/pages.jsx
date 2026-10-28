@@ -14,10 +14,10 @@ const words = {
 };
 const local = (v, lang) => v?.[lang] || v?.en || '';
 const whatsapp = msg => `https://wa.me/250792294432?text=${encodeURIComponent(msg)}`;
-const ids = ['creatine', 'citrulline', 'czinc', 'carnitine', 'milga'];
+const ids = ['creatine', 'citrulline', 'czinc', 'carnitine', 'b-complex'];
 const oldIds = ['creatine-monohydrate', 'citrulline', 'c-zinc', 'l-carnitine', null];
 const currentCategories = ['power', 'pump', 'immunity', 'energy', 'immunity'];
-const legacyExtras = OLD_PRODUCTS.filter(p => ['protein-pea-rice', 'b-complex'].includes(p.id));
+const legacyExtras = OLD_PRODUCTS.filter(p => ['protein-pea-rice'].includes(p.id));
 
 function Heading({ eyebrow, title, subtitle }) {
   return <div className="legacy-heading"><p className="section-kicker">{eyebrow || 'MGREFOTS · KIGALI'}</p><h1>{title}</h1>{subtitle && <p>{subtitle}</p>}</div>;

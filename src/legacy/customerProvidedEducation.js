@@ -37,14 +37,14 @@ export const customerProvidedEducation = {
       ['كبار السن', 'يدعم صحة القلب بشكل ممتاز (لأن القلب يعتمد على الدهون كوقود بنسبة كبيرة)، ويقلل من التعب الجسدي والذهني، خاصة في أشكاله الأخرى (مثل الأسيتيل-إل-كارنيتين لدعم الذاكرة).'],
     ],
   },
-  milga: {
-    summary: 'هو "غذاء الأعصاب" ومحرك "الأيض". الميلجا يحتوي على (بنفوتيامين - فيتامين ب1 سريع الامتصاص، ب6، ب12) ووظيفتها تحويل الطعام الذي نأكله إلى طاقة قابلة للاستخدام، وصيانة الأسلاك العصبية في الجسم.',
+  'b-complex': {
+    summary: 'هو "غذاء الأعصاب" ومحرك "الأيض". البي كومبليكس يحتوي على (بنفوتيامين - فيتامين ب1 سريع الامتصاص، ب6، ب12) ووظيفتها تحويل الطعام الذي نأكله إلى طاقة قابلة للاستخدام، وصيانة الأسلاك العصبية في الجسم.',
     points: [
       ['لاعبو كمال الأجسام', 'يحسن "التوافق العضلي العصبي" (Mind-Muscle Connection)، ويساعد في استشفاء الجهاز العصبي المركزي الذي يرهق بشدة من رفع الأوزان الثقيلة. فيتامين ب6 أساسي لهضم واستفادة الجسم من البروتين.'],
-      ['كرة القدم وكرة السلة', 'سرعة رد الفعل تعتمد على صحة الأعصاب. الميلجا يضمن انتقال الإشارات من المخ للعضلات في أجزاء من الثانية (مثل لحظة التسديد أو القفز).'],
+      ['كرة القدم وكرة السلة', 'سرعة رد الفعل تعتمد على صحة الأعصاب. البي كومبليكس يضمن انتقال الإشارات من المخ للعضلات في أجزاء من الثانية (مثل لحظة التسديد أو القفز).'],
       ['اللياقة العالية', 'يمنع الإرهاق العصبي المفاجئ أثناء التمارين القاسية ويحافظ على مستويات طاقة مستقرة.'],
       ['الأشخاص العاديون', 'يعالج التنميل، الوخز، رعشة الأطراف، وآلام أسفل الظهر الناتجة عن التهاب الأعصاب، ويقلل من التوتر العصبي.'],
-      ['الرجال', 'الإحساس والانتصاب يعتمدان بشكل أساسي على أعصاب قوية وصحية. أي تلف أو ضعف في الأعصاب يؤثر مباشرة على الأداء الجنسي، وهنا يبرز دور الميلجا كعلاج وقائي قوي.'],
+      ['الرجال', 'الإحساس والانتصاب يعتمدان بشكل أساسي على أعصاب قوية وصحية. أي تلف أو ضعف في الأعصاب يؤثر مباشرة على الأداء الجنسي، وهنا يبرز دور البي كومبليكس كعلاج وقائي قوي.'],
       ['السيدات والحمل', 'فيتامين ب6 يقلل جداً من أعراض ما قبل الطمث (PMS) وتقلبات المزاج. في الحمل: فيتامينات ب (وخاصة ب12 مع حمض الفوليك) هي حجر الأساس لتكوين الحبل الشوكي والجهاز العصبي للجنين.'],
       ['كبار السن', 'يحمي من الاعتلال العصبي (خاصة لمرضى السكر)، يحافظ على الذاكرة من التدهور بسبب نقص ب12 الذي يقل امتصاصه جداً مع التقدم في العمر.'],
     ],
@@ -102,14 +102,14 @@ export const customerProvidedEducationEnglish = {
       ['Older adults', 'It strongly supports heart health (because the heart relies heavily on fat as fuel) and reduces physical and mental fatigue, especially in other forms such as acetyl-L-carnitine for memory support.'],
     ],
   },
-  milga: {
-    summary: 'It is “nerve nourishment” and an “engine for metabolism.” Milga contains (benfotiamine — fast-absorbing vitamin B1, B6, and B12). Their role is to turn the food we eat into usable energy and maintain the body’s nerve pathways.',
+  'b-complex': {
+    summary: 'It is “nerve nourishment” and an “engine for metabolism.” B-Complex contains (benfotiamine — fast-absorbing vitamin B1, B6, and B12). Their role is to turn the food we eat into usable energy and maintain the body’s nerve pathways.',
     points: [
       ['Bodybuilding', 'It improves “muscle–nerve coordination” (Mind-Muscle Connection) and helps the central nervous system recover from the heavy strain of lifting heavy weights. Vitamin B6 is essential for digesting and making use of protein.'],
-      ['Football and basketball', 'Reaction speed depends on healthy nerves. Milga ensures signals travel from the brain to the muscles in fractions of a second (such as when shooting or jumping).'],
+      ['Football and basketball', 'Reaction speed depends on healthy nerves. B-Complex ensures signals travel from the brain to the muscles in fractions of a second (such as when shooting or jumping).'],
       ['High fitness', 'It prevents sudden nervous fatigue during intense workouts and maintains stable energy levels.'],
       ['Everyday use', 'It treats numbness, tingling, limb tremors, and lower-back pain caused by nerve inflammation, and reduces nervous tension.'],
-      ['Men', 'Sensation and erection depend mainly on strong, healthy nerves. Any nerve damage or weakness directly affects sexual performance; this is where Milga stands out as a strong preventive treatment.'],
+      ['Men', 'Sensation and erection depend mainly on strong, healthy nerves. Any nerve damage or weakness directly affects sexual performance; this is where B-Complex stands out as a strong preventive treatment.'],
       ['Women and pregnancy', 'Vitamin B6 greatly reduces premenstrual symptoms (PMS) and mood swings. During pregnancy: B vitamins (especially B12 together with folic acid) are the cornerstone of forming the fetal spinal cord and nervous system.'],
       ['Older adults', 'It protects against neuropathy (especially for people with diabetes) and helps preserve memory from decline due to B12 deficiency, whose absorption decreases greatly with age.'],
     ],

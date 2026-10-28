@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/products/milga", "destination": "/products/b-complex", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/order", "destination": "/index.html" },
     { "source": "/order/", "destination": "/index.html" },
