@@ -75,7 +75,7 @@ export function ProductsPage({ lang,t,market }) {
   const filtered=products.filter(p=>category==='all'||p.category===category);
   return frame(<><Heading title={w.browse} subtitle={t.intro} /><div className="legacy-chips" aria-label={w.choose}>{cats.map(([id,label])=><button className={category===id?'active':''} onClick={()=>setCategory(id)} key={id}>{label}</button>)}</div>
     <div className="legacy-product-grid">{filtered.map(p=><ProductTile key={p.id} product={p} lang={lang} market={market}/>)}</div>
-    <p className="legacy-note">{lang==='ar'?'منتجا البروتين وB-Complex من الكتالوج القديم للعرض والاستفسار فقط؛ لا يدخلان في طلب الموقع حتى تتأكد إتاحتهما وسعرهما.':'Protein is from the earlier catalogue and is for enquiries only; it is not part of online checkout.'}</p>
+    <p className="legacy-note">{lang==='ar'?'منتج البروتين من الكتالوج القديم للعرض والاستفسار فقط؛ لا يدخل في طلب الموقع حتى تتأكد إتاحته وسعره.':'Protein is from the earlier catalogue and is for enquiries only; it is not part of online checkout.'}</p>
   </>);
 }
 export function ProductDetailPage({ lang,t,slug,market }) {
