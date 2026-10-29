@@ -5,6 +5,7 @@
   "rewrites": [
     { "source": "/order", "destination": "/index.html" },
     { "source": "/order/", "destination": "/index.html" },
+    { "source": "/benefits/:slug", "destination": "/index.html" },
     { "source": "/explore", "destination": "/index.html" },
     { "source": "/products", "destination": "/index.html" },
     { "source": "/products/creatine/certificate", "destination": "/index.html" },
