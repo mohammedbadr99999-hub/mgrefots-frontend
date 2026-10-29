@@ -38,7 +38,7 @@ function currentProducts(t, market, lang) {
 }
 function extraProducts(lang) {
   return legacyExtras.map(p => ({
-    id:p.id, name:local(p.name, lang), description:lang==='ar'?'بروتين MGREFOTS النباتي: ٧٠٪ بازلاء + ٣٠٪ أرز. قريبًا في مصر.':lang==='rw'?'Poroteyine y’ibimera MGREFOTS: 70% amashaza + 30% umuceri. Izaboneka vuba muri Egiputa.':'MGREFOTS plant protein: 70% pea + 30% rice. Coming soon in Egypt.',
+    id:p.id, name:local(p.name, lang), description:lang==='ar'?'أول بروتين نباتي من MGREFOTS: ٧٠٪ بازلاء + ٣٠٪ أرز.':lang==='rw'?'Poroteyine ya mbere y’ibimera ya MGREFOTS: 70% amashaza + 30% umuceri.':'MGREFOTS’s first plant protein: 70% pea + 30% rice.',
     spec:`${p.size} · ${p.servings}`, image:p.id==='protein-pea-rice'?'/legacy-products/protein-pea-rice-new.webp':`/legacy-products/${p.id}.png`,
     old:p, category:p.category, orderable:false,
   }));
