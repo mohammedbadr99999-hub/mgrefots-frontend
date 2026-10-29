@@ -1,10 +1,18 @@
-import { EGYPT_PRICES } from '../src/market.js';
+import { EGYPT_PRODUCT_PRICES } from '../src/market.js';
 const PRODUCTS = {
   creatine: { name: 'Creatine Monohydrate', price: 50000 },
   citrulline: { name: 'L-Citrulline', price: 40000 },
   czinc: { name: 'C-Zinc', price: 27000 },
   carnitine: { name: 'L-Carnitine', price: 22000 },
   'b-complex': { name: 'B-Complex', price: 50000 },
+  ashwagandha: { name: 'Nutriville Ashwagandha KSM-66 600 mg', price: 300 },
+  'nad-plus': { name: 'Nutriville NAD+ 300 mg', price: 300 },
+  'men-multivitamin': { name: 'Nutriville Men Multivitamin', price: 270 },
+  'women-multivitamin': { name: 'Nutriville Women Multivitamin', price: 270 },
+  coq10: { name: 'Nutriville CoQ10 100 mg', price: 450 },
+  'magnesium-glycinate': { name: 'Nutriville Magnesium Glycinate 150 mg', price: 230 },
+  'vitamin-b': { name: 'Nutriville Vitamin B Complex', price: 270 },
+  'omega-3': { name: 'Nutriville DHA/EPA Omega 3', price: 300 },
 };
 
 const clean = (value, max) => String(value ?? '').trim().slice(0, max);
@@ -38,11 +46,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Check your contact, delivery and product details, then try again.' });
   }
 
-  const productIds = Object.keys(PRODUCTS);
   const normalizedItems = items.map((item) => {
     const id = clean(item?.product, 30) === 'milga' ? 'b-complex' : clean(item?.product, 30);
     const product = PRODUCTS[id];
-    return { product: product && { ...product, price: market === 'EG' ? EGYPT_PRICES[productIds.indexOf(id)] : product.price }, quantity: Number(item?.quantity) };
+    return { product: product && { ...product, price: market === 'EG' ? EGYPT_PRODUCT_PRICES[id] : product.price }, quantity: Number(item?.quantity) };
   });
   if (normalizedItems.some((item) => !item.product || !Number.isInteger(item.quantity) || item.quantity < 1 || item.quantity > 99)) {
     return res.status(400).json({ message: 'Check your contact, delivery and product details, then try again.' });

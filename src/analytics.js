@@ -1,14 +1,15 @@
 import { copy } from './storefront-copy.js';
-import { EGYPT_PRICES, currencyFor } from './market.js';
+import { EGYPT_PRODUCT_PRICES, currencyFor } from './market.js';
 
-const productIds = ['creatine', 'citrulline', 'czinc', 'carnitine', 'b-complex'];
+const productIds = ['creatine', 'citrulline', 'czinc', 'carnitine', 'b-complex','ashwagandha','nad-plus','men-multivitamin','women-multivitamin','coq10','magnesium-glycinate','vitamin-b','omega-3'];
+const extraNames = {ashwagandha:'Nutriville Ashwagandha KSM-66 600 mg','nad-plus':'Nutriville NAD+ 300 mg','men-multivitamin':'Nutriville Men Multivitamin','women-multivitamin':'Nutriville Women Multivitamin',coq10:'Nutriville CoQ10 100 mg','magnesium-glycinate':'Nutriville Magnesium Glycinate 150 mg','vitamin-b':'Nutriville Vitamin B Complex','omega-3':'Nutriville DHA/EPA Omega 3'};
 
 // Send product data only; never include the customer's form or WhatsApp text.
 export function ecommerce(items, market = 'RW') {
   const products = items.filter(item => productIds.includes(item.product)).map(item => {
     const index = productIds.indexOf(item.product);
-    return { item_id: item.product, item_name: copy.en.names[index],
-      price: market === 'EG' ? EGYPT_PRICES[index] : copy.en.prices[index], quantity: item.quantity };
+    return { item_id: item.product, item_name: extraNames[item.product] || copy.en.names[index],
+      price: market === 'EG' ? EGYPT_PRODUCT_PRICES[item.product] : copy.en.prices[index], quantity: item.quantity };
   });
   return { currency: currencyFor(market), value: products.reduce((sum, item) => sum + item.price * item.quantity, 0), items: products };
 }
