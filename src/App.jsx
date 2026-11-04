@@ -4,6 +4,20 @@ import { copy } from './storefront-copy';
 import PriceDisplay from './PriceDisplay.jsx';
 import { marketFor, pricesFor, currencyFor, productImage, productSpec } from './market';
 import CoachBox from './CoachBox.jsx';
+<a 
+  href="/library/index.html" 
+  style={{
+    backgroundColor: '#087F76',
+    color: '#ffffff',
+    padding: '12px 24px',
+    borderRadius: '8px',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    display: 'inline-block'
+  }}
+>
+  MGREFOTS — Workouts & Nutrition
+</a>
 import { ecommerce, trackEvent, trackOrderResult, installClickTracking } from './analytics.js';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/noto-sans-arabic';
