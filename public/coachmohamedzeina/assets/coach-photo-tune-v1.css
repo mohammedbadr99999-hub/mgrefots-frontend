@@ -5,7 +5,7 @@
   }
 
   #home-coach-photo {
-    height: clamp(460px, 39vw, 535px) !important;
+    height: clamp(540px, 47vw, 640px) !important;
     flex: 0 0 auto !important;
     max-width: none !important;
   }
