@@ -552,7 +552,7 @@ export async function createServerApp(serveFrontend = false) {
     | { ok: false; status: number; error: string }
   > {
     const authRes = await authenticateRequest(req);
-    if (!authRes.ok) return authRes;
+    if ('error' in authRes) return authRes;
     if (!authRes.user.email || authRes.user.emailVerified !== true) {
       return {
         ok: false,
@@ -570,7 +570,7 @@ export async function createServerApp(serveFrontend = false) {
     | { ok: false; status: number; error: string }
   > {
     const authRes = await requireVerifiedEmailRequest(req);
-    if (!authRes.ok) return authRes;
+    if ('error' in authRes) return authRes;
 
     if (VERIFIED_ADMIN_EMAILS.includes(authRes.user.email.toLowerCase())) {
       return authRes;
@@ -650,7 +650,7 @@ export async function createServerApp(serveFrontend = false) {
   app.post('/api/auth/migrate-legacy', async (req, res) => {
     try {
       const authRes = await requireVerifiedEmailRequest(req);
-      if (!authRes.ok) {
+      if ('error' in authRes) {
         return res.status(authRes.status).json({ error: authRes.error });
       }
 
@@ -858,7 +858,7 @@ export async function createServerApp(serveFrontend = false) {
   app.post('/api/registrations', async (req, res) => {
     try {
       const authRes = await authenticateRequest(req);
-      if (!authRes.ok) {
+      if ('error' in authRes) {
         return res.status(authRes.status).json({ error: authRes.error });
       }
 
@@ -1073,7 +1073,7 @@ export async function createServerApp(serveFrontend = false) {
   // 2. List All Registrations (Strictly Protected for Verified Admins Only)
   app.get('/api/registrations', async (req, res) => {
     const adminRes = await requireAdminRequest(req);
-    if (!adminRes.ok) {
+    if ('error' in adminRes) {
       return res.status(adminRes.status).json({ error: adminRes.error });
     }
     const list = readRegistrations();
@@ -1090,7 +1090,7 @@ export async function createServerApp(serveFrontend = false) {
   // 3. Update User Profile (Strictly Protected for Authenticated Owner Only)
   app.put('/api/registrations/:uid', async (req, res) => {
     const authRes = await authenticateRequest(req);
-    if (!authRes.ok) {
+    if ('error' in authRes) {
       return res.status(authRes.status).json({ error: authRes.error });
     }
     const { uid } = req.params;
@@ -1178,7 +1178,7 @@ export async function createServerApp(serveFrontend = false) {
   // 4. Delete User Registration (Strictly Protected for Authenticated Owner Only)
   app.delete('/api/registrations/:uid', async (req, res) => {
     const authRes = await authenticateRequest(req);
-    if (!authRes.ok) {
+    if ('error' in authRes) {
       return res.status(authRes.status).json({ error: authRes.error });
     }
     const { uid } = req.params;
