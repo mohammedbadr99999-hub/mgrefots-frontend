@@ -20,7 +20,7 @@
  *    preparation state (raw vs. cooked weight), fiber, and household measures.
  */
 
-import { Locale } from '../data/muscleGroups';
+import type { Locale } from '../data/muscleGroups.ts';
 
 export type NutritionPathway = 'general_fitness' | 'health_condition';
 export type GoalType = 'lose_fat' | 'build_muscle' | 'maintain' | 'improve_eating';
