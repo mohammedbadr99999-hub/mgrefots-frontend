@@ -5,7 +5,6 @@ import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, ThinkingLevel, Type } from '@google/genai';
 import firebaseConfig from './firebase-applet-config.json' with { type: 'json' };
 import {
@@ -2970,6 +2969,7 @@ MULTI-TURN COACHING & SAFETY RULES:
 
   if (serveFrontend) {
     if (process.env.NODE_ENV !== 'production') {
+      const { createServer: createViteServer } = await import('vite');
       const vite = await createViteServer({
         server: { middlewareMode: true, hmr: false },
         appType: 'spa',
