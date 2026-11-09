@@ -1,12 +1,35 @@
 {
   "redirects": [
     {
+      "source": "/library",
+      "destination": "/coachmohamedzeina",
+      "permanent": true
+    },
+    {
+      "source": "/library/:path*",
+      "destination": "/coachmohamedzeina/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/library/index (2).html",
+      "destination": "/coachmohamedzeina",
+      "permanent": true
+    },
+    {
       "source": "/products/milga",
       "destination": "/products/b-complex",
       "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/coachmohamedzeina",
+      "destination": "/coachmohamedzeina/index.html"
+    },
+    {
+      "source": "/coachmohamedzeina/:path*",
+      "destination": "/coachmohamedzeina/index.html"
+    },
     {
       "source": "/maqaam",
       "destination": "/api/maqaam"
@@ -107,6 +130,9 @@
   "functions": {
     "api/maqaam.js": {
       "includeFiles": "maqaam-runtime/**",
+      "maxDuration": 60
+    },
+    "api/nutrition/[...path].js": {
       "maxDuration": 60
     }
   }
