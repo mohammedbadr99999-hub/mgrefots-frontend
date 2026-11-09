@@ -29,6 +29,59 @@
   <link rel="manifest" href="/coachmohamedzeina/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/coachmohamedzeina/registerSW.js"></script></head>
   <body>
     <div id="root"></div>
+  <style>
+    #mgrefots-main-site-link {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1200;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 17px;
+      border: 1px solid rgba(242, 199, 79, .82);
+      border-radius: 999px;
+      background: linear-gradient(135deg, #087f76, #075c57);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(7, 95, 88, .28);
+      font: 700 14px/1.1 Inter, Arial, sans-serif;
+      text-decoration: none;
+      white-space: nowrap;
+      animation: mgrefots-float 3s ease-in-out infinite;
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+    #mgrefots-main-site-link:hover,
+    #mgrefots-main-site-link:focus-visible {
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(7, 95, 88, .4);
+      transform: translateY(-2px);
+      outline: 2px solid #f2c74f;
+      outline-offset: 3px;
+    }
+    #mgrefots-main-site-link svg { width: 19px; height: 19px; flex: none; }
+    @keyframes mgrefots-float {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -5px; }
+    }
+    @media (max-width: 768px) {
+      #mgrefots-main-site-link {
+        right: 14px;
+        bottom: calc(82px + env(safe-area-inset-bottom));
+        padding: 11px 14px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #mgrefots-main-site-link { animation: none; }
+    }
+  </style>
+  <a id="mgrefots-main-site-link" href="https://www.mgrefots.com/" aria-label="Open the MGREFOTS main website">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M3.5 10.5 12 3.8l8.5 6.7v9a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M9 20.5v-6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <span>MGREFOTS.com</span>
+  </a>
   </body>
 </html>
 
