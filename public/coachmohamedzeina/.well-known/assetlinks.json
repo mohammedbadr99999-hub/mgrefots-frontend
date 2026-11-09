@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "studio.ai.mgrefots.twa",
+        "sha256_cert_fingerprints": ["16:EF:EA:D6:3D:82:65:D3:E7:A3:9A:D5:E4:FB:78:36:B3:08:76:9A:DC:56:2F:93:05:1C:D5:46:95:73:50:9C"]
+      }
+    }]
