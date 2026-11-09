@@ -540,4 +540,975 @@ export const CLINICAL_HEALTH_GUIDANCE: Record<string, ClinicalGuidanceCard> = {
       ],
       ar: [
         'أمراض الكلى وقصور القلب تتطلب تحديداً طبياً دقيقاً لكميات البروتين والبوتاسيوم والفوسفور والصوديوم والسوائل اليومية.',
-        'الحمل والرضاعة يتطلبان دعماً غذائياً خاصاً للطاق�
+        'الحمل والرضاعة يتطلبان دعماً غذائياً خاصاً للطاقة والحديد وحمض الفوليك والبروتين وليس أنظمة عجز سعرات لإنقاص الوزن.',
+        'في حال وجود تاريخ لاضطرابات الأكل، يتجنب التطبيق عرض عدادات السعرات الصارمة لدعم علاقة صحية وآمنة مع الطعام.',
+      ],
+      fr: [
+        'Les apports en protéines, électrolytes et liquides doivent être fixés par votre médecin en cas d’atteinte rénale ou cardiaque.',
+        'Aucun objectif de perte de poids n’est appliqué pendant la grossesse ou en cas d’antécédent de trouble alimentaire.',
+      ],
+      rw: [
+        'Ingano ya proteyine, umunyu n’amazi bigombaugenwa na muganga ku barwayi b’impyiko cyangwa umutima.',
+        'Abatwite n’abonsa ntibagomba kugabanya ingufu z’ibiryo.',
+      ],
+    },
+    whatWeDoNotDoByLocale: {
+      en: 'We pause automated therapeutic meal-plan generation and do not prescribe high-protein loads, fluid targets, or calorie deficits for these conditions.',
+      ar: 'يوقف التطبيق التوليد التلقائي للخطط العلاجية ولا يفرض أحمال بروتين عالية أو أهداف سوائل أو عجز سعرات لهذه الحالات.',
+      fr: 'Nous ne générons pas de plan thérapeutique automatisé pour ces situations cliniques.',
+      rw: 'Ntabwo dukora gahunda y’imirire yikora kuri izi ndwara zikomeye.',
+    },
+    whenToConsultClinicianByLocale: {
+      en: 'Please consult your physician or a registered/licensed clinical dietitian for a personalized care plan.',
+      ar: 'يرجى مراجعة طبيبك المعالج أو أخصائي التغذية الإكلينيكية المرخص لوضع خطة غذائية آمنة ومخصصة لحالتك.',
+      fr: 'Veuillez consulter votre médecin ou un diététicien clinicien agréé.',
+      rw: 'Nyamuneka ganira na muganga wawe cyangwa inzobere mu mirire.',
+    },
+    sourceName: 'NIDDK (NIH) & World Health Organization — Clinical Nutrition Guidance',
+    sourceUrl: 'https://www.niddk.nih.gov/health-information/diet-nutrition',
+    reviewDate: '2025-01-15',
+    contentOwner: 'MGREFOTS Clinical Safety & Nutrition Review',
+  },
+};
+
+export interface FoodReferenceItem {
+  id: string;
+  category: 'protein' | 'carb' | 'fat_veg';
+  nameByLocale: { en: string; ar: string; fr: string; rw: string };
+  stateLabelByLocale: { en: string; ar: string; fr: string; rw: string };
+  householdMeasureByLocale: { en: string; ar: string; fr: string; rw: string };
+  sourceRef: string;
+  budgetTier: 'low' | 'medium' | 'flexible';
+  per100g: {
+    kcal: number;
+    proteinG: number;
+    carbsG: number;
+    fatG: number;
+    fiberG: number;
+  };
+  defaultGrams: number;
+  tags: {
+    vegan: boolean;
+    vegetarian: boolean;
+    pescatarian: boolean;
+    halalCompatible: boolean;
+    allergens: string[];
+  };
+}
+
+export const VERIFIED_FOOD_DATABASE: FoodReferenceItem[] = [
+  // PROTEINS
+  {
+    id: 'chicken_breast_cooked',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Skinless Chicken Breast',
+      ar: 'صدور دجاج بدون جلد',
+      fr: 'Blanc de poulet sans peau',
+      rw: 'Inkoko idafite uruhu (Chicken breast)',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked / grilled weight (raw ~185g -> cooked 140g)',
+      ar: 'وزن مطهو / مشوي (يعادل نحو 185 جم وزن نيئ)',
+      fr: 'Poids cuit / grillé (~185g cru)',
+      rw: 'Ibiro bitetse (~185g mbisi)',
+    },
+    householdMeasureByLocale: {
+      en: '~1 palm-sized cooked breast per 140g',
+      ar: '~قطعة بحجم كف اليد لكل 140 جم مطهو',
+      fr: '~1 filet cuit de la taille de la paume (140g)',
+      rw: '~Igice kimwe kiri mu kiganza (140g)',
+    },
+    sourceRef: 'USDA FoodData Central #171477',
+    budgetTier: 'medium',
+    per100g: { kcal: 165, proteinG: 31.0, carbsG: 0, fatG: 3.6, fiberG: 0 },
+    defaultGrams: 140,
+    tags: { vegan: false, vegetarian: false, pescatarian: false, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'lean_beef_cooked',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Lean Beef Sirloin',
+      ar: 'لحم بقري صافي قليل الدهن',
+      fr: 'Bœuf maigre grillé',
+      rw: 'Inyama y’inka idafite ibinure',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked weight (raw ~175g -> cooked 130g)',
+      ar: 'وزن مطهو (يعادل نحو 175 جم وزن نيئ)',
+      fr: 'Poids cuit (~175g cru)',
+      rw: 'Ibiro bitetse (~175g mbisi)',
+    },
+    householdMeasureByLocale: {
+      en: '~1 deck-of-cards steak portion per 130g',
+      ar: '~قطعة متوسطة صافية لكل 130 جم مطهو',
+      fr: '~1 portion cuite de 130g',
+      rw: '~Igice cya 130g gitetse',
+    },
+    sourceRef: 'USDA FoodData Central #174032',
+    budgetTier: 'flexible',
+    per100g: { kcal: 206, proteinG: 29.5, carbsG: 0, fatG: 9.1, fiberG: 0 },
+    defaultGrams: 130,
+    tags: { vegan: false, vegetarian: false, pescatarian: false, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'tilapia_white_fish_cooked',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Baked White Fish / Tilapia',
+      ar: 'سمك أبيض / بلطي مشوي',
+      fr: 'Poisson blanc / Tilapia au four',
+      rw: 'Ifi y’umweru / Tilapia itetse',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked weight (raw ~200g -> cooked 160g)',
+      ar: 'وزن مطهو (يعادل نحو 200 جم وزن نيئ)',
+      fr: 'Poids cuit (~200g cru)',
+      rw: 'Ibiro bitetse (~200g mbisi)',
+    },
+    householdMeasureByLocale: {
+      en: '~1 medium cooked fish fillet per 160g',
+      ar: '~شريحة فيليه سمك متوسطة لكل 160 جم مطهو',
+      fr: '~1 filet moyen cuit (160g)',
+      rw: '~Ifi imwe iringaniye (160g)',
+    },
+    sourceRef: 'USDA FoodData Central #175177',
+    budgetTier: 'medium',
+    per100g: { kcal: 128, proteinG: 26.2, carbsG: 0, fatG: 2.7, fiberG: 0 },
+    defaultGrams: 160,
+    tags: { vegan: false, vegetarian: false, pescatarian: true, halalCompatible: true, allergens: ['fish'] },
+  },
+  {
+    id: 'whole_eggs_cooked',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Whole Eggs (Boiled / Poached)',
+      ar: 'بيض كامل مسلوق أو مطهو',
+      fr: 'Œufs entiers cuits',
+      rw: 'Amagi atetse',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked edible weight without shell',
+      ar: 'وزن مطهو صافي بدون قشر',
+      fr: 'Poids cuit sans coquille',
+      rw: 'Ibiro bitetse bidafite igishishwa',
+    },
+    householdMeasureByLocale: {
+      en: '~3 large eggs per 150g (~50g per egg)',
+      ar: '~3 بيضات كبيرة لكل 150 جم (البيضة ~50 جم)',
+      fr: '~3 grands œufs pour 150g',
+      rw: '~Amagi 3 manini kuri 150g',
+    },
+    sourceRef: 'USDA FoodData Central #173424',
+    budgetTier: 'low',
+    per100g: { kcal: 155, proteinG: 12.6, carbsG: 1.1, fatG: 10.6, fiberG: 0 },
+    defaultGrams: 150,
+    tags: { vegan: false, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: ['eggs'] },
+  },
+  {
+    id: 'greek_yogurt_plain',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Plain Low-Fat Greek Yogurt / Laban',
+      ar: 'زبادي يوناني أو زبادي سادة قليل الدسم',
+      fr: 'Yaourt grec nature léger',
+      rw: 'Yahurute (Plain Greek Yogurt)',
+    },
+    stateLabelByLocale: {
+      en: 'Ready-to-eat chilled weight',
+      ar: 'وزن جاهز للأكل مباشرة',
+      fr: 'Poids prêt à consommer',
+      rw: 'Ibiro byiteguye kuribwa',
+    },
+    householdMeasureByLocale: {
+      en: '~1 standard cup / bowl per 200g',
+      ar: '~كوب قياسي واحد لكل 200 جم',
+      fr: '~1 bol / pot de 200g',
+      rw: '~Igikombe 1 (200g)',
+    },
+    sourceRef: 'USDA FoodData Central #170903',
+    budgetTier: 'medium',
+    per100g: { kcal: 73, proteinG: 9.9, carbsG: 3.9, fatG: 1.9, fiberG: 0 },
+    defaultGrams: 200,
+    tags: { vegan: false, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: ['dairy'] },
+  },
+  {
+    id: 'lentils_beans_cooked',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Cooked Lentils & Red Kidney Beans',
+      ar: 'عدس وفاصوليا حمراء مطهوة (مسلوقة)',
+      fr: 'Lentilles et haricots rouges cuits',
+      rw: 'Ibishyimbo n’inkori bitetse',
+    },
+    stateLabelByLocale: {
+      en: 'Boiled / cooked drained weight (dry ~75g -> cooked 200g)',
+      ar: 'وزن مطهو مصفى (يعادل نحو 75 جم وزن جاف قبل السلق)',
+      fr: 'Poids cuit égoutté (~75g sec)',
+      rw: 'Ibiro bitetse (~75g byumye)',
+    },
+    householdMeasureByLocale: {
+      en: '~1 heaping cup cooked per 200g',
+      ar: '~كوب ممتلئ مطهو لكل 200 جم',
+      fr: '~1 grande tasse cuite (200g)',
+      rw: '~Igikombe 1 cyuzuye gitetse (200g)',
+    },
+    sourceRef: 'USDA FoodData Central #172421',
+    budgetTier: 'low',
+    per100g: { kcal: 116, proteinG: 9.0, carbsG: 20.1, fatG: 0.4, fiberG: 7.9 },
+    defaultGrams: 200,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'firm_tofu_cooked',
+    category: 'protein',
+    nameByLocale: {
+      en: 'Firm Tofu / Soy Bean Curd',
+      ar: 'توفو نباتي متماسك مطهو',
+      fr: 'Tofu ferme cuit',
+      rw: 'Tofu (Ibikomoka kuri soya)',
+    },
+    stateLabelByLocale: {
+      en: 'Pressed prepared weight',
+      ar: 'وزن جاهز ومصفى',
+      fr: 'Poids préparé',
+      rw: 'Ibiro bitetse',
+    },
+    householdMeasureByLocale: {
+      en: '~3/4 cup cubed tofu per 160g',
+      ar: '~ثلاثة أرباع كوب مكعبات لكل 160 جم',
+      fr: '~3/4 tasse en dés (160g)',
+      rw: '~3/4 by’igikombe (160g)',
+    },
+    sourceRef: 'USDA FoodData Central #172476',
+    budgetTier: 'medium',
+    per100g: { kcal: 144, proteinG: 17.3, carbsG: 2.8, fatG: 8.7, fiberG: 2.3 },
+    defaultGrams: 160,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: ['soy'] },
+  },
+
+  // CARBOHYDRATES & GRAINS
+  {
+    id: 'white_basmati_rice_cooked',
+    category: 'carb',
+    nameByLocale: {
+      en: 'Steamed White / Basmati Rice',
+      ar: 'أرز أبيض / بسمتي مطهو بالبخار',
+      fr: 'Riz blanc / Basmati cuit',
+      rw: 'Umuceri utetse',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked weight (raw dry rice ~60g -> cooked 180g)',
+      ar: 'وزن مطهو (يعادل نحو 60 جم أرز جاف قبل الطهي)',
+      fr: 'Poids cuit (~60g cru sec)',
+      rw: 'Ibiro bitetse (~60g umuceri mubisi)',
+    },
+    householdMeasureByLocale: {
+      en: '~1 standard cup cooked rice per 180g',
+      ar: '~كوب واحد مطهو لكل 180 جم',
+      fr: '~1 tasse de riz cuit (180g)',
+      rw: '~Igikombe 1 cy’umuceri utetse (180g)',
+    },
+    sourceRef: 'USDA FoodData Central #168878',
+    budgetTier: 'low',
+    per100g: { kcal: 130, proteinG: 2.7, carbsG: 28.2, fatG: 0.3, fiberG: 0.4 },
+    defaultGrams: 180,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'rolled_oats_dry',
+    category: 'carb',
+    nameByLocale: {
+      en: 'Rolled Oats (Oatmeal)',
+      ar: 'شوفان كامل الحبة',
+      fr: 'Flocons d’avoine',
+      rw: 'Oats (Ingano za Oatmeal)',
+    },
+    stateLabelByLocale: {
+      en: 'Dry weight before cooking with water/milk',
+      ar: 'وزن جاف قبل الطهي بالماء أو الحليب',
+      fr: 'Poids sec avant cuisson',
+      rw: 'Ibiro byumye mbere yo guteka',
+    },
+    householdMeasureByLocale: {
+      en: '~2/3 cup dry rolled oats per 60g',
+      ar: '~ثلثا كوب شوفان جاف (نحو 6 ملاعق كبيرة) لكل 60 جم',
+      fr: '~2/3 tasse de flocons secs (60g)',
+      rw: '~2/3 by’igikombe cyumye (60g)',
+    },
+    sourceRef: 'USDA FoodData Central #173904',
+    budgetTier: 'low',
+    per100g: { kcal: 379, proteinG: 13.2, carbsG: 67.7, fatG: 6.5, fiberG: 10.1 },
+    defaultGrams: 60,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: ['gluten'] },
+  },
+  {
+    id: 'sweet_potato_baked',
+    category: 'carb',
+    nameByLocale: {
+      en: 'Baked or Boiled Sweet Potato',
+      ar: 'بطاطا حلوة مشوية أو مسلوقة',
+      fr: 'Patate douce cuite',
+      rw: 'Ikijumba gitetse',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked flesh weight without skin',
+      ar: 'وزن مطهو صافي بدون قشر',
+      fr: 'Poids cuit sans peau',
+      rw: 'Ibiro bitetse',
+    },
+    householdMeasureByLocale: {
+      en: '~1 medium-large sweet potato per 220g',
+      ar: '~ثمرة بطاطا متوسطة إلى كبيرة لكل 220 جم',
+      fr: '~1 patate douce moyenne-grande (220g)',
+      rw: '~Ikijumba 1 kiringaniye (220g)',
+    },
+    sourceRef: 'USDA FoodData Central #168483',
+    budgetTier: 'low',
+    per100g: { kcal: 90, proteinG: 2.0, carbsG: 20.7, fatG: 0.2, fiberG: 3.3 },
+    defaultGrams: 220,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'boiled_potatoes',
+    category: 'carb',
+    nameByLocale: {
+      en: 'Boiled or Oven-Roasted White Potatoes',
+      ar: 'بطاطس مسلوقة أو مشوية بالفرن بدون قلي',
+      fr: 'Pommes de terre bouillies ou rôties',
+      rw: 'Ibirayi bitetse mu mazi',
+    },
+    stateLabelByLocale: {
+      en: 'Cooked weight',
+      ar: 'وزن مطهو',
+      fr: 'Poids cuit',
+      rw: 'Ibiro bitetse',
+    },
+    householdMeasureByLocale: {
+      en: '~2 medium boiled potatoes per 240g',
+      ar: '~حبتا بطاطس متوسطتان لكل 240 جم مطهو',
+      fr: '~2 pommes de terre moyennes (240g)',
+      rw: '~Ibirayi 2 biringaniye (240g)',
+    },
+    sourceRef: 'USDA FoodData Central #170030',
+    budgetTier: 'low',
+    per100g: { kcal: 87, proteinG: 1.9, carbsG: 20.1, fatG: 0.1, fiberG: 1.8 },
+    defaultGrams: 240,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'whole_wheat_bread_flatbread',
+    category: 'carb',
+    nameByLocale: {
+      en: 'Whole-Grain Bread / Baladi Flatbread',
+      ar: 'خبز قمح كامل / خبز بلدي أسمر',
+      fr: 'Pain complet / Pain plat complet',
+      rw: 'Umugati w’ingano zuzuye',
+    },
+    stateLabelByLocale: {
+      en: 'Ready baked weight',
+      ar: 'وزن جاهز للأكل',
+      fr: 'Poids prêt à consommer',
+      rw: 'Ibiro byiteguye',
+    },
+    householdMeasureByLocale: {
+      en: '~1 medium flatbread or 2 thick slices per 80g',
+      ar: '~رغيف أسمر متوسط أو شريحتا توست سميكتان لكل 80 جم',
+      fr: '~2 tranches épaisses ou 1 pain plat (80g)',
+      rw: '~Imigati 2 mito (80g)',
+    },
+    sourceRef: 'USDA FoodData Central #172688',
+    budgetTier: 'low',
+    per100g: { kcal: 252, proteinG: 12.5, carbsG: 42.7, fatG: 3.5, fiberG: 6.0 },
+    defaultGrams: 80,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: ['gluten'] },
+  },
+
+  // HEALTHY FATS, FRUITS & VEGETABLES
+  {
+    id: 'olive_oil_veggies',
+    category: 'fat_veg',
+    nameByLocale: {
+      en: 'Mixed Greens, Cucumber, Tomato & Olive Oil',
+      ar: 'سلطة خضراء مشكلة (خيار، طماطم، ورقيات) مع زيت زيتون',
+      fr: 'Salade verte, concombre, tomate & huile d’olive',
+      rw: 'Imboga rwatsi, inyanya, concombre n’amavuta ya elayo',
+    },
+    stateLabelByLocale: {
+      en: '180g raw fresh vegetables + 10g extra-virgin olive oil',
+      ar: '180 جم خضار طازج نيئ + 10 جم زيت زيتون بكر',
+      fr: '180g légumes crus + 10g huile d’olive',
+      rw: '180g imboga mbisi + 10g amavuta ya elayo',
+    },
+    householdMeasureByLocale: {
+      en: '~1 large salad bowl + 2 teaspoons olive oil per 190g',
+      ar: '~طبق سلطة كبير + ملعقتان صغيرتان زيت زيتون لكل 190 جم',
+      fr: '~1 grand bol de salade + 2 c.à.c d’huile (190g)',
+      rw: '~Ibakure 1 y’imboga + utuyiko 2 tw’amavuta (190g)',
+    },
+    sourceRef: 'USDA FoodData Central #171413 + Veg',
+    budgetTier: 'low',
+    per100g: { kcal: 62, proteinG: 0.9, carbsG: 3.2, fatG: 5.3, fiberG: 1.5 },
+    defaultGrams: 190,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'avocado_spinach_bowl',
+    category: 'fat_veg',
+    nameByLocale: {
+      en: 'Fresh Avocado & Steamed Leafy Greens',
+      ar: 'شرائح أفوكادو طازجة مع خضروات ورقية مطهوة',
+      fr: 'Avocat frais et légumes verts vapeur',
+      rw: 'Avoka n’imboga rwatsi zitetse',
+    },
+    stateLabelByLocale: {
+      en: '80g raw avocado + 120g cooked greens',
+      ar: '80 جم أفوكادو طازج + 120 جم خضار ورقي مطهو',
+      fr: '80g avocat cru + 120g légumes cuits',
+      rw: '80g avoka + 120g imboga zitetse',
+    },
+    householdMeasureByLocale: {
+      en: '~1/2 medium avocado + 1 cup cooked greens per 200g',
+      ar: '~نصف ثمرة أفوكادو + كوب خضار مطهو لكل 200 جم',
+      fr: '~1/2 avocat + 1 tasse de légumes verts (200g)',
+      rw: '~1/2 cya avoka + igikombe 1 cy’imboga (200g)',
+    },
+    sourceRef: 'USDA FoodData Central #171705',
+    budgetTier: 'medium',
+    per100g: { kcal: 82, proteinG: 1.9, carbsG: 5.4, fatG: 6.1, fiberG: 3.8 },
+    defaultGrams: 200,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: [] },
+  },
+  {
+    id: 'banana_almonds',
+    category: 'fat_veg',
+    nameByLocale: {
+      en: 'Medium Banana & Raw Unsalted Almonds',
+      ar: 'موزة متوسطة مع حفنة لوز نيئ غير مملح',
+      fr: 'Banane moyenne et amandes crues non salées',
+      rw: 'Umuneke n’ubunyobwa / Almonds zidatetse',
+    },
+    stateLabelByLocale: {
+      en: '110g peeled raw banana + 20g raw almonds',
+      ar: '110 جم موز مقشر + 20 جم لوز نيئ',
+      fr: '110g banane épluchée + 20g amandes crues',
+      rw: '110g umuneke + 20g almonds',
+    },
+    householdMeasureByLocale: {
+      en: '~1 medium banana + ~15 almonds per 130g',
+      ar: '~موزة متوسطة + نحو 15 حبة لوز لكل 130 جم',
+      fr: '~1 banane moyenne + ~15 amandes (130g)',
+      rw: '~Umuneke 1 + almonds ~15 (130g)',
+    },
+    sourceRef: 'USDA FoodData Central #173944 + #170567',
+    budgetTier: 'medium',
+    per100g: { kcal: 165, proteinG: 4.2, carbsG: 22.5, fatG: 7.9, fiberG: 4.1 },
+    defaultGrams: 130,
+    tags: { vegan: true, vegetarian: true, pescatarian: true, halalCompatible: true, allergens: ['tree_nuts'] },
+  },
+];
+
+export interface CalculatedItemPortion {
+  foodId: string;
+  grams: number;
+  kcal: number;
+  proteinG: number;
+  carbsG: number;
+  fatG: number;
+  fiberG: number;
+}
+
+export interface GeneratedMealCard {
+  mealIndex: number;
+  titleByLocale: { en: string; ar: string; fr: string; rw: string };
+  items: CalculatedItemPortion[];
+  alternativeFoodIds: string[];
+  totals: {
+    kcal: number;
+    proteinG: number;
+    carbsG: number;
+    fatG: number;
+    fiberG: number;
+  };
+}
+
+export interface NutritionPlanResult {
+  createdAt: string;
+  pathway: NutritionPathway;
+  goal: GoalType;
+  requiresSpecialistReferral: boolean;
+  isUrgentSymptomStop: boolean;
+  isUnder18Stop: boolean;
+  activeClinicalGuidanceIds: string[];
+  hasNumericTargets: boolean;
+  showWaterTarget: boolean;
+  estimatedTargets: {
+    bmrKcal: number | null;
+    tdeeKcal: number | null;
+    targetKcal: number | null;
+    targetKcalRangeLow: number | null;
+    targetKcalRangeHigh: number | null;
+    proteinG: number | null;
+    carbsG: number | null;
+    fatG: number | null;
+    fiberG: number | null;
+    waterLiters: number | null;
+  };
+  meals: GeneratedMealCard[];
+  dailyTotals: {
+    kcal: number;
+    proteinG: number;
+    carbsG: number;
+    fatG: number;
+    fiberG: number;
+  };
+  equationDocumentation: string;
+  skippedScreeningNotice: boolean;
+}
+
+export function convertWeightToKg(val: number | null, unit: 'kg' | 'lb'): number | null {
+  if (!val || val <= 0) return null;
+  return unit === 'kg' ? val : Math.round(val * 0.45359237 * 10) / 10;
+}
+
+export function convertHeightToCm(
+  cm: number | null,
+  feet: number | null,
+  inches: number | null,
+  unit: 'cm' | 'ft_in'
+): number | null {
+  if (unit === 'cm') {
+    return cm && cm > 0 ? cm : null;
+  }
+  if (!feet || feet <= 0) return null;
+  const totalInches = feet * 12 + (inches || 0);
+  return Math.round(totalInches * 2.54 * 10) / 10;
+}
+
+export function calculateItemMacros(food: FoodReferenceItem, grams: number): CalculatedItemPortion {
+  const safeGrams = Math.max(20, Math.min(800, Math.round(grams)));
+  const ratio = safeGrams / 100;
+  const proteinG = Math.round(food.per100g.proteinG * ratio);
+  const carbsG = Math.round(food.per100g.carbsG * ratio);
+  const fatG = Math.round(food.per100g.fatG * ratio);
+  const fiberG = Math.round(food.per100g.fiberG * ratio * 10) / 10;
+  const kcal = Math.round(food.per100g.kcal * ratio);
+  return {
+    foodId: food.id,
+    grams: safeGrams,
+    kcal,
+    proteinG,
+    carbsG,
+    fatG,
+    fiberG,
+  };
+}
+
+export function recomputeMealAndDailyTotals(meals: GeneratedMealCard[]): {
+  meals: GeneratedMealCard[];
+  dailyTotals: { kcal: number; proteinG: number; carbsG: number; fatG: number; fiberG: number };
+} {
+  const updatedMeals = meals.map((m) => {
+    const totals = m.items.reduce(
+      (acc, item) => ({
+        kcal: acc.kcal + item.kcal,
+        proteinG: acc.proteinG + item.proteinG,
+        carbsG: acc.carbsG + item.carbsG,
+        fatG: acc.fatG + item.fatG,
+        fiberG: Math.round((acc.fiberG + (item.fiberG || 0)) * 10) / 10,
+      }),
+      { kcal: 0, proteinG: 0, carbsG: 0, fatG: 0, fiberG: 0 }
+    );
+    return { ...m, totals };
+  });
+
+  const dailyTotals = updatedMeals.reduce(
+    (acc, m) => ({
+      kcal: acc.kcal + m.totals.kcal,
+      proteinG: acc.proteinG + m.totals.proteinG,
+      carbsG: acc.carbsG + m.totals.carbsG,
+      fatG: acc.fatG + m.totals.fatG,
+      fiberG: Math.round((acc.fiberG + m.totals.fiberG) * 10) / 10,
+    }),
+    { kcal: 0, proteinG: 0, carbsG: 0, fatG: 0, fiberG: 0 }
+  );
+
+  return { meals: updatedMeals, dailyTotals };
+}
+
+/**
+ * Deterministic Weekly Check-In Adjustment Calculator
+ */
+export function computeWeeklyCheckInAdjustment(
+  goal: GoalType,
+  checkIn: WeeklyCheckInData
+): { recommendedDeltaKcal: number; rationaleByLocale: Record<Locale, string> } {
+  if (goal === 'build_muscle') {
+    if (checkIn.weightChangeTrend === 'maintained' || checkIn.weightChangeTrend === 'lost_steady' || checkIn.weightChangeTrend === 'lost_fast') {
+      return {
+        recommendedDeltaKcal: 150,
+        rationaleByLocale: {
+          en: 'Weight has not increased toward your muscle-building goal. Adding a modest +150 kcal/day supports gradual lean mass gain.',
+          ar: 'لم يزد الوزن نحو هدف بناء العضلات؛ تمت إضافة +150 سعرة يومياً بشكل متدرج لدعم البناء العضلي.',
+          fr: 'Le poids n’a pas augmenté ; un ajout modéré de +150 kcal/jour soutient la prise de muscle.',
+          rw: 'Ibiro ntibyiyongereye; kongeraho +150 kcal/umunsi bifasha kubaka imikaya gahoro gahoro.',
+        },
+      };
+    }
+    if (checkIn.weightChangeTrend === 'gained_fast') {
+      return {
+        recommendedDeltaKcal: -120,
+        rationaleByLocale: {
+          en: 'Weight is rising faster than needed for lean muscle gain. Trimming 120 kcal/day keeps the surplus modest and limits excess fat gain.',
+          ar: 'الوزن يزداد بسرعة أكبر من المطلوب للبناء العضلي الصافي؛ تم تقليل الفائض بمقدار 120 سعرة يومياً لتقليل تخزين الدهون.',
+          fr: 'La prise de poids est rapide ; réduire de 120 kcal/jour maintient un surplus modéré.',
+          rw: 'Ibiro byiyongera vuba cyane; kugabanya 120 kcal/umunsi bifasha kwirinda ibinure.',
+        },
+      };
+    }
+  }
+
+  if (goal === 'lose_fat') {
+    if (checkIn.hungerLevel === 'high' || checkIn.trainingPerformance === 'fatigued' || checkIn.weightChangeTrend === 'lost_fast') {
+      return {
+        recommendedDeltaKcal: 150,
+        rationaleByLocale: {
+          en: 'High hunger, training fatigue, or rapid weight loss indicates the deficit may be too steep. Adding +150 kcal/day helps preserve muscle and recovery.',
+          ar: 'الشعور بجوع مرتفع أو إرهاق في التمرين أو نزول سريع جداً يشير إلى أن العجز قد يكون حاداً؛ تمت إضافة +150 سعرة للحفاظ على العضلات والاستشفاء.',
+          fr: 'La faim élevée ou la fatigue indique un déficit trop fort ; +150 kcal/jour aide à préserver le muscle.',
+          rw: 'Inzara nyinshi cyangwa umunaniro mu myitozo bigaragaza ko wagabanyije cyane; kongeraho +150 kcal birinda imikaya.',
+        },
+      };
+    }
+    if (checkIn.weightChangeTrend === 'maintained' || checkIn.weightChangeTrend === 'gained_steady') {
+      if (checkIn.adherenceLevel === 'high') {
+        return {
+          recommendedDeltaKcal: -120,
+          rationaleByLocale: {
+            en: 'With strong adherence and stable weight, a gentle -120 kcal/day adjustment restarts gradual fat loss while protecting training performance.',
+            ar: 'مع التزامك العالي وثبات الوزن، تم تطبيق تعديل لطيف (-120 سعرة يومياً) لتحفيز نزول الدهون تدريجياً مع حماية الأداء التدريبي.',
+            fr: 'Avec une bonne adhésion et un poids stable, un ajustement de -120 kcal/jour relance une perte progressive.',
+            rw: 'Kubera ko ukurikiza gahunda neza ariko ibiro ntibigabanuke, kugabanya -120 kcal/umunsi birafasha.',
+          },
+        };
+      }
+    }
+  }
+
+  return {
+    recommendedDeltaKcal: 0,
+    rationaleByLocale: {
+      en: 'Your current pace, hunger, and training recovery are well balanced. Keep your daily targets steady for the next week.',
+      ar: 'معدل التقدم الحالي ومستوى الشبع والأداء في التمرين متوازنون بشكل ممتاز. استمر على نفس الأهداف للأسبوع القادم.',
+      fr: 'Votre rythme actuel et votre récupération sont équilibrés. Gardez les mêmes cibles cette semaine.',
+      rw: 'Intambwe ugezeho n’imbaraga mu myitozo bimeze neza. Komeza kuri iyi gahunda.',
+    },
+  };
+}
+
+export function buildProgrammaticNutritionPlan(data: NutritionAssessmentData): NutritionPlanResult {
+  const weightKg = convertWeightToKg(data.weightValue, data.weightUnit);
+  const heightCm = convertHeightToCm(
+    data.heightCm,
+    data.heightFeet,
+    data.heightInches,
+    data.heightUnit
+  );
+  const age = data.age;
+  const hs = data.healthScreening || DEFAULT_HEALTH_SCREENING;
+  const pathway: NutritionPathway = data.pathway || 'general_fitness';
+
+  const isUnder18Stop = age !== null && age < 18;
+  const isUrgentSymptomStop = Boolean(
+    hs.hasUrgentSymptoms || hs.hasBpDizzinessOrFainting
+  );
+
+  // Collect all active clinical condition IDs
+  const activeClinicalGuidanceIds: string[] = [];
+  if (isUrgentSymptomStop) {
+    activeClinicalGuidanceIds.push('urgent_symptoms');
+  }
+  if (isUnder18Stop) {
+    activeClinicalGuidanceIds.push('under_18');
+  }
+
+  for (const cond of hs.selectedConditions) {
+    if (CLINICAL_HEALTH_GUIDANCE[cond] && !activeClinicalGuidanceIds.includes(cond)) {
+      activeClinicalGuidanceIds.push(cond);
+    } else if (
+      ['kidney_disease', 'heart_failure', 'pregnant_lactating', 'eating_disorder_history'].includes(cond) &&
+      !activeClinicalGuidanceIds.includes('other_chronic')
+    ) {
+      activeClinicalGuidanceIds.push('other_chronic');
+    }
+  }
+
+  if (
+    (data.healthFlag === 'pregnant_lactating' ||
+      data.healthFlag === 'medical_condition' ||
+      data.healthFlag === 'eating_disorder_history') &&
+    activeClinicalGuidanceIds.length === 0
+  ) {
+    activeClinicalGuidanceIds.push('other_chronic');
+  }
+
+  if (
+    pathway === 'health_condition' &&
+    activeClinicalGuidanceIds.length === 0
+  ) {
+    activeClinicalGuidanceIds.push('other_chronic');
+  }
+
+  const hasAnyClinicalCondition =
+    isUrgentSymptomStop ||
+    isUnder18Stop ||
+    pathway === 'health_condition' ||
+    hs.selectedConditions.length > 0 ||
+    hs.takesSafetyCriticalMedications === 'yes' ||
+    hs.usesInsulinOrHypoglycemiaMeds === 'yes' ||
+    data.healthFlag === 'pregnant_lactating' ||
+    data.healthFlag === 'medical_condition' ||
+    data.healthFlag === 'eating_disorder_history';
+
+  const requiresSpecialistReferral = hasAnyClinicalCondition;
+
+  const skippedScreeningNotice =
+    hs.screeningStatus === 'prefer_not' ||
+    hs.screeningStatus === 'unsure' ||
+    data.healthFlag === 'prefer_not';
+
+  const canCalculateBmr =
+    weightKg !== null &&
+    heightCm !== null &&
+    age !== null &&
+    age >= 18 &&
+    !requiresSpecialistReferral;
+
+  let bmrKcal: number | null = null;
+  let tdeeKcal: number | null = null;
+  let targetKcal: number | null = null;
+  let targetKcalRangeLow: number | null = null;
+  let targetKcalRangeHigh: number | null = null;
+  let targetProteinG: number | null = null;
+  let targetCarbsG: number | null = null;
+  let targetFatG: number | null = null;
+  let targetFiberG: number | null = null;
+  let waterLiters: number | null = null;
+
+  if (canCalculateBmr && weightKg && heightCm && age) {
+    const sexConstant =
+      data.sexForEquation === 'male'
+        ? 5
+        : data.sexForEquation === 'female'
+        ? -161
+        : -78; // midpoint estimate if user prefers not to specify sex
+    bmrKcal = Math.round(10 * weightKg + 6.25 * heightCm - 5 * age + sexConstant);
+
+    const activityMultipliers: Record<DailyActivityLevel, number> = {
+      sedentary: 1.2,
+      light: 1.32,
+      moderate: 1.45,
+      active: 1.6,
+    };
+    const baseDailyExpenditure = bmrKcal * activityMultipliers[data.dailyActivity];
+
+    const metByTraining: Record<TrainingType, number> = {
+      none: 0,
+      resistance: 4.5,
+      cardio: 6.5,
+      mixed: 5.5,
+    };
+    const weeklyTrainingHours =
+      (Math.min(7, Math.max(0, data.trainingDaysPerWeek)) *
+        Math.min(180, Math.max(0, data.sessionDurationMinutes))) /
+      60;
+    const dailyTrainingKcal =
+      (weeklyTrainingHours * metByTraining[data.trainingType] * weightKg) / 7;
+
+    tdeeKcal = Math.round(baseDailyExpenditure + dailyTrainingKcal);
+
+    const pace = data.pacePreference || 'moderate';
+    const checkInDelta = data.weeklyCheckIn?.kcalAdjustmentApplied || 0;
+
+    if (data.goal === 'lose_fat') {
+      const deficitRatio = pace === 'conservative' ? 0.88 : 0.84; // modest 12% to 16% deficit
+      targetKcal = Math.max(1350, Math.round(tdeeKcal * deficitRatio) + checkInDelta);
+    } else if (data.goal === 'build_muscle') {
+      const surplus = pace === 'conservative' ? 180 : 260; // modest +180 to +260 kcal surplus
+      targetKcal = Math.round(tdeeKcal + surplus + checkInDelta);
+    } else {
+      targetKcal = Math.round(tdeeKcal + checkInDelta);
+    }
+
+    // Express energy target as a practical ±100 kcal range to avoid false precision
+    targetKcalRangeLow = Math.max(1250, Math.round((targetKcal - 100) / 10) * 10);
+    targetKcalRangeHigh = Math.round((targetKcal + 100) / 10) * 10;
+
+    const proteinPerKg =
+      data.goal === 'build_muscle' || data.goal === 'lose_fat' ? 1.8 : 1.5;
+    targetProteinG = Math.round(weightKg * proteinPerKg);
+    targetFatG = Math.round((targetKcal * 0.27) / 9);
+    const remainingKcal = Math.max(
+      400,
+      targetKcal - targetProteinG * 4 - targetFatG * 9
+    );
+    targetCarbsG = Math.round(remainingKcal / 4);
+    targetFiberG = Math.max(24, Math.min(42, Math.round((targetKcal / 1000) * 14)));
+    waterLiters = Math.round((weightKg * 0.033 + (weeklyTrainingHours > 0 ? 0.35 : 0)) * 10) / 10;
+  }
+
+  // Filter foods strictly respecting dietary pattern, halal, budget, and allergies
+  const allowedFoods = VERIFIED_FOOD_DATABASE.filter((f) => {
+    if (data.dietPattern === 'vegan' && !f.tags.vegan) return false;
+    if (data.dietPattern === 'vegetarian' && !f.tags.vegetarian) return false;
+    if (data.dietPattern === 'pescatarian' && !f.tags.pescatarian) return false;
+    if (data.halalPreference && !f.tags.halalCompatible) return false;
+    for (const alg of data.allergies) {
+      if (f.tags.allergens.includes(alg)) return false;
+    }
+    return true;
+  });
+
+  // Prioritize low-cost staple foods when budget === 'low'
+  const sortByBudget = (items: FoodReferenceItem[]) => {
+    if (data.budget !== 'low') return items;
+    return [...items].sort((a, b) => {
+      const rank = { low: 0, medium: 1, flexible: 2 };
+      return rank[a.budgetTier] - rank[b.budgetTier];
+    });
+  };
+
+  const proteins = sortByBudget(allowedFoods.filter((f) => f.category === 'protein'));
+  const carbs = sortByBudget(allowedFoods.filter((f) => f.category === 'carb'));
+  const fatVegs = sortByBudget(allowedFoods.filter((f) => f.category === 'fat_veg'));
+
+  const safeProteins =
+    proteins.length > 0
+      ? proteins
+      : VERIFIED_FOOD_DATABASE.filter((f) => f.id === 'lentils_beans_cooked');
+  const safeCarbs =
+    carbs.length > 0
+      ? carbs
+      : VERIFIED_FOOD_DATABASE.filter((f) => f.id === 'white_basmati_rice_cooked');
+  const safeFatVegs =
+    fatVegs.length > 0
+      ? fatVegs
+      : VERIFIED_FOOD_DATABASE.filter((f) => f.id === 'olive_oil_veggies');
+
+  const meals: GeneratedMealCard[] = [];
+
+  // Only auto-generate a structured meal plan when it is safe to do so (no urgent symptoms or unreviewed clinical condition)
+  if (!requiresSpecialistReferral) {
+    const scaleFactor = targetKcal ? targetKcal / 2000 : 1.0;
+    const mealsCount = data.mealsPerDay || 3;
+    const perMealScale = (scaleFactor * 3) / mealsCount;
+
+    const mealTitles = [
+      {
+        en: 'Meal 1 — Morning Foundation',
+        ar: 'الوجبة الأولى — الإفطار المتوازن',
+        fr: 'Repas 1 — Petit-déjeuner équilibré',
+        rw: 'Ifunguro rya 1 — Mu gitondo',
+      },
+      {
+        en: 'Meal 2 — Midday Fuel & Training Support',
+        ar: 'الوجبة الثانية — الغداء ودعم النشاط',
+        fr: 'Repas 2 — Déjeuner et soutien à l’effort',
+        rw: 'Ifunguro rya 2 — Ku manywa',
+      },
+      {
+        en: 'Meal 3 — Evening Recovery & Muscle Maintenance',
+        ar: 'الوجبة الثالثة — العشاء والاستشفاء العضلي',
+        fr: 'Repas 3 — Dîner et récupération musculaire',
+        rw: 'Ifunguro rya 3 — Nimugoroba',
+      },
+      {
+        en: 'Meal 4 — Structured Nourishment',
+        ar: 'الوجبة الرابعة — وجبة تكميلية منظمة',
+        fr: 'Repas 4 — Collation structurée',
+        rw: 'Ifunguro rya 4 — Inyongera',
+      },
+    ];
+
+    for (let i = 0; i < mealsCount; i++) {
+      const pFood = safeProteins[i % safeProteins.length];
+      const cFood = safeCarbs[i % safeCarbs.length];
+      const fvFood = safeFatVegs[i % safeFatVegs.length];
+
+      const pGrams = Math.max(
+        80,
+        Math.round((pFood.defaultGrams * perMealScale) / 10) * 10
+      );
+      const cGrams = Math.max(
+        50,
+        Math.round((cFood.defaultGrams * perMealScale) / 10) * 10
+      );
+      const fvGrams = Math.max(
+        90,
+        Math.round((fvFood.defaultGrams * perMealScale) / 10) * 10
+      );
+
+      const items = [
+        calculateItemMacros(pFood, pGrams),
+        calculateItemMacros(cFood, cGrams),
+        calculateItemMacros(fvFood, fvGrams),
+      ];
+
+      const totals = items.reduce(
+        (acc, item) => ({
+          kcal: acc.kcal + item.kcal,
+          proteinG: acc.proteinG + item.proteinG,
+          carbsG: acc.carbsG + item.carbsG,
+          fatG: acc.fatG + item.fatG,
+          fiberG: Math.round((acc.fiberG + item.fiberG) * 10) / 10,
+        }),
+        { kcal: 0, proteinG: 0, carbsG: 0, fatG: 0, fiberG: 0 }
+      );
+
+      const altIds = safeProteins
+        .filter((x) => x.id !== pFood.id)
+        .slice(0, 3)
+        .map((x) => x.id);
+
+      meals.push({
+        mealIndex: i,
+        titleByLocale: mealTitles[i],
+        items,
+        alternativeFoodIds: altIds,
+        totals,
+      });
+    }
+  }
+
+  const { dailyTotals } = recomputeMealAndDailyTotals(meals);
+
+  return {
+    createdAt: new Date().toISOString(),
+    pathway,
+    goal: data.goal,
+    requiresSpecialistReferral,
+    isUrgentSymptomStop,
+    isUnder18Stop,
+    activeClinicalGuidanceIds,
+    hasNumericTargets: canCalculateBmr && !requiresSpecialistReferral,
+    showWaterTarget: canCalculateBmr && !requiresSpecialistReferral,
+    estimatedTargets: {
+      bmrKcal: requiresSpecialistReferral ? null : bmrKcal,
+      tdeeKcal: requiresSpecialistReferral ? null : tdeeKcal,
+      targetKcal: requiresSpecialistReferral ? null : targetKcal,
+      targetKcalRangeLow: requiresSpecialistReferral ? null : targetKcalRangeLow,
+      targetKcalRangeHigh: requiresSpecialistReferral ? null : targetKcalRangeHigh,
+      proteinG: requiresSpecialistReferral ? null : targetProteinG,
+      carbsG: requiresSpecialistReferral ? null : targetCarbsG,
+      fatG: requiresSpecialistReferral ? null : targetFatG,
+      fiberG: requiresSpecialistReferral ? null : targetFiberG,
+      waterLiters: requiresSpecialistReferral ? null : waterLiters,
+    },
+    meals,
+    dailyTotals,
+    equationDocumentation:
+      'Mifflin-St Jeor (1990) + Separated Daily Movement (NEAT/PAL) & Training METs + USDA FoodData Central Reference Values',
+    skippedScreeningNotice,
+  };
+}
