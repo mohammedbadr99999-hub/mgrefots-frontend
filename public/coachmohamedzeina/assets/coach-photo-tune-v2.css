@@ -1,0 +1,12 @@
+/* Responsive coach portrait sizing for the dashboard hub. */
+@media (min-width: 1024px) {
+  #home-coach-hub > div:has(> #home-coach-photo) {
+    overflow: visible;
+  }
+
+  #home-coach-photo {
+    height: clamp(540px, 47vw, 640px) !important;
+    flex: 0 0 auto !important;
+    max-width: none !important;
+  }
+}
