@@ -26,8 +26,20 @@ function back(res, cookie) {
 }
 function originAllowed(req) {
   const origin = req.headers.origin;
-  return origin === 'https://www.mgrefots.com' || origin === 'https://mgrefots.com' ||
-    Boolean(process.env.VERCEL_URL && origin === 'https://' + process.env.VERCEL_URL);
+  if (origin) {
+    try {
+      const parsed = new URL(origin);
+      if (parsed.protocol === 'https:' && ['mgrefots.com', 'www.mgrefots.com'].includes(parsed.hostname) && !parsed.port) return true;
+      if (process.env.VERCEL_URL && parsed.origin === 'https://' + process.env.VERCEL_URL) return true;
+    } catch {}
+  }
+  const fetchSite = req.headers['sec-fetch-site'];
+  const forwardedHost = String(req.headers['x-forwarded-host'] || req.headers.host || '')
+    .split(',')[0].trim().toLowerCase().replace(/:\d+$/, '');
+  const forwardedProtocol = String(req.headers['x-forwarded-proto'] || 'https')
+    .split(',')[0].trim().toLowerCase();
+  return fetchSite === 'same-origin' && forwardedProtocol === 'https' &&
+    ['mgrefots.com', 'www.mgrefots.com'].includes(forwardedHost);
 }
 function loginLimited(ip) {
   const now = Date.now();
