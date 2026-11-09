@@ -32,7 +32,8 @@
   <style>
     #mgrefots-main-site-link {
       position: fixed;
-      right: 24px;
+      left: 50%;
+      right: auto;
       bottom: 24px;
       z-index: 1200;
       display: inline-flex;
@@ -47,6 +48,7 @@
       font: 700 14px/1.1 Inter, Arial, sans-serif;
       text-decoration: none;
       white-space: nowrap;
+      transform: translateX(-50%);
       animation: mgrefots-float 3s ease-in-out infinite;
       transition: box-shadow .2s ease, transform .2s ease;
     }
@@ -54,18 +56,18 @@
     #mgrefots-main-site-link:focus-visible {
       color: #fff;
       box-shadow: 0 10px 30px rgba(7, 95, 88, .4);
-      transform: translateY(-2px);
+      transform: translateX(-50%) translateY(-2px);
       outline: 2px solid #f2c74f;
       outline-offset: 3px;
     }
     #mgrefots-main-site-link svg { width: 19px; height: 19px; flex: none; }
     @keyframes mgrefots-float {
-      0%, 100% { translate: 0 0; }
-      50% { translate: 0 -5px; }
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-5px); }
     }
     @media (max-width: 768px) {
       #mgrefots-main-site-link {
-        right: 14px;
+        left: 50%;
         bottom: calc(82px + env(safe-area-inset-bottom));
         padding: 11px 14px;
         font-size: 13px;
