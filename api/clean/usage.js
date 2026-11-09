@@ -136,6 +136,9 @@ async function withSubscriptionLock(id, work) {
 }
 
 export default async function handler(req, res) {
+  if (process.env.PIXEL_CLEAN_PAID_ACCESS !== 'true') {
+    return json(res, 403, { error: 'Subscription metering is paused.' });
+  }
   try {
     if (req.method !== 'GET' && req.method !== 'POST') {
       res.setHeader('Allow', 'GET, POST');
