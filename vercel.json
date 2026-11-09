@@ -132,13 +132,13 @@
       "includeFiles": "maqaam-runtime/**",
       "maxDuration": 60
     },
-    "api/nutrition/[...path].js": {
-      "maxDuration": 60,
-      "includeFiles": "integration/coachmohamedzeina/**"
-    },
     "api/coach-portrait.js": {
       "includeFiles": "integration/coachmohamedzeina/portrait/**",
       "maxDuration": 10
+    },
+    "api/nutrition/[...path].ts": {
+      "maxDuration": 60,
+      "includeFiles": "integration/coachmohamedzeina/**"
     }
   }
 }
