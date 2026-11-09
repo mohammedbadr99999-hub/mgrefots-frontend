@@ -133,7 +133,8 @@
       "maxDuration": 60
     },
     "api/nutrition/[...path].js": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "includeFiles": "integration/coachmohamedzeina/**"
     },
     "api/coach-portrait.js": {
       "includeFiles": "integration/coachmohamedzeina/portrait/**",
