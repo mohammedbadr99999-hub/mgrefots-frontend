@@ -3,3 +3,6 @@ dist/
 .env
 .env.*
 !.env.example
+.maqaam-build/
+maqaam-runtime/*
+!maqaam-runtime/status.json
