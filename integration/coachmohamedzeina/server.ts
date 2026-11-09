@@ -11,9 +11,9 @@ import firebaseConfig from './firebase-applet-config.json' with { type: 'json' }
 import {
   VERIFIED_FOOD_DATABASE,
   CLINICAL_HEALTH_GUIDANCE,
-  FoodReferenceItem,
-} from './src/utils/nutritionCalculator';
-import { Locale } from './src/data/muscleGroups';
+  type FoodReferenceItem,
+} from './src/utils/nutritionCalculator.ts';
+import type { Locale } from './src/data/muscleGroups.ts';
 
 dotenv.config({ override: false });
 
