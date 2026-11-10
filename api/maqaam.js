@@ -78,7 +78,7 @@ export default async function handler(req, res) {
     : (url.searchParams.get('studioPath') || '');
   const home = route === '';
   const password = process.env.MAQAAM_OWNER_PASSWORD;
-  if (req.method === 'POST' && !originAllowed(req)) return json(res, 403, 'مصدر الطلب غير مسموح.');
+  if (req.method === 'POST' && route !== 'login' && !originAllowed(req)) return json(res, 403, 'مصدر الطلب غير مسموح.');
   try {
     if (req.method === 'POST' && route === 'logout') return back(res, signOutCookie());
     if (req.method === 'POST' && route === 'login') {
