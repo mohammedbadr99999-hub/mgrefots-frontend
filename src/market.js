@@ -8,7 +8,7 @@ export const marketFor = (country, lang) => country === 'EG' || lang === 'ar' ? 
 export const pricesFor = (market, copy) => market === 'EG' ? EGYPT_PRICES : copy.prices;
 export const currencyFor = market => market === 'EG' ? 'EGP' : 'RWF';
 export const productImage = (id, market, lang) => {
-  if (lang !== 'ar' && ['czinc','b-complex','carnitine'].includes(id)) return `/products/${id}-intl.png`;
+  if (lang !== 'ar' && ['czinc','b-complex','carnitine'].includes(id)) return `/products/${id}-intl.jpg`;
   return `/products/${id}${market === 'EG' && ['czinc','carnitine'].includes(id) ? '-eg' : ''}.webp`;
 };
 export const productSpec = (id, market, spec, lang) => {
