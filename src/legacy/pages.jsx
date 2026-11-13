@@ -32,7 +32,7 @@ function frame(children) { return <div className="container legacy-content">{chi
 function currentProducts(t, market, lang) {
   return ids.map((id, i) => ({
     id, name:t.names[i], description:t.descriptions[i], spec:productSpec(id,market,t.specs[i],lang), price:pricesFor(market,t)[i], category:currentCategories[i],
-    image:productImage(id,market), sales:t.sales?.[i],
+    image:productImage(id,market,lang), sales:t.sales?.[i],
     old: OLD_PRODUCTS.find(p => p.id === oldIds[i]), orderable:true,
   }));
 }
