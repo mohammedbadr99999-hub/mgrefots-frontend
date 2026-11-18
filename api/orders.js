@@ -34,13 +34,9 @@ export default async function handler(req, res) {
   const city = clean(body.city, 80);
   const area = clean(body.area, 100);
   const street = clean(body.street, 160);
-  const creatineOnlyOrder = body.orderType === 'creatine-only';
-  // The dedicated link only accepts creatine, even if extra product IDs are added to the request.
-  const items = creatineOnlyOrder && Array.isArray(body.items)
-    ? body.items.filter((item) => clean(item?.product, 30) === 'creatine')
-    : body.items;
+  const items = body.items;
   // Only recognize approved partner codes. Do not trust an arbitrary referral label from a visitor.
-  const referralCode = creatineOnlyOrder ? '' : (clean(body.referralCode, 40).toUpperCase() === 'COACH01' ? 'COACH01' : '');
+  const referralCode = clean(body.referralCode, 40).toUpperCase() === 'COACH01' ? 'COACH01' : '';
   const market = String(req.headers['x-vercel-ip-country'] || '').toUpperCase() === 'EG' || body.lang === 'ar' ? 'EG' : 'RW';
   const currency = market === 'EG' ? 'EGP' : 'RWF';
   if (!name || !phone || !city || !area || !street || !Array.isArray(items) ||
@@ -61,9 +57,7 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const sender = process.env.RESEND_FROM_EMAIL || 'MGREFOTS Orders <orders@notifications.mgrefots.com>';
-  const recipient = creatineOnlyOrder
-    ? (process.env.CREATINE_ORDER_NOTIFICATION_EMAIL || '17.yan.noah@gmail.com')
-    : (process.env.ORDER_NOTIFICATION_EMAIL || 'info@mgrefots.com');
+  const recipient = process.env.ORDER_NOTIFICATION_EMAIL || 'info@mgrefots.com';
   if (!apiKey) return res.status(503).json({ code: 'ORDER_EMAIL_NOT_CONFIGURED' });
 
   const total = normalizedItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
@@ -84,14 +78,56 @@ export default async function handler(req, res) {
   ).join('')}</ul><p>Contact the customer to confirm availability, delivery and payment.</p>`;
 
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    const companyResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: sender, to: referralCode === 'COACH01' ? [recipient, 'mufukuzij@gmail.com'] : [recipient], subject: `${creatineOnlyOrder ? 'New creatine order' : 'New MGREFOTS order'}${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`, text, html }),
+      body: JSON.stringify({
+        from: sender,
+        to: [recipient],
+        subject: `New MGREFOTS order${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`,
+        text,
+        html,
+      }),
     });
-    if (!response.ok) {
-      console.error('Order email provider rejected request:', response.status, await response.text());
+    if (!companyResponse.ok) {
+      console.error('Order email provider rejected company notification:', companyResponse.status, await companyResponse.text());
       return res.status(502).json({ message: 'We could not deliver your order notification. Please try again or contact us on WhatsApp.' });
+    }
+
+    if (referralCode === 'COACH01') {
+      const creatineItems = normalizedItems.filter((item) => item.product.name === PRODUCTS.creatine.name);
+      if (creatineItems.length) {
+        const coachRecipient = process.env.COACH01_NOTIFICATION_EMAIL || '17.yan.noah@gmail.com';
+        const coachFields = fields.filter(([label]) => label !== 'Order total');
+        const coachProductLines = creatineItems.map((item) =>
+          `${item.product.name} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} ${currency} = ${(item.quantity * item.product.price).toLocaleString('en-US')} ${currency}`
+        );
+        const coachText = [
+          ...coachFields.map(([label, value]) => `${label}: ${value}`),
+          '',
+          'Creatine ordered through your MGREFOTS link:',
+          ...coachProductLines,
+        ].join('\\n');
+        const coachHtml = `<h2>New creatine order through your MGREFOTS link</h2><table>${coachFields.map(([label, value]) =>
+          `<tr><th align="left" style="padding:6px 12px 6px 0">${escapeHtml(label)}</th><td style="padding:6px">${escapeHtml(value)}</td></tr>`
+        ).join('')}</table><h3>Creatine</h3><ul>${creatineItems.map((item) =>
+          `<li>${escapeHtml(item.product.name)} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} ${currency} = ${(item.quantity * item.product.price).toLocaleString('en-US')} ${currency}</li>`
+        ).join('')}</ul>`;
+        const coachResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: sender,
+            to: [coachRecipient],
+            subject: `New creatine order via your MGREFOTS link — ${orderId}`,
+            text: coachText,
+            html: coachHtml,
+          }),
+        });
+        if (!coachResponse.ok) {
+          console.error('Coach creatine notification failed:', coachResponse.status, await coachResponse.text());
+        }
+      }
     }
     return res.status(200).json({ ok: true, orderId, total });
   } catch (error) {
