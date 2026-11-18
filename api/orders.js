@@ -107,7 +107,7 @@ export default async function handler(req, res) {
           '',
           'Creatine ordered through your MGREFOTS link:',
           ...coachProductLines,
-        ].join('\\n');
+        ].join('\n');
         const coachHtml = `<h2>New creatine order through your MGREFOTS link</h2><table>${coachFields.map(([label, value]) =>
           `<tr><th align="left" style="padding:6px 12px 6px 0">${escapeHtml(label)}</th><td style="padding:6px">${escapeHtml(value)}</td></tr>`
         ).join('')}</table><h3>Creatine</h3><ul>${creatineItems.map((item) =>
