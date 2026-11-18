@@ -34,9 +34,13 @@ export default async function handler(req, res) {
   const city = clean(body.city, 80);
   const area = clean(body.area, 100);
   const street = clean(body.street, 160);
+  const creatineOnlyOrder = body.orderType === 'creatine-only';
+  // The dedicated link only accepts creatine, even if extra product IDs are added to the request.
+  const items = creatineOnlyOrder && Array.isArray(body.items)
+    ? body.items.filter((item) => clean(item?.product, 30) === 'creatine')
+    : body.items;
   // Only recognize approved partner codes. Do not trust an arbitrary referral label from a visitor.
-  const referralCode = clean(body.referralCode, 40).toUpperCase() === 'COACH01' ? 'COACH01' : '';
-  const items = body.items;
+  const referralCode = creatineOnlyOrder ? '' : (clean(body.referralCode, 40).toUpperCase() === 'COACH01' ? 'COACH01' : '');
   const market = String(req.headers['x-vercel-ip-country'] || '').toUpperCase() === 'EG' || body.lang === 'ar' ? 'EG' : 'RW';
   const currency = market === 'EG' ? 'EGP' : 'RWF';
   if (!name || !phone || !city || !area || !street || !Array.isArray(items) ||
@@ -57,7 +61,9 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const sender = process.env.RESEND_FROM_EMAIL || 'MGREFOTS Orders <orders@notifications.mgrefots.com>';
-  const recipient = process.env.ORDER_NOTIFICATION_EMAIL || 'info@mgrefots.com';
+  const recipient = creatineOnlyOrder
+    ? (process.env.CREATINE_ORDER_NOTIFICATION_EMAIL || '17.yan.noah@gmail.com')
+    : (process.env.ORDER_NOTIFICATION_EMAIL || 'info@mgrefots.com');
   if (!apiKey) return res.status(503).json({ code: 'ORDER_EMAIL_NOT_CONFIGURED' });
 
   const total = normalizedItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
@@ -81,7 +87,7 @@ export default async function handler(req, res) {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: sender, to: referralCode === 'COACH01' ? [recipient, 'mufukuzij@gmail.com'] : [recipient], subject: `New MGREFOTS order${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`, text, html }),
+      body: JSON.stringify({ from: sender, to: referralCode === 'COACH01' ? [recipient, 'mufukuzij@gmail.com'] : [recipient], subject: `${creatineOnlyOrder ? 'New creatine order' : 'New MGREFOTS order'}${referralCode ? ' [COACH01 / Instagram]' : ''} — ${orderId}`, text, html }),
     });
     if (!response.ok) {
       console.error('Order email provider rejected request:', response.status, await response.text());
