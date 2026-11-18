@@ -97,7 +97,7 @@ export default async function handler(req, res) {
     if (referralCode === 'COACH01') {
       const creatineItems = normalizedItems.filter((item) => item.product.name === PRODUCTS.creatine.name);
       if (creatineItems.length) {
-        const coachRecipient = process.env.COACH01_NOTIFICATION_EMAIL || '17.yan.noah@gmail.com';
+        const coachRecipient = '17.yan.noah@gmail.com';
         const coachFields = fields.filter(([label]) => label !== 'Order total');
         const coachProductLines = creatineItems.map((item) =>
           `${item.product.name} — ${item.quantity} bottle(s) × ${item.product.price.toLocaleString('en-US')} ${currency} = ${(item.quantity * item.product.price).toLocaleString('en-US')} ${currency}`
