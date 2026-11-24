@@ -1,8 +1,17 @@
 import {products} from './catalog.js';
 
 const css=document.createElement('link');css.rel='stylesheet';css.href='/beauty/enhancements.css';document.head.append(css);
-const brandOf=p=>p.brand||((p.name.match(/^([A-Z]+)\b/)||[])[1]||'ANUA');
+const brandOf=p=>p.brand||((p.name.match(/^([A-Za-z][A-Za-z0-9-]*)\b/)||[])[1]||'ANUA');
 const brands=[...new Set(products.map(brandOf))];
+
+function enhanceBrandNavigation(){
+  const menu=document.querySelector('.brand-menu > div');
+  if(menu)menu.innerHTML=brands.map(b=>`<a href="/beauty#collection" data-brand-link="${b}">${b}</a>`).join('');
+  const strip=document.querySelector('.brand-strip > div');
+  if(strip)strip.innerHTML=[...brands,...brands,...brands].map(b=>`<b>${b}</b><span>REFOTS BEAUTY</span>`).join('');
+  const eyebrow=document.querySelector('.hero .eyebrow');
+  if(eyebrow)eyebrow.textContent='REFOTS BEAUTY · '+brands.join(' + ');
+}
 
 function ensureViewer(){
   if(document.getElementById('image-viewer'))return;
@@ -36,4 +45,4 @@ document.addEventListener('click',e=>{
 });
 const observer=new MutationObserver(()=>{ensureViewer();enhanceImages();ensurePicker()});
 observer.observe(document.body,{childList:true,subtree:true});
-ensureViewer();enhanceImages();ensurePicker();
+ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation();

@@ -1,6 +1,6 @@
 // Price basis: Imported_Korean_All_Products.xlsx, newest explicit dated entry per exact size.
 // Retail is cost × 1.25 EGP. Private purchasing costs are not published.
-export const products = [
+const anua = [
 ['serum-minis-discovery-kit','Serum Minis Discovery Kit','3 × 10 ml',1087.5,'Sets','1-0'],
 ['golden-firming-collagen-mask','Golden Firming Collagen Wrapping Mask','80 ml',1050,'Masks','1-1'],
 ['rice-70-glow-milky-toner','Rice 70 Glow Milky Toner','250 ml',1162.5,'Toners','1-2'],
@@ -22,4 +22,23 @@ export const products = [
 ['barrier-reboot-intensive-cream','Barrier Reboot Intensive Cream','100 ml',1187.5,'Moisturizers','6-0'],
 ['heartleaf-80-soothing-ampoule','Heartleaf 80 Moisture Soothing Ampoule','30 ml',1025,'Serums','6-1'],
 ['peach-77-essence-toner','Peach 77+ Niacin Essence Toner','250 ml',1025,'Toners','6-2']
-].map(([id,name,size,price,category,image])=>({id,name:'ANUA '+name,size,price,category,image:id==='serum-minis-discovery-kit'?'/beauty/assets/anua-1-0-cropped.png':'/beauty/assets/anua-'+image+'.webp'}));
+].map(([id,name,size,price,category,image])=>({id,name:'ANUA '+name,brand:'ANUA',size,price,category,image:id==='serum-minis-discovery-kit'?'/beauty/assets/anua-1-0-cropped.png':'/beauty/assets/anua-'+image+'.webp'}));
+
+// Arencia — latest non-duplicate explicit price in Arencia.xlsx, then +25% retail markup.
+const arencia = [
+  ['arencia-eraser-glycolic-booster','Eraser Shot Glycolic Acid Booster','30 ml',900,'Serums','eraser-glycolic-booster'],
+  ['arencia-nad-booster-shot','NAD+ Booster Shot','30 ml',900,'Moisturizers','nad-booster-shot'],
+  ['arencia-pdrn-booster-shot','PDRN Booster Shot','30 ml',900,'Moisturizers','pdrn-booster-shot'],
+  ['arencia-retinal-booster-shot','Retinal Booster Shot','30 ml',900,'Serums','retinal-booster-shot'],
+  ['arencia-txa-booster-shot','TXA Booster Shot','30 ml',900,'Serums','txa-booster-shot'],
+  ['arencia-vitamin-c-booster-shot','Vitamin C Booster Shot','30 ml',850,'Serums','vitamin-c-booster-shot'],
+  ['arencia-black-tea-rice-mochi-cleanser','Black Tea Rice Mochi Cleanser','120 g',1025,'Cleansers','black-tea-cleanser'],
+  ['arencia-eraser-soothing-cream','Eraser Soothing Cream','50 ml',968.75,'Moisturizers','eraser-soothing-cream'],
+  ['arencia-fresh-blue-hyssop-rice-mochi-cleanser','Fresh Blue Hyssop Rice Mochi Cleanser','120 g',1037.5,'Cleansers','fresh-blue-hyssop-cleanser'],
+  ['arencia-fresh-green-rice-mochi-cleanser','Fresh Green Rice Mochi Cleanser','120 g',1062.5,'Cleansers','fresh-green-cleanser'],
+  ['arencia-fresh-rosehip-rice-mochi-cleanser','Fresh Rosehip Rice Mochi Cleanser','120 g',1037.5,'Cleansers','fresh-rosehip-cleanser'],
+  ['arencia-pore-melt-mochi-cleansing-oil','Pore Melt Mochi Cleansing Oil','200 ml',937.5,'Cleansers','pore-melt-cleansing-oil'],
+  ['arencia-rice-mucin-cleanser','Rice Mucin Cleanser','120 g',1025,'Cleansers','rice-mucin-cleanser']
+].map(([id,name,size,price,category,image])=>({id,name:'Arencia '+name,brand:'Arencia',size,price,category,image:'/beauty/assets/arencia/'+image+'.png'}));
+
+export const products = [...anua, ...arencia];
