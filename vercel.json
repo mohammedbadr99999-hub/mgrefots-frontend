@@ -22,6 +22,9 @@
     }
   ],
   "rewrites": [
+    {"source":"/beauty", "destination":"/beauty/index.html"},
+    {"source":"/beauty/", "destination":"/beauty/index.html"},
+    {"source":"/beauty/anua/:slug", "destination":"/beauty/index.html"},
     {
       "source": "/clean/",
       "destination": "/clean/index.html"
