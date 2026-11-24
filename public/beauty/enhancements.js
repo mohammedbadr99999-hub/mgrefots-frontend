@@ -6,9 +6,11 @@ const brands=[...new Set(products.map(brandOf))];
 
 function enhanceBrandNavigation(){
   const menu=document.querySelector('.brand-menu > div');
-  if(menu)menu.innerHTML=brands.map(b=>`<a href="/beauty#collection" data-brand-link="${b}">${b}</a>`).join('');
+  const menuHtml=brands.map(b=>`<a href="/beauty#collection" data-brand-link="${b}">${b}</a>`).join('');
+  if(menu&&menu.innerHTML!==menuHtml)menu.innerHTML=menuHtml;
   const strip=document.querySelector('.brand-strip > div');
-  if(strip)strip.innerHTML=[...brands,...brands,...brands].map(b=>`<b>${b}</b><span>REFOTS BEAUTY</span>`).join('');
+  const stripHtml=[...brands,...brands,...brands].map(b=>`<b>${b}</b><span>REFOTS BEAUTY</span>`).join('');
+  if(strip&&strip.innerHTML!==stripHtml)strip.innerHTML=stripHtml;
   const eyebrow=document.querySelector('.hero .eyebrow');
   if(eyebrow)eyebrow.textContent='REFOTS BEAUTY · '+brands.join(' + ');
 }
