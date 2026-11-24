@@ -5,6 +5,7 @@ export default async function handler(req,res){
  if(b.website)return res.status(400).json({ok:false});
  const name=clean(b.name,100),phone=clean(b.phone,24),city=clean(b.city,80),address=clean(b.address,300);
  if(!name||!city||!address||!/^\+?[0-9 ().-]{7,24}$/.test(phone)||!Array.isArray(b.items)||!b.items.length||b.items.length>products.length||!(/^[a-f0-9-]{36}$/i.test(b.orderKey||'')))return res.status(400).json({ok:false});
+ if(b.items.some(i=>!i||typeof i!=='object'))return res.status(400).json({ok:false});
  const items=b.items.map(i=>({p:products.find(p=>p.id===i.id),q:i.quantity}));
  if(items.some(i=>!i.p||!Number.isInteger(i.q)||i.q<1||i.q>99)||new Set(b.items.map(i=>i.id)).size!==b.items.length)return res.status(400).json({ok:false});
  if(!process.env.RESEND_API_KEY)return res.status(503).json({ok:false});
