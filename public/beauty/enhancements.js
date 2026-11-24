@@ -46,3 +46,4 @@ document.addEventListener('click',e=>{
 const observer=new MutationObserver(()=>{ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation()});
 observer.observe(document.body,{childList:true,subtree:true});
 ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation();
+setTimeout(enhanceBrandNavigation,300);setTimeout(enhanceBrandNavigation,1200);
