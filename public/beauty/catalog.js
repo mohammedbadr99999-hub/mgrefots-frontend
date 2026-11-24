@@ -22,4 +22,4 @@ export const products = [
 ['barrier-reboot-intensive-cream','Barrier Reboot Intensive Cream','100 ml',1187.5,'Moisturizers','6-0'],
 ['heartleaf-80-soothing-ampoule','Heartleaf 80 Moisture Soothing Ampoule','30 ml',1025,'Serums','6-1'],
 ['peach-77-essence-toner','Peach 77+ Niacin Essence Toner','250 ml',1025,'Toners','6-2']
-].map(([id,name,size,price,category,image])=>({id,name:'ANUA '+name,size,price,category,image:'/beauty/assets/anua-'+image+'.webp'}));
+].map(([id,name,size,price,category,image])=>({id,name:'ANUA '+name,size,price,category,image:id==='serum-minis-discovery-kit'?'/beauty/assets/anua-1-0-cropped.png':'/beauty/assets/anua-'+image+'.webp'}));
