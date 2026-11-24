@@ -1,6 +1,6 @@
 import {products} from './catalog.js';
 const readability=document.createElement('link');readability.rel='stylesheet';readability.href='/beauty/readability.css';document.head.append(readability);
-const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js';document.head.append(enhancements);
+const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=arencia';document.head.append(enhancements);
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('en-EG',{maximumFractionDigits:2}).format(n)+' EGP';
 let en=localStorage.getItem('beauty-language')==='en', category='All',brand='All',query='',sort='featured',bag={};
 try{bag=JSON.parse(localStorage.getItem('beauty-cart')||'{}')}catch{}

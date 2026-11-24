@@ -43,6 +43,6 @@ document.addEventListener('click',e=>{
   const detailImage=e.target.closest('.detail-photo img');
   if(detailImage){e.preventDefault();openViewer(detailImage.currentSrc||detailImage.src,detailImage.alt)}
 });
-const observer=new MutationObserver(()=>{ensureViewer();enhanceImages();ensurePicker()});
+const observer=new MutationObserver(()=>{ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation()});
 observer.observe(document.body,{childList:true,subtree:true});
 ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation();
