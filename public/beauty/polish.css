@@ -188,3 +188,11 @@ html[lang='ar'] .directory-hero h1 { letter-spacing: 0; }
     padding: 12px;
   }
 }
+
+/* Give replaced images a definite box independent of intrinsic PNG dimensions. */
+.card .photo { display:block; position:relative; }
+.card .photo > img {
+ position:absolute; inset:0; margin:auto;
+ width:88%; height:88%; max-width:88%; max-height:88%;
+ object-fit:contain; object-position:center; padding:0; transform:none;
+}
