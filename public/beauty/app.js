@@ -23,10 +23,13 @@ function brandHero() {
     const items = products.filter(product => product.brand === name);
     return { name, count: items.length, cover: items.find(item => item.id === covers[name]) || items[0] };
   });
-  const tiles = collections.map(({name, count, cover}) => {
+  const tiles = collections.map(({name, count}, index) => {
     return `<a class="brand-tile" href="${brandUrl(name)}"${brand === name ? ' aria-current="page"' : ''}>
-      <span class="brand-art"><img src="${cover.image}" alt=""></span>
-      <span class="brand-info"><strong dir="ltr">${name}</strong><span>${count} ${t('منتج', 'products')}</span></span>
+      <span class="brand-surface">
+        <span class="brand-index" aria-hidden="true">0${index + 1}</span>
+        <span class="brand-info"><strong dir="ltr">${name}</strong><span>${count} ${t('منتج', 'products')}</span></span>
+        <span class="brand-arrow" aria-hidden="true">↗</span>
+      </span>
     </a>`;
   });
   const heading = t('اختاري البراند الي يناسبك 😊❤️', 'Choose the brand that suits you 😊❤️');
@@ -43,7 +46,7 @@ function brandHero() {
       </div>
     </div>
     <div class="hero-art">
-      <span class="bigtype" aria-hidden="true">Refots</span>
+      <span class="bigtype" aria-hidden="true">${[...'Refots'].map(letter => `<span class="hero-letter">${letter}</span>`).join('')}</span>
       <div class="hero-portraits">${portraits}</div>
       <span class="art-caption" dir="ltr">YOUR EVERYDAY BEAUTY RITUAL</span>
     </div>
