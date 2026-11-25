@@ -6,13 +6,14 @@ const brands=[...new Set(products.map(brandOf))];
 
 function enhanceBrandNavigation(){
   const menu=document.querySelector('.brand-menu > div');
-  const menuHtml=brands.map(b=>`<a href="/beauty#collection" data-brand-link="${b}">${b}</a>`).join('');
+  const menuHtml=brands.map(b=>`<a href="/beauty?brand=${encodeURIComponent(b)}#collection" data-brand-link="${b}">${b}</a>`).join('');
   if(menu&&menu.innerHTML!==menuHtml)menu.innerHTML=menuHtml;
   const strip=document.querySelector('.brand-strip > div');
   const stripHtml=[...brands,...brands,...brands].map(b=>`<b>${b}</b><span>REFOTS BEAUTY</span>`).join('');
   if(strip&&strip.innerHTML!==stripHtml)strip.innerHTML=stripHtml;
   const eyebrow=document.querySelector('.hero .eyebrow');
-  if(eyebrow)eyebrow.textContent='REFOTS BEAUTY · '+brands.join(' + ');
+  const title='REFOTS BEAUTY · '+brands.join(' + ');
+  if (eyebrow && eyebrow.textContent !== title) eyebrow.textContent = title;
 }
 
 function ensureViewer(){
@@ -45,7 +46,15 @@ document.addEventListener('click',e=>{
   const detailImage=e.target.closest('.detail-photo img');
   if(detailImage){e.preventDefault();openViewer(detailImage.currentSrc||detailImage.src,detailImage.alt)}
 });
-const observer=new MutationObserver(()=>{ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation()});
-observer.observe(document.body,{childList:true,subtree:true});
-ensureViewer();enhanceImages();ensurePicker();enhanceBrandNavigation();
-setTimeout(enhanceBrandNavigation,300);setTimeout(enhanceBrandNavigation,1200);
+// Refresh after the application replaces cards or a product detail.
+const main = document.getElementById('main');
+const observer = new MutationObserver(refreshProducts);
+function refreshProducts() {
+  observer.disconnect();
+  enhanceImages();
+  enhanceBrandNavigation();
+  observer.observe(main, { childList: true, subtree: true });
+}
+ensureViewer();
+ensurePicker();
+refreshProducts();
