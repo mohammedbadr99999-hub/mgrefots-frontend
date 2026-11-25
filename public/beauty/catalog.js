@@ -317,6 +317,8 @@ const skin1004 = [
   }
 ];
 
+const frontPngVaseline = new Set(["vaseline-intensive-care-kiss-of-petals-body-oil","vaseline-kiss-of-petals-body-oil-200ml","vaseline-radiant-x-even-tone-nourishing-body-lotion-325ml","vaseline-men-double-invisible-proderma-anti-perspirant-spray-250ml","vaseline-intensive-care-advanced","vaseline-glazed-and-glisten-sunlit-glow-shimmering-gel-body-oil","vaseline-sunlit-glow-gel-oil-vanilla-cocoa"]);
+
 export const products = [...anua, ...arencia, ...cosrx, ...skin1004, ...beautyOfJoseon, ...vaseline, ...medicube].map(product =>
   product.brand === 'Vaseline'
     ? {...product, image: product.image.replace(/\.png$/, '.webp')}
