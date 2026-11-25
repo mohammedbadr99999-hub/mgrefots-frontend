@@ -28,7 +28,7 @@ function brandHero() {
       <span class="brand-surface">
         <span class="brand-index" aria-hidden="true">0${index + 1}</span>
         <span class="brand-info"><strong dir="ltr">${name}</strong><span>${count} ${t('منتج', 'products')}</span></span>
-        <span class="brand-arrow" aria-hidden="true">↗</span>
+        <span class="brand-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
       </span>
     </a>`;
   });
