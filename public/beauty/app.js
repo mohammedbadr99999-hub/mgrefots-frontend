@@ -39,6 +39,7 @@ function brandHero() {
   return `<section class="hero directory-hero">
     <div class="hero-copy">
       <span class="eyebrow" dir="ltr">REFOTS BEAUTY · ${collections.map(item => item.name).join(' + ')}</span>
+      <div class="original-products-wrap"><span class="original-products-badge" dir="ltr"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2 14.6 9.4 22 12 14.6 14.6 12 22 9.4 14.6 2 12 9.4 9.4Z" fill="currentColor"/></svg>ORIGINAL PRODUCTS</span></div>
       <h1>${t('لحظتكِ الهادئة.<br>إشراقتكِ الخاصة.', 'A little ritual.<br>A brighter you.')}<em dir="ltr">Beautifully, you.</em></h1>
       <div class="brand-directory" id="brands">
         <h2>${heading}</h2>

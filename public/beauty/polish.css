@@ -87,3 +87,29 @@ html[lang='ar'] .directory-hero h1 { letter-spacing: 0; }
 
 /* Fourth collection keeps the existing animated card treatment. */
 .brand-tile:nth-child(4) .brand-surface { background: linear-gradient(135deg, #eaf0f4, #d8e3e8); border-color: #b4c4cc; animation-duration: 7.5s; animation-delay: -3s; }
+
+/* A slow luminous accent in the hero, with a stable layout while it fades. */
+.original-products-wrap { display: flex; justify-content: flex-start; margin: 18px 0 6px; min-height: 44px; }
+.original-products-badge {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  max-width: 100%; box-sizing: border-box; padding: 10px 20px;
+  border: 1px solid #c5a878; border-radius: 999px;
+  background: linear-gradient(115deg, #43283e, #654559, #43283e);
+  color: #f8e6bf; font: 650 17px/1.4 var(--beauty-font); letter-spacing: .1em;
+  animation: original-products-glow 5s ease-in-out infinite;
+}
+.original-products-badge svg { flex: 0 0 auto; color: #e7c58a; }
+@keyframes original-products-glow {
+  0%, 100% { opacity: 0; transform: translateY(3px); box-shadow: 0 0 0 #c5a87800; }
+  22%, 65% { opacity: 1; transform: translateY(0); box-shadow: 0 0 18px #c5a87845, inset 0 0 12px #e7c58a12; }
+  85% { opacity: .25; transform: translateY(2px); box-shadow: 0 0 5px #c5a87816; }
+}
+@media (max-width: 900px) {
+  .original-products-wrap { justify-content: center; }
+}
+@media (max-width: 650px) {
+  .original-products-badge { padding: 9px 16px; font-size: 16px; letter-spacing: .08em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .original-products-badge { animation: none; opacity: 1; }
+}
