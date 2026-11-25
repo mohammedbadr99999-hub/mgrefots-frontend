@@ -1,4 +1,4 @@
-import {products} from './catalog.js';
+import {products} from './catalog.js?v=cosrx1';
 
 const css=document.createElement('link');css.rel='stylesheet';css.href='/beauty/enhancements.css';document.head.append(css);
 const brandOf=p=>p.brand||((p.name.match(/^([A-Za-z][A-Za-z0-9-]*)\b/)||[])[1]||'ANUA');

@@ -41,4 +41,23 @@ const arencia = [
   ['arencia-rice-mucin-cleanser','Rice Mucin Cleanser','120 g',1025,'Cleansers','rice-mucin-cleanser']
 ].map(([id,name,size,price,category,image])=>({id,name:'Arencia '+name,brand:'Arencia',size,price,category,image:'/beauty/assets/arencia/'+image+'.png'}));
 
-export const products = [...anua, ...arencia];
+const cosrx = [
+  ["all-about-snail-kit", "All About Snail Kit", "4-step", 887.5, "Sets"],
+  ["advanced-snail-96-mucin-power-essence", "Advanced Snail 96 Mucin Power Essence", "100 ml", 850.0, "Essences"],
+  ["advanced-snail-92-all-in-one-cream", "Advanced Snail 92 All In One Cream", "100 g", 825.0, "Moisturizers"],
+  ["hyaluronic-acid-hydra-power-essence", "Hyaluronic Acid Hydra Power Essence", "100 ml", 850.0, "Essences"],
+  ["hyaluronic-acid-intensive-cream", "Hyaluronic Acid Intensive Cream", "100 g", 825.0, "Moisturizers"],
+  ["low-ph-good-morning-gel-cleanser", "Low pH Good Morning Gel Cleanser", "150 ml", 825.0, "Cleansers"],
+  ["oil-free-ultra-moisturizing-lotion-with-birch-sap", "Oil-Free Ultra-Moisturizing Lotion with Birch Sap", "100 ml", 975.0, "Moisturizers"],
+  ["salicylic-acid-daily-gentle-cleanser", "Salicylic Acid Daily Gentle Cleanser", "150 ml", 737.5, "Cleansers"],
+  ["the-6-peptide-skin-booster-serum", "The 6 Peptide Skin Booster Serum", "150 ml", 1106.25, "Serums"],
+  ["the-ceramide-skin-barrier-moisturizer", "The Ceramide Skin Barrier Moisturizer", "80 ml", 1087.5, "Moisturizers"],
+  ["the-niacinamide-15-serum", "The Niacinamide 15 Serum", "20 ml", 975.0, "Serums"],
+  ["the-peptide-collagen-hydrogel-eye-patch", "The Peptide Collagen Hydrogel Eye Patch", "60 patches", 1012.5, "Eye care"],
+  ["the-vitamin-c-23-serum", "The Vitamin C 23 Serum", "20 g", 975.0, "Serums"]
+].map(([slug, name, size, price, category]) => ({
+  id: "cosrx-" + slug, name: "COSRX " + name, brand: "COSRX", size, price, category,
+  image: "/beauty/assets/cosrx/" + slug + ".webp"
+}));
+
+export const products = [...anua, ...arencia, ...cosrx];
