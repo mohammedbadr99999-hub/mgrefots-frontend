@@ -25,7 +25,8 @@ html[lang='ar'] .directory-hero h1 { letter-spacing: 0; }
 .directory-hero .hero-art .bigtype {
   display: flex; direction: ltr; white-space: nowrap; pointer-events: none;
   font-family: Georgia, serif; font-size: clamp(70px, 9vw, 126px);
-  letter-spacing: -.075em; line-height: 1.2;
+  top: clamp(26px, 3vw, 38px);
+  letter-spacing: -.025em; line-height: 1.2;
 }
 .hero-letter { display: inline-block; transform-origin: 50% 85%; }
 .hero-letter:nth-child(1) { animation: letter-rise 5.1s ease-in-out infinite; }
