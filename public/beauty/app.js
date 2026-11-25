@@ -52,6 +52,7 @@ function brandHero() {
       </div>
     </div>
     <div class="hero-art">
+      <img class="company-seal" src="/beauty/assets/refots-beauty-company-seal.jpg" alt="Refots Beauty company logo">
       <span class="bigtype" aria-hidden="true">${[...'Refots'].map(letter => `<span class="hero-letter">${letter}</span>`).join('')}</span>
       <div class="hero-portraits">${portraits}</div>
       <span class="art-caption" dir="ltr">YOUR EVERYDAY BEAUTY RITUAL</span>

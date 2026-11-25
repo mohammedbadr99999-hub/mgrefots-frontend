@@ -85,6 +85,35 @@ html[lang='ar'] .directory-hero h1 { letter-spacing: 0; }
   .hero-letter, .brand-surface, .brand-strip > div { animation: none !important; }
 }
 
+/* Temporary brand-seal treatment: keep the clean header logo and add the new
+   company mark as a small premium badge inside the hero artwork. */
+.directory-hero .hero-art .bigtype { display: none; }
+.directory-hero .hero-art .company-seal {
+  position: absolute;
+  z-index: 4;
+  top: 24px;
+  left: 28px;
+  width: 132px;
+  height: 132px;
+  padding: 0;
+  object-fit: cover;
+  border: 3px solid #f2d9b2;
+  border-radius: 50%;
+  box-shadow: 0 12px 24px #48283e24, 0 0 0 7px #f9f0e5cc;
+  transform: rotate(-4deg);
+  filter: saturate(.98) contrast(1.02);
+}
+@media (max-width: 650px) {
+  .directory-hero .hero-art .company-seal {
+    top: 12px;
+    left: 10px;
+    width: 92px;
+    height: 92px;
+    border-width: 2px;
+    box-shadow: 0 8px 16px #48283e24, 0 0 0 5px #f9f0e5cc;
+  }
+}
+
 /* Fourth collection keeps the existing animated card treatment. */
 .brand-tile:nth-child(4) .brand-surface { background: linear-gradient(135deg, #eaf0f4, #d8e3e8); border-color: #b4c4cc; animation-duration: 7.5s; animation-delay: -3s; }
 
