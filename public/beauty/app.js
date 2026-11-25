@@ -20,17 +20,35 @@ function renderBrandDirectory() {
     Arencia: 'arencia-fresh-green-rice-mochi-cleanser',
     COSRX: 'cosrx-advanced-snail-96-mucin-power-essence'
   };
-  const tiles = brandNames.map(name => {
+  const collections = brandNames.map(name => {
     const items = products.filter(product => product.brand === name);
-    const cover = items.find(item => item.id === covers[name]) || items[0];
+    return { name, count: items.length, cover: items.find(item => item.id === covers[name]) || items[0] };
+  });
+  const tiles = collections.map(({name, count, cover}) => {
     return `<a class="brand-tile" href="${brandUrl(name)}">
       <span class="brand-art"><img src="${cover.image}" alt=""></span>
-      <span class="brand-info"><strong dir="ltr">${name}</strong><span>${items.length} ${t('منتج', 'products')}</span></span>
+      <span class="brand-info"><strong dir="ltr">${name}</strong><span>${count} ${t('منتج', 'products')}</span></span>
     </a>`;
   });
-  document.title = t('اختاري البراند', 'Choose a brand') + ' | Refots Beauty';
-  $('#main').innerHTML = `<section class="brand-directory" id="collection">
-    <h1>${t('اختاري البراند', 'Choose a brand')}</h1>
+  const heading = t('اختاري البراند الي يناسبك 😊❤️', 'Choose the brand that suits you 😊❤️');
+  const portraits = collections.slice(0, 3).map(({cover}) =>
+    `<img src="${cover.image}" alt="${cover.name}">`
+  ).join('');
+  document.title = heading + ' | Refots Beauty';
+  $('#main').innerHTML = `<section class="hero directory-hero">
+    <div class="hero-copy">
+      <span class="eyebrow" dir="ltr">REFOTS BEAUTY · ${collections.slice(0, 3).map(item => item.name).join(' + ')}</span>
+      <h1>${t('لحظتكِ الهادئة.<br>إشراقتكِ الخاصة.', 'A little ritual.<br>A brighter you.')}<em dir="ltr">Beautifully, you.</em></h1>
+      <a class="primary" href="#collection">${t('اكتشفي البراندات', 'Explore the brands')}</a>
+    </div>
+    <div class="hero-art">
+      <span class="bigtype" aria-hidden="true">Refots</span>
+      <div class="hero-portraits">${portraits}</div>
+      <span class="art-caption" dir="ltr">YOUR EVERYDAY BEAUTY RITUAL</span>
+    </div>
+  </section>
+  <section class="brand-directory" id="collection">
+    <h2>${heading}</h2>
     <div class="brand-tiles">${tiles.join('')}</div>
   </section>`;
 }

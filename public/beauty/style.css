@@ -29,7 +29,7 @@ nav{gap:32px;font-size:19px}nav button{font-size:19px}#count{font-size:15px;padd
   margin: auto;
   padding: clamp(26px, 5vw, 72px) 5% clamp(36px, 6vw, 86px);
 }
-.brand-directory h1, .collection .heading h1 {
+.brand-directory h2, .collection .heading h1 {
   font-size: clamp(1.9rem, 4vw, 3.4rem);
   font-weight: 500;
   line-height: 1.35;
@@ -58,4 +58,32 @@ nav{gap:32px;font-size:19px}nav button{font-size:19px}#count{font-size:15px;padd
   .brand-tile { grid-template-columns: 34% 1fr; align-items: center; border-radius: 14px; }
   .brand-art { height: clamp(92px, 24vw, 116px); }
   .card .photo { height: clamp(208px, 64vw, 292px); }
+}
+
+.directory-hero .hero-art .bigtype { font-size: clamp(72px, 12vw, 152px); letter-spacing: -.055em; }
+.hero-portraits {
+  position: absolute;
+  inset: 19% 5% 10%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+}
+.directory-hero .hero-portraits img {
+  position: static;
+  width: 100%;
+  height: 79%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: rotate(-7deg);
+}
+.directory-hero .hero-portraits img:nth-child(2) { height: 60%; transform: translateY(4%); }
+.directory-hero .hero-portraits img:last-child { height: 94%; transform: rotate(6deg); }
+.directory-hero .primary { margin-top: 12px; }
+@media (max-width: 650px) {
+  .directory-hero .hero-art { height: clamp(230px, 68vw, 315px); }
+  .directory-hero .hero-copy { margin-top: 12px; }
+  .directory-hero .eyebrow { font-size: .77rem; letter-spacing: .1em; }
+  .directory-hero .hero-art .bigtype { font-size: clamp(65px, 19vw, 112px); }
+  .brand-directory { scroll-margin-top: 38px; }
 }
