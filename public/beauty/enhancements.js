@@ -1,12 +1,11 @@
 import {products} from './catalog.js?v=cosrx1';
 
-const css=document.createElement('link');css.rel='stylesheet';css.href='/beauty/enhancements.css?v=brands2';document.head.append(css);
 const brandOf=p=>p.brand||((p.name.match(/^([A-Za-z][A-Za-z0-9-]*)\b/)||[])[1]||'ANUA');
 const brands=[...new Set(products.map(brandOf))];
 
 function enhanceBrandNavigation(){
   const menu=document.querySelector('.brand-menu > div');
-  const menuHtml=brands.map(b=>`<a href="/beauty?brand=${encodeURIComponent(b)}#collection" data-brand-link="${b}">${b}</a>`).join('');
+  const menuHtml=brands.map(b=>`<a href="/beauty?brand=${encodeURIComponent(b)}" data-brand-link="${b}">${b}</a>`).join('');
   if(menu&&menu.innerHTML!==menuHtml)menu.innerHTML=menuHtml;
   const strip=document.querySelector('.brand-strip > div');
   const stripHtml=[...brands,...brands,...brands].map(b=>`<b>${b}</b><span>REFOTS BEAUTY</span>`).join('');
