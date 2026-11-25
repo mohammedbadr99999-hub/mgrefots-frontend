@@ -1,5 +1,5 @@
-import {products} from './catalog.js?v=hero-motion5';
-const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=hero-motion5';document.head.append(enhancements);
+import {products} from './catalog.js?v=skin1004-1';
+const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=skin1004-1';document.head.append(enhancements);
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('en-EG',{maximumFractionDigits:2}).format(n)+' EGP';
 let en=localStorage.getItem('beauty-language')==='en', category='All',brand='All',query='',sort='featured',bag={};
 const brandNames = [...new Set(products.map(product => product.brand))];
@@ -38,7 +38,7 @@ function brandHero() {
   ).join('');
   return `<section class="hero directory-hero">
     <div class="hero-copy">
-      <span class="eyebrow" dir="ltr">REFOTS BEAUTY · ${collections.slice(0, 3).map(item => item.name).join(' + ')}</span>
+      <span class="eyebrow" dir="ltr">REFOTS BEAUTY · ${collections.map(item => item.name).join(' + ')}</span>
       <h1>${t('لحظتكِ الهادئة.<br>إشراقتكِ الخاصة.', 'A little ritual.<br>A brighter you.')}<em dir="ltr">Beautifully, you.</em></h1>
       <div class="brand-directory" id="brands">
         <h2>${heading}</h2>

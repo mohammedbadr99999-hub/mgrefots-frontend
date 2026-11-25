@@ -60,4 +60,259 @@ const cosrx = [
   image: "/beauty/assets/cosrx/" + slug + ".webp"
 }));
 
-export const products = [...anua, ...arencia, ...cosrx];
+const skin1004 = [
+  {
+    "id": "skin1004-air-fit-suncream-plus-50ml",
+    "name": "SKIN1004 Madagascar Centella Air-Fit Suncream Plus SPF50+ PA++++",
+    "brand": "SKIN1004",
+    "size": "50 ml",
+    "price": 762.5,
+    "category": "Sun care",
+    "image": "/beauty/assets/skin1004/skin1004-air-fit-suncream-plus-50ml.png"
+  },
+  {
+    "id": "skin1004-centella-ampoule-55ml",
+    "name": "SKIN1004 Madagascar Centella Ampoule",
+    "brand": "SKIN1004",
+    "size": "55 ml",
+    "price": 937.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-ampoule-55ml.png"
+  },
+  {
+    "id": "skin1004-centella-ampoule-foam-125ml",
+    "name": "SKIN1004 Madagascar Centella Ampoule Foam",
+    "brand": "SKIN1004",
+    "size": "125 ml",
+    "price": 900,
+    "category": "Cleansers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-ampoule-foam-125ml.png"
+  },
+  {
+    "id": "skin1004-centella-cream-75ml",
+    "name": "SKIN1004 Madagascar Centella Cream",
+    "brand": "SKIN1004",
+    "size": "75 ml",
+    "price": 937.5,
+    "category": "Moisturizers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-cream-75ml.png"
+  },
+  {
+    "id": "skin1004-centella-light-cleansing-oil-200ml",
+    "name": "SKIN1004 Madagascar Centella Light Cleansing Oil",
+    "brand": "SKIN1004",
+    "size": "200 ml",
+    "price": 1000,
+    "category": "Cleansers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-light-cleansing-oil-200ml.png"
+  },
+  {
+    "id": "skin1004-centella-hyalu-cica-blue-serum-50ml",
+    "name": "SKIN1004 Madagascar Centella Hyalu-Cica Blue Serum",
+    "brand": "SKIN1004",
+    "size": "50 ml",
+    "price": 900,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-hyalu-cica-blue-serum-50ml.png"
+  },
+  {
+    "id": "skin1004-centella-hyalu-cica-water-fit-sun-serum-50ml",
+    "name": "SKIN1004 Madagascar Centella Hyalu-Cica Water-Fit Sun Serum SPF50+ PA++++",
+    "brand": "SKIN1004",
+    "size": "50 ml",
+    "price": 850,
+    "category": "Sun care",
+    "image": "/beauty/assets/skin1004/skin1004-centella-hyalu-cica-water-fit-sun-serum-50ml.png"
+  },
+  {
+    "id": "skin1004-centella-light-cleansing-oil-30ml",
+    "name": "SKIN1004 Madagascar Centella Light Cleansing Oil",
+    "brand": "SKIN1004",
+    "size": "30 ml",
+    "price": 437.5,
+    "category": "Cleansers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-light-cleansing-oil-30ml.png"
+  },
+  {
+    "id": "skin1004-centella-niacinamide-10-boosting-shot-ampoule-30ml",
+    "name": "SKIN1004 Madagascar Centella Niacinamide 10 Boosting Shot Ampoule",
+    "brand": "SKIN1004",
+    "size": "30 ml",
+    "price": 937.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-niacinamide-10-boosting-shot-ampoule-30ml.png"
+  },
+  {
+    "id": "skin1004-centella-poremizing-deep-cleansing-foam-125ml",
+    "name": "SKIN1004 Madagascar Centella Poremizing Deep Cleansing Foam",
+    "brand": "SKIN1004",
+    "size": "125 ml",
+    "price": 900,
+    "category": "Cleansers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-poremizing-deep-cleansing-foam-125ml.png"
+  },
+  {
+    "id": "skin1004-centella-poremizing-fresh-ampoule-100ml",
+    "name": "SKIN1004 Madagascar Centella Poremizing Fresh Ampoule",
+    "brand": "SKIN1004",
+    "size": "100 ml",
+    "price": 1062.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-poremizing-fresh-ampoule-100ml.png"
+  },
+  {
+    "id": "skin1004-centella-poremizing-quick-clay-stick-mask-27g",
+    "name": "SKIN1004 Madagascar Centella Poremizing Quick Clay Stick Mask",
+    "brand": "SKIN1004",
+    "size": "27 g",
+    "price": 950,
+    "category": "Masks",
+    "image": "/beauty/assets/skin1004/skin1004-centella-poremizing-quick-clay-stick-mask-27g.png"
+  },
+  {
+    "id": "skin1004-centella-probio-cica-bakuchiol-eye-cream-20ml",
+    "name": "SKIN1004 Madagascar Centella Probio-Cica Bakuchiol Eye Cream",
+    "brand": "SKIN1004",
+    "size": "20 ml",
+    "price": 750,
+    "category": "Eye care",
+    "image": "/beauty/assets/skin1004/skin1004-centella-probio-cica-bakuchiol-eye-cream-20ml.png"
+  },
+  {
+    "id": "skin1004-centella-probio-cica-enrich-cream-50ml",
+    "name": "SKIN1004 Madagascar Centella Probio-Cica Enrich Cream",
+    "brand": "SKIN1004",
+    "size": "50 ml",
+    "price": 1012.5,
+    "category": "Moisturizers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-probio-cica-enrich-cream-50ml.png"
+  },
+  {
+    "id": "skin1004-centella-probio-cica-intensive-ampoule-95ml",
+    "name": "SKIN1004 Madagascar Centella Probio-Cica Intensive Ampoule",
+    "brand": "SKIN1004",
+    "size": "95 ml",
+    "price": 1062.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-probio-cica-intensive-ampoule-95ml.png"
+  },
+  {
+    "id": "skin1004-centella-quick-calming-pad-70-pads-130ml",
+    "name": "SKIN1004 Madagascar Centella Quick Calming Pad",
+    "brand": "SKIN1004",
+    "size": "70 pads / 130 ml",
+    "price": 1000,
+    "category": "Toners",
+    "image": "/beauty/assets/skin1004/skin1004-centella-quick-calming-pad-70-pads-130ml.png"
+  },
+  {
+    "id": "skin1004-centella-retinol-0-2-ampoule-30ml",
+    "name": "SKIN1004 Madagascar Centella Retinol 0.2% Ampoule",
+    "brand": "SKIN1004",
+    "size": "30 ml",
+    "price": 937.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-retinol-0-2-ampoule-30ml.png"
+  },
+  {
+    "id": "skin1004-centella-soothing-cream-75ml",
+    "name": "SKIN1004 Madagascar Centella Soothing Cream",
+    "brand": "SKIN1004",
+    "size": "75 ml",
+    "price": 937.5,
+    "category": "Moisturizers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-soothing-cream-75ml.png"
+  },
+  {
+    "id": "skin1004-centella-tea-trica-bha-foam-125ml",
+    "name": "SKIN1004 Madagascar Centella Tea-Trica BHA Foam",
+    "brand": "SKIN1004",
+    "size": "125 ml",
+    "price": 900,
+    "category": "Cleansers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-tea-trica-bha-foam-125ml.png"
+  },
+  {
+    "id": "skin1004-centella-tea-trica-relief-ampoule-100ml",
+    "name": "SKIN1004 Madagascar Centella Tea-Trica Relief Ampoule",
+    "brand": "SKIN1004",
+    "size": "100 ml",
+    "price": 1062.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-tea-trica-relief-ampoule-100ml.png"
+  },
+  {
+    "id": "skin1004-centella-teca-ampoule-50ml",
+    "name": "SKIN1004 Madagascar Centella Teca Ampoule",
+    "brand": "SKIN1004",
+    "size": "50 ml",
+    "price": 912.5,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-teca-ampoule-50ml.png"
+  },
+  {
+    "id": "skin1004-centella-teca-cream-75ml",
+    "name": "SKIN1004 Madagascar Centella Teca Cream",
+    "brand": "SKIN1004",
+    "size": "75 ml",
+    "price": 962.5,
+    "category": "Moisturizers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-teca-cream-75ml.png"
+  },
+  {
+    "id": "skin1004-centella-tone-brightening-capsule-ampoule-100ml",
+    "name": "SKIN1004 Madagascar Centella Tone Brightening Capsule Ampoule",
+    "brand": "SKIN1004",
+    "size": "100 ml",
+    "price": 1050,
+    "category": "Serums",
+    "image": "/beauty/assets/skin1004/skin1004-centella-tone-brightening-capsule-ampoule-100ml.png"
+  },
+  {
+    "id": "skin1004-centella-tone-brightening-capsule-cream-75ml",
+    "name": "SKIN1004 Madagascar Centella Tone Brightening Capsule Cream",
+    "brand": "SKIN1004",
+    "size": "75 ml",
+    "price": 937.5,
+    "category": "Moisturizers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-tone-brightening-capsule-cream-75ml.png"
+  },
+  {
+    "id": "skin1004-centella-tone-brightening-cleansing-gel-foam-125ml",
+    "name": "SKIN1004 Madagascar Centella Tone Brightening Cleansing Gel Foam",
+    "brand": "SKIN1004",
+    "size": "125 ml",
+    "price": 900,
+    "category": "Cleansers",
+    "image": "/beauty/assets/skin1004/skin1004-centella-tone-brightening-cleansing-gel-foam-125ml.png"
+  },
+  {
+    "id": "skin1004-centella-tone-brightening-tone-up-sunscreen-spf50-50ml",
+    "name": "SKIN1004 Madagascar Centella Tone Brightening Tone Up Sunscreen SPF50+ PA++++",
+    "brand": "SKIN1004",
+    "size": "50 ml",
+    "price": 862.5,
+    "category": "Sun care",
+    "image": "/beauty/assets/skin1004/skin1004-centella-tone-brightening-tone-up-sunscreen-spf50-50ml.png"
+  },
+  {
+    "id": "skin1004-centella-toning-toner-30ml",
+    "name": "SKIN1004 Madagascar Centella Toning Toner",
+    "brand": "SKIN1004",
+    "size": "30 ml",
+    "price": 375,
+    "category": "Toners",
+    "image": "/beauty/assets/skin1004/skin1004-centella-toning-toner-30ml.png"
+  },
+  {
+    "id": "skin1004-centella-watergel-sheet-ampoule-mask-25ml-x5",
+    "name": "SKIN1004 Madagascar Centella Watergel Sheet Ampoule Mask",
+    "brand": "SKIN1004",
+    "size": "25 ml x 5 sheets",
+    "price": 875,
+    "category": "Masks",
+    "image": "/beauty/assets/skin1004/skin1004-centella-watergel-sheet-ampoule-mask-25ml-x5.png"
+  }
+];
+
+export const products = [...anua, ...arencia, ...cosrx, ...skin1004];
