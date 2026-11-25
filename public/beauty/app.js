@@ -1,4 +1,4 @@
-import {products} from './catalog.js?v=vaseline-complete-1';
+import {products} from './catalog.js?v=vaseline-webp-1';
 const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=skin1004-1';document.head.append(enhancements);
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('en-EG',{maximumFractionDigits:2}).format(n)+' EGP';
 let en=localStorage.getItem('beauty-language')==='en', category='All',brand='All',query='',sort='featured',bag={};
