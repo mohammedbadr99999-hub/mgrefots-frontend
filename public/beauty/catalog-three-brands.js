@@ -90,6 +90,15 @@ export const beautyOfJoseon = [
     "price": 937.5,
     "category": "Sun care",
     "image": "/beauty/assets/beauty-of-joseon/ginseng-moist-sun-serum-spf50-pa.png"
+  },
+  {
+    "id": "beauty-of-joseon-ground-rice-honey-glow-mask",
+    "name": "Beauty of Joseon Ground Rice and Honey Glow Mask",
+    "brand": "Beauty of Joseon",
+    "size": "",
+    "price": 812.5,
+    "category": "Masks",
+    "image": "/beauty/assets/beauty-of-joseon/ground-rice-honey-glow-mask.png"
   }
 ];
 export const vaseline = [
