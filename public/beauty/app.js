@@ -7,6 +7,16 @@ const staticPreview = location.pathname.endsWith('/beauty/index.html');
 const beautyBase = staticPreview ? '/beauty/index.html' : '/beauty';
 const urlParams = new URLSearchParams(location.search);
 const brandUrl = name => beautyBase + '?brand=' + encodeURIComponent(name);
+function mountFloatingSeal(){
+  if(document.querySelector('.floating-company-seal')) return;
+  const seal=document.createElement('a');
+  seal.className='floating-company-seal';
+  seal.href=beautyBase;
+  seal.setAttribute('aria-label',t('العودة إلى كل البراندات','Back to all brands'));
+  seal.title=t('Refots Beauty','Refots Beauty');
+  seal.innerHTML='<img src="/beauty/assets/refots-beauty-company-seal.jpg" alt="Refots Beauty">';
+  document.body.append(seal);
+}
 const requestedBrand = urlParams.get('brand');
 if (products.some(product => product.brand === requestedBrand)) brand = requestedBrand;
 try{bag=JSON.parse(localStorage.getItem('beauty-cart')||'{}')}catch{}
@@ -52,7 +62,6 @@ function brandHero() {
       </div>
     </div>
     <div class="hero-art">
-      <img class="company-seal" src="/beauty/assets/refots-beauty-company-seal.jpg" alt="Refots Beauty company logo">
       <span class="bigtype" aria-hidden="true">${[...'Refots'].map(letter => `<span class="hero-letter">${letter}</span>`).join('')}</span>
       <div class="hero-portraits">${portraits}</div>
       <span class="art-caption" dir="ltr">YOUR EVERYDAY BEAUTY RITUAL</span>
@@ -74,4 +83,4 @@ document.addEventListener('click',e=>{const a=e.target.closest('[data-add]');if(
 $('#language').onclick=()=>{en=!en;localStorage.setItem('beauty-language',en?'en':'ar');render()};$('#bag').onclick=()=>{cart();$('#cart').showModal()};$('.close').onclick=()=>$('#cart').close();
 let orderKey=null, orderSignature='';$('#checkout').onsubmit=async e=>{e.preventDefault();const b=$('#submit');b.disabled=true;$('#notice').textContent=t('جارٍ تسجيل الطلب…','Submitting…');const data=Object.fromEntries(new FormData(e.target));const items=products.filter(p=>bag[p.id]).map(p=>({id:p.id,quantity:bag[p.id]}));const total=items.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.quantity,0);const message=['Refots Beauty — order',data.name,data.phone,data.city,data.address,...items.map(i=>{const p=products.find(p=>p.id===i.id);return `${p.name} ${p.size} × ${i.quantity} — ${money(p.price*i.quantity)}`}),`Total: ${money(total)} (delivery to be confirmed)`].join('\n');const link='https://wa.me/201557022071?text='+encodeURIComponent(message);const fallback=$('#wa-fallback');fallback.href=link;fallback.hidden=false;const signature=JSON.stringify({...data,items});if(signature!==orderSignature){orderSignature=signature;orderKey=crypto.randomUUID()}orderKey ||= crypto.randomUUID();try{const r=await fetch('/api/beauty-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,items,orderKey})});if(!r.ok)throw new Error();$('#notice').textContent=t('تم إرسال الطلب بالإيميل. افتحي واتساب واضغطي إرسال لتأكيد الرسالة.','Order emailed. Open WhatsApp and tap Send to send your message.');fallback.click();bag={};save();orderKey=null;b.hidden=true;}catch{$('#notice').textContent=t('تعذر إرسال الإيميل. طلبك محفوظ في الحقيبة؛ افتحي واتساب بالزر أدناه لإرساله.','Email delivery failed. Your bag is saved; use WhatsApp below to send your order.')}finally{b.disabled=false}};
 window.__beautyAdd=add;window.__beautyCart=cart;
-save();render();
+mountFloatingSeal();save();render();

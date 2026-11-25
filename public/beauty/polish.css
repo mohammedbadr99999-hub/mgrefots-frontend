@@ -85,33 +85,53 @@ html[lang='ar'] .directory-hero h1 { letter-spacing: 0; }
   .hero-letter, .brand-surface, .brand-strip > div { animation: none !important; }
 }
 
-/* Temporary brand-seal treatment: keep the clean header logo and add the new
-   company mark as a small premium badge inside the hero artwork. */
+/* Keep the faint hero wordmark hidden; the company mark now floats globally. */
 .directory-hero .hero-art .bigtype { display: none; }
-.directory-hero .hero-art .company-seal {
-  position: absolute;
-  z-index: 4;
-  top: 24px;
-  left: 28px;
-  width: 132px;
-  height: 132px;
-  padding: 0;
-  object-fit: cover;
-  border: 3px solid #f2d9b2;
+.floating-company-seal {
+  position: fixed;
+  z-index: 40;
+  top: 112px;
+  left: clamp(12px, 2.2vw, 30px);
+  display: block;
+  width: 94px;
+  height: 94px;
+  padding: 4px;
+  border: 1px solid #d5b277;
   border-radius: 50%;
-  box-shadow: 0 12px 24px #48283e24, 0 0 0 7px #f9f0e5cc;
-  transform: rotate(-4deg);
+  background: #f9f0e5ee;
+  box-shadow: 0 12px 28px #48283e24, 0 0 0 6px #f9f0e5b8;
+  animation: floating-seal-drift 3.8s ease-in-out infinite;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.floating-company-seal:hover,
+.floating-company-seal:focus-visible {
+  transform: scale(1.08) rotate(3deg);
+  box-shadow: 0 16px 32px #48283e30, 0 0 0 7px #f9f0e5e8;
+}
+.floating-company-seal img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
   filter: saturate(.98) contrast(1.02);
 }
+@keyframes floating-seal-drift {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-7px) rotate(3deg); }
+}
 @media (max-width: 650px) {
-  .directory-hero .hero-art .company-seal {
-    top: 12px;
+  .floating-company-seal {
+    top: 76px;
     left: 10px;
-    width: 92px;
-    height: 92px;
-    border-width: 2px;
-    box-shadow: 0 8px 16px #48283e24, 0 0 0 5px #f9f0e5cc;
+    width: 72px;
+    height: 72px;
+    padding: 3px;
+    box-shadow: 0 9px 20px #48283e24, 0 0 0 5px #f9f0e5c9;
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-company-seal { animation: none; }
 }
 
 /* Fourth collection keeps the existing animated card treatment. */
