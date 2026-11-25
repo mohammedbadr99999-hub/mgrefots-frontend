@@ -319,6 +319,6 @@ const skin1004 = [
 
 export const products = [...anua, ...arencia, ...cosrx, ...skin1004, ...beautyOfJoseon, ...vaseline, ...medicube].map(product =>
   product.brand === 'Vaseline'
-    ? {...product, image: `${product.image}?v=vaseline-drive-20261125`}
+    ? {...product, image: `${product.image}?v=vaseline-complete-1`}
     : product
 );
