@@ -10,7 +10,15 @@ nav { gap: 26px; }
 #count { font-size: 16px; }
 .brand-strip > div { font-size: 15px; }
 .brand-strip b { font-size: 19px; }
-.directory-hero { min-height: 620px; padding: 38px 5% 44px; gap: 5%; }
+.directory-hero {
+  min-height: 620px;
+  padding: 38px 5% 44px;
+  gap: 5%;
+  /* Keep the Refots artwork anchored to the top of the hero row.
+     The brand directory can grow vertically without pushing it down. */
+  align-items: start;
+}
+.directory-hero .hero-art { align-self: start; }
 .directory-hero h1 { font-size: clamp(36px, 3.6vw, 54px); line-height: 1.45; margin: 16px 0 22px; }
 .directory-hero h1 em { font-size: clamp(52px, 5vw, 72px); margin-top: 10px; }
 .directory-hero .eyebrow { font-size: 15px; letter-spacing: 2px; line-height: 1.8; }
