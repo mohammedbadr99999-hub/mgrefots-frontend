@@ -1,6 +1,6 @@
 import {products} from './catalog.js?v=cosrx1';
 
-const css=document.createElement('link');css.rel='stylesheet';css.href='/beauty/enhancements.css';document.head.append(css);
+const css=document.createElement('link');css.rel='stylesheet';css.href='/beauty/enhancements.css?v=brands2';document.head.append(css);
 const brandOf=p=>p.brand||((p.name.match(/^([A-Za-z][A-Za-z0-9-]*)\b/)||[])[1]||'ANUA');
 const brands=[...new Set(products.map(brandOf))];
 
@@ -11,9 +11,7 @@ function enhanceBrandNavigation(){
   const strip=document.querySelector('.brand-strip > div');
   const stripHtml=[...brands,...brands,...brands].map(b=>`<b>${b}</b><span>REFOTS BEAUTY</span>`).join('');
   if(strip&&strip.innerHTML!==stripHtml)strip.innerHTML=stripHtml;
-  const eyebrow=document.querySelector('.hero .eyebrow');
-  const title='REFOTS BEAUTY · '+brands.join(' + ');
-  if (eyebrow && eyebrow.textContent !== title) eyebrow.textContent = title;
+
 }
 
 function ensureViewer(){
