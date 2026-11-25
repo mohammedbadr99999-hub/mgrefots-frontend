@@ -321,6 +321,6 @@ const frontPngVaseline = new Set(["vaseline-intensive-care-kiss-of-petals-body-o
 
 export const products = [...anua, ...arencia, ...cosrx, ...skin1004, ...beautyOfJoseon, ...vaseline, ...medicube].map(product =>
   product.brand === 'Vaseline'
-    ? {...product, image: product.image.replace(/\.png$/, '.webp')}
+    ? {...product, image: frontPngVaseline.has(product.id) ? product.image : product.image.replace(/\.png$/, '.webp')}
     : product
 );
