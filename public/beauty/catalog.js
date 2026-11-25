@@ -35,7 +35,7 @@ const arencia = [
   ['arencia-black-tea-rice-mochi-cleanser','Black Tea Rice Mochi Cleanser','120 g',1025,'Cleansers','black-tea-cleanser'],
   ['arencia-eraser-soothing-cream','Eraser Soothing Cream','50 ml',968.75,'Moisturizers','eraser-soothing-cream'],
   ['arencia-fresh-blue-hyssop-rice-mochi-cleanser','Fresh Blue Hyssop Rice Mochi Cleanser','120 g',1037.5,'Cleansers','fresh-blue-hyssop-cleanser'],
-  ['arencia-fresh-green-rice-mochi-cleanser','Fresh Green Rice Mochi Cleanser','120 g',1062.5,'Cleansers','fresh-green-cleanser'],
+  ['arencia-fresh-green-rice-mochi-cleanser','Fresh Green Rice Mochi Cleanser','120 g',1062.5,'Cleansers','fresh-green-cleanser-clean'],
   ['arencia-fresh-rosehip-rice-mochi-cleanser','Fresh Rosehip Rice Mochi Cleanser','120 g',1037.5,'Cleansers','fresh-rosehip-cleanser'],
   ['arencia-pore-melt-mochi-cleansing-oil','Pore Melt Mochi Cleansing Oil','200 ml',937.5,'Cleansers','pore-melt-cleansing-oil'],
   ['arencia-rice-mucin-cleanser','Rice Mucin Cleanser','120 g',1025,'Cleansers','rice-mucin-cleanser']

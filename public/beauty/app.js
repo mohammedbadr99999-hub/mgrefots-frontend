@@ -1,5 +1,5 @@
-import {products} from './catalog.js?v=cosrx1';
-const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=polish4';document.head.append(enhancements);
+import {products} from './catalog.js?v=hero-motion5';
+const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=hero-motion5';document.head.append(enhancements);
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('en-EG',{maximumFractionDigits:2}).format(n)+' EGP';
 let en=localStorage.getItem('beauty-language')==='en', category='All',brand='All',query='',sort='featured',bag={};
 const brandNames = [...new Set(products.map(product => product.brand))];
