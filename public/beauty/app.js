@@ -1,18 +1,23 @@
-import {products} from './catalog.js?v=skin1004-1';
+import {products} from './catalog.js?v=beauty-vaseline-medicube-1';
 const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=skin1004-1';document.head.append(enhancements);
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('en-EG',{maximumFractionDigits:2}).format(n)+' EGP';
 let en=localStorage.getItem('beauty-language')==='en', category='All',brand='All',query='',sort='featured',bag={};
 const brandNames = [...new Set(products.map(product => product.brand))];
-const brandUrl = name => '/beauty?brand=' + encodeURIComponent(name);
-const requestedBrand = new URLSearchParams(location.search).get('brand');
+const staticPreview = location.pathname.endsWith('/beauty/index.html');
+const beautyBase = staticPreview ? '/beauty/index.html' : '/beauty';
+const urlParams = new URLSearchParams(location.search);
+const brandUrl = name => beautyBase + '?brand=' + encodeURIComponent(name);
+const requestedBrand = urlParams.get('brand');
 if (products.some(product => product.brand === requestedBrand)) brand = requestedBrand;
 try{bag=JSON.parse(localStorage.getItem('beauty-cart')||'{}')}catch{}
 bag=Object.fromEntries(Object.entries(bag).filter(([id,q])=>products.some(p=>p.id===id)&&Number.isInteger(q)&&q>0&&q<=99));
 const t=(ar,eng)=>en?eng:ar;
-const cats={'All':'الكل','Serums':'السيرومات','Moisturizers':'المرطبات','Toners':'التونر والبادز','Cleansers':'الغسول','Mists':'الميست','Sun care':'الحماية من الشمس','Lip care':'العناية بالشفاه','Masks':'الماسكات','Sets':'المجموعات','Essences':'الإيسنس','Eye care':'العناية بالعين'};
+const cats={'All':'الكل','Serums':'السيرومات','Moisturizers':'المرطبات','Toners':'التونر والبادز','Cleansers':'الغسول','Mists':'الميست','Sun care':'الحماية من الشمس','Lip care':'العناية بالشفاه','Masks':'الماسكات','Sets':'المجموعات','Essences':'الإيسنس','Eye care':'العناية بالعين','Body care':'العناية بالجسم','Deodorants':'مزيلات العرق','Hair care':'العناية بالشعر'};
 function save(){localStorage.setItem('beauty-cart',JSON.stringify(bag));$('#count').textContent=Object.values(bag).reduce((a,b)=>a+b,0)}
 function add(id){bag[id]=Math.min(99,(bag[id]||0)+1);save();$('#toast').textContent=t('اتضاف لحقيبتك','Added to your bag');$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),1800)}
-const productUrl=p=>`/beauty/${(p.brand||'ANUA').toLowerCase()}/${p.id}`;
+const productUrl=p=>staticPreview
+  ? beautyBase+'?product='+encodeURIComponent(p.id)
+  : `/beauty/${(p.brand||'ANUA').toLowerCase().replace(/[^a-z0-9]+/g,'-')}/${p.id}`;
 function brandHero() {
   const covers = {
     ANUA: 'peach-70-niacin-serum',
@@ -54,7 +59,7 @@ function brandHero() {
   </section>`;
 }
 function cards(){let list=products.filter(p=>(brand==='All'||p.brand===brand)&&(category==='All'||p.category===category)&&p.name.toLowerCase().includes(query.toLowerCase()));if(sort!=='featured')list.sort((a,b)=>sort==='low'?a.price-b.price:b.price-a.price);$('#grid').innerHTML=list.map(p=>`<article class="card"><a class="photo" href="${productUrl(p)}"><img src="${p.image}" alt="${p.name}" loading="lazy" width="700" height="900"></a><small>${p.brand} · ${en?p.category:cats[p.category]} · ${p.size}</small><h3><a href="${productUrl(p)}">${p.name}</a></h3><div class="card-bottom"><span class="price">${money(p.price)}</span><button class="add" data-add="${p.id}">${t('أضيفي للحقيبة','Add to bag')}</button></div></article>`).join('')||`<p class="empty">${t('لا توجد نتائج','No matching products')}</p>`;$('#results').textContent=`${list.length} ${t('منتج','products')}`}
-function render(){document.documentElement.lang=en?'en':'ar';document.documentElement.dir=en?'ltr':'rtl';$('#language').textContent=en?'عربي':'EN';let slug=location.pathname.replace(/\/$/,'').split('/')[3];const p=products.find(p=>p.id===slug);if(slug&&!p){$('#main').innerHTML='<section class="detail"><h1>Product not found</h1><a href="/beauty">View collection</a></section>';return}if(p){document.title=p.name+' | Refots Beauty';$('#main').innerHTML=`<section class="detail"><a class="crumb" href="${brandUrl(p.brand)}">${t('المجموعة','Collection')} / ${p.brand||'ANUA'}</a><div class="detail-grid"><div class="detail-photo"><img src="${p.image}" alt="${p.name}"></div><div><span class="eyebrow">REFOTS BEAUTY · ${p.brand||'ANUA'} EDIT</span><h1>${p.name}</h1><p>${en?p.category:cats[p.category]} · ${p.size}</p><div class="price">${money(p.price)}</div><button class="primary" data-add="${p.id}">${t('أضيفي إلى حقيبتك','Add to your bag')}</button><p class="details-note">${t('اختيارك من مجموعة '+(p.brand||'ANUA')+' لدى Refots Beauty. أضيفي المنتج إلى حقيبتك وأكملي بياناتك لإرسال طلب الشراء.','Your selection from the '+(p.brand||'ANUA')+' collection at Refots Beauty. Add it to your bag and complete your details to request an order.')}</p><p class="note">${t('السعر بالجنيه المصري. التوفر والشحن يتم تأكيدهما عند التواصل.','Prices in Egyptian pounds. Availability and delivery are confirmed when we contact you.')}</p></div></div></section>`;return}
+function render(){document.documentElement.lang=en?'en':'ar';document.documentElement.dir=en?'ltr':'rtl';$('#language').textContent=en?'عربي':'EN';let slug=urlParams.get('product')||location.pathname.replace(/\/$/,'').split('/')[3];const p=products.find(p=>p.id===slug);if(slug&&!p){$('#main').innerHTML='<section class="detail"><h1>Product not found</h1><a href="'+beautyBase+'">View collection</a></section>';return}if(p){document.title=p.name+' | Refots Beauty';$('#main').innerHTML=`<section class="detail"><a class="crumb" href="${brandUrl(p.brand)}">${t('المجموعة','Collection')} / ${p.brand||'ANUA'}</a><div class="detail-grid"><div class="detail-photo"><img src="${p.image}" alt="${p.name}"></div><div><span class="eyebrow">REFOTS BEAUTY · ${p.brand||'ANUA'} EDIT</span><h1>${p.name}</h1><p>${en?p.category:cats[p.category]} · ${p.size}</p><div class="price">${money(p.price)}</div><button class="primary" data-add="${p.id}">${t('أضيفي إلى حقيبتك','Add to your bag')}</button><p class="details-note">${t('اختيارك من مجموعة '+(p.brand||'ANUA')+' لدى Refots Beauty. أضيفي المنتج إلى حقيبتك وأكملي بياناتك لإرسال طلب الشراء.','Your selection from the '+(p.brand||'ANUA')+' collection at Refots Beauty. Add it to your bag and complete your details to request an order.')}</p><p class="note">${t('السعر بالجنيه المصري. التوفر والشحن يتم تأكيدهما عند التواصل.','Prices in Egyptian pounds. Availability and delivery are confirmed when we contact you.')}</p></div></div></section>`;return}
 if (brand === 'All') {
   document.title = 'Refots Beauty | ' + t('اختاري البراند الي يناسبك 😊❤️', 'Choose your brand 😊❤️');
   $('#main').innerHTML = brandHero();

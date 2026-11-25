@@ -1,3 +1,5 @@
+import { beautyOfJoseon, vaseline, medicube } from './catalog-three-brands.js';
+
 // Price basis: Imported_Korean_All_Products.xlsx, newest explicit dated entry per exact size.
 // Retail is cost × 1.25 EGP. Private purchasing costs are not published.
 const anua = [
@@ -315,4 +317,4 @@ const skin1004 = [
   }
 ];
 
-export const products = [...anua, ...arencia, ...cosrx, ...skin1004];
+export const products = [...anua, ...arencia, ...cosrx, ...skin1004, ...beautyOfJoseon, ...vaseline, ...medicube];
