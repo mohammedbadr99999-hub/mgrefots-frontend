@@ -63,10 +63,6 @@
       "destination": "/beauty/index.html"
     },
     {
-      "source": "/beauty/ibraq/:slug",
-      "destination": "/beauty/index.html"
-    },
-    {
       "source": "/clean/",
       "destination": "/clean/index.html"
     },

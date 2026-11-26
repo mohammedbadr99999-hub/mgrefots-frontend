@@ -1,5 +1,5 @@
-import {products} from './catalog.js?v=dr-althea-ibraq-20261126';
-const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=dr-althea-ibraq-20261126';document.head.append(enhancements);
+import {products} from './catalog.js?v=dr-althea-only-20261126';
+const enhancements=document.createElement('script');enhancements.type='module';enhancements.src='/beauty/enhancements.js?v=dr-althea-only-20261126';document.head.append(enhancements);
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('en-EG',{maximumFractionDigits:2}).format(n)+' EGP';
 let en=localStorage.getItem('beauty-language')==='en', category='All',brand='All',query='',sort='featured',bag={};
 const brandNames = [...new Set(products.map(product => product.brand))];
@@ -22,7 +22,7 @@ if (products.some(product => product.brand === requestedBrand)) brand = requeste
 try{bag=JSON.parse(localStorage.getItem('beauty-cart')||'{}')}catch{}
 bag=Object.fromEntries(Object.entries(bag).filter(([id,q])=>products.some(p=>p.id===id)&&Number.isInteger(q)&&q>0&&q<=99));
 const t=(ar,eng)=>en?eng:ar;
-const cats={'All':'الكل','Serums':'السيرومات','Moisturizers':'المرطبات','Toners':'التونر والبادز','Cleansers':'الغسول','Mists':'الميست','Sun care':'الحماية من الشمس','Lip care':'العناية بالشفاه','Masks':'الماسكات','Sets':'المجموعات','Essences':'الإيسنس','Eye care':'العناية بالعين','Body care':'العناية بالجسم','Deodorants':'مزيلات العرق','Hair care':'العناية بالشعر','Fragrances':'العطور'};
+const cats={'All':'الكل','Serums':'السيرومات','Moisturizers':'المرطبات','Toners':'التونر والبادز','Cleansers':'الغسول','Mists':'الميست','Sun care':'الحماية من الشمس','Lip care':'العناية بالشفاه','Masks':'الماسكات','Sets':'المجموعات','Essences':'الإيسنس','Eye care':'العناية بالعين','Body care':'العناية بالجسم','Deodorants':'مزيلات العرق','Hair care':'العناية بالشعر'};
 function save(){localStorage.setItem('beauty-cart',JSON.stringify(bag));$('#count').textContent=Object.values(bag).reduce((a,b)=>a+b,0)}
 function add(id){bag[id]=Math.min(99,(bag[id]||0)+1);save();$('#toast').textContent=t('اتضاف لحقيبتك','Added to your bag');$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),1800)}
 const productUrl=p=>staticPreview

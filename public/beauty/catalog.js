@@ -1,5 +1,5 @@
 import { beautyOfJoseon, vaseline, medicube } from './catalog-three-brands.js';
-import { drAltheaProducts, ibraqProducts } from './catalog-dr-althea-ibraq.js';
+import { drAltheaProducts } from './catalog-dr-althea-ibraq.js';
 
 // Price basis: Imported_Korean_All_Products.xlsx, newest explicit dated entry per exact size.
 // Retail is cost × 1.25 EGP. Private purchasing costs are not published.
@@ -320,7 +320,7 @@ const skin1004 = [
 
 const frontPngVaseline = new Set(["vaseline-intensive-care-kiss-of-petals-body-oil","vaseline-kiss-of-petals-body-oil-200ml","vaseline-radiant-x-even-tone-nourishing-body-lotion-325ml","vaseline-men-double-invisible-proderma-anti-perspirant-spray-250ml","vaseline-intensive-care-advanced","vaseline-glazed-and-glisten-sunlit-glow-shimmering-gel-body-oil","vaseline-sunlit-glow-gel-oil-vanilla-cocoa"]);
 
-export const products = [...anua, ...arencia, ...cosrx, ...skin1004, ...beautyOfJoseon, ...vaseline, ...medicube, ...drAltheaProducts, ...ibraqProducts].map(product =>
+export const products = [...anua, ...arencia, ...cosrx, ...skin1004, ...beautyOfJoseon, ...vaseline, ...medicube, ...drAltheaProducts].map(product =>
   product.brand === 'Vaseline'
     ? {...product, image: frontPngVaseline.has(product.id) ? product.image : product.image.replace(/\.png$/, '.webp')}
     : product
