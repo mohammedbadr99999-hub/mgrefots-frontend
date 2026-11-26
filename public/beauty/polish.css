@@ -85,8 +85,7 @@ html[lang='ar'] .directory-hero h1 { letter-spacing: 0; }
   .hero-letter, .brand-surface, .brand-strip > div { animation: none !important; }
 }
 
-/* Keep the faint hero wordmark hidden; the company mark now floats globally. */
-.directory-hero .hero-art .bigtype { display: none; }
+/* The animated hero wordmark and floating company seal remain visible together. */
 .floating-company-seal {
   position: fixed;
   z-index: 40;
