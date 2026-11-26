@@ -1,4 +1,4 @@
-import {products} from './catalog.js?v=skin1004-1';
+import {products} from './catalog.js?v=dr-althea-ibraq-20261126';
 
 const brandOf=p=>p.brand||((p.name.match(/^([A-Za-z][A-Za-z0-9-]*)\b/)||[])[1]||'ANUA');
 const brands=[...new Set(products.map(brandOf))];
